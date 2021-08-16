@@ -1,0 +1,1 @@
+enum AuxiliaryMeaningType { whitelist, blacklist }
