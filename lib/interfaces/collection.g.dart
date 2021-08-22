@@ -15,7 +15,10 @@ Collection<T> _$CollectionFromJson<T>(
     object: json['object'] as String,
     url: json['url'] as String,
     dataUpdatedAt: DateTime.parse(json['data_updated_at'] as String),
-    data: (json['data'] as List<dynamic>).map(fromJsonT).toList(),
+    data: (json['data'] as List<dynamic>)
+        .map((e) => Resource.fromJson(
+            e as Map<String, dynamic>, (value) => fromJsonT(value)))
+        .toList(),
     pages: Pages.fromJson(json['pages'] as Map<String, dynamic>),
     totalCount: json['total_count'] as int,
   );
@@ -30,7 +33,11 @@ Map<String, dynamic> _$CollectionToJson<T>(
       'object': instance.object,
       'url': instance.url,
       'data_updated_at': instance.dataUpdatedAt.toIso8601String(),
-      'data': instance.data.map(toJsonT).toList(),
+      'data': instance.data
+          .map((e) => e.toJson(
+                (value) => toJsonT(value),
+              ))
+          .toList(),
       'pages': instance.pages.toJson(),
       'total_count': instance.totalCount,
     };

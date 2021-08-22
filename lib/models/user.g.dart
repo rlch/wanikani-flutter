@@ -16,7 +16,8 @@ User _$UserFromJson(Map<String, dynamic> json) {
         Preferences.fromJson(json['preferences'] as Map<String, dynamic>),
     profileUrl: json['profile_url'] as String,
     startedAt: DateTime.parse(json['started_at'] as String),
-    subscription: json['subscription'] as Object,
+    subscription:
+        Subscription.fromJson(json['subscription'] as Map<String, dynamic>),
     username: json['username'] as String,
   );
 }
@@ -28,7 +29,7 @@ Map<String, dynamic> _$UserToJson(User instance) => <String, dynamic>{
       'preferences': instance.preferences.toJson(),
       'profile_url': instance.profileUrl,
       'started_at': instance.startedAt.toIso8601String(),
-      'subscription': instance.subscription,
+      'subscription': instance.subscription.toJson(),
       'username': instance.username,
     };
 

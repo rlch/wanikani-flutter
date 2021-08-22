@@ -1,5 +1,10 @@
 import 'package:json_annotation/json_annotation.dart';
 import 'package:wanikani_flutter/enums/auxiliary_meaning_type.dart';
+import 'package:wanikani_flutter/enums/subject_type.dart';
+
+import 'kanji.dart';
+import 'radical.dart';
+import 'vocabulary.dart';
 
 part 'subject.g.dart';
 
@@ -19,6 +24,22 @@ abstract class Subject {
     required this.slug,
     required this.spacedRepetitionSystemId,
   });
+
+  factory Subject.fromJson(
+    Map<String, dynamic> json, {
+    required SubjectType type,
+  }) {
+    switch (type) {
+      case SubjectType.kanji:
+        return Kanji.fromJson(json);
+      case SubjectType.radical:
+        return Radical.fromJson(json);
+      case SubjectType.vocabulary:
+        return Vocabulary.fromJson(json);
+    }
+  }
+
+  Map<String, dynamic> toJson();
 
   /// Collection of auxiliary meanings. See table below for the object structure.
   final List<AuxiliaryMeaning> auxiliaryMeanings;

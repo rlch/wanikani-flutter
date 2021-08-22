@@ -1,6 +1,7 @@
 import 'package:json_annotation/json_annotation.dart';
 import 'package:wanikani_flutter/interfaces/response.dart';
 import '../typedefs/generic_serializers.dart';
+import 'resource.dart';
 
 part 'collection.g.dart';
 
@@ -20,8 +21,12 @@ class Collection<T> implements IResponse<T> {
   factory Collection.fromJson(
     Map<String, dynamic> json,
     GenericFromJson<T> fromJsonT,
-  ) =>
-      _$CollectionFromJson(json, fromJsonT);
+  ) {
+    return _$CollectionFromJson(
+      json,
+      (dynamic o) => fromJsonT(o..['object'] = json['object']),
+    );
+  }
   Map<String, dynamic> toJson(GenericToJson<T> toJsonT) =>
       _$CollectionToJson(this, toJsonT);
 
@@ -38,7 +43,7 @@ class Collection<T> implements IResponse<T> {
   final DateTime dataUpdatedAt;
 
   /// Resources returned by the specified scope
-  final List<T> data;
+  final List<Resource<T>> data;
 
   final Pages pages;
   final int totalCount;

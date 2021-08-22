@@ -37,7 +37,7 @@ class User {
   final DateTime startedAt;
 
   /// Details about the user's subscription state.
-  final Object subscription;
+  final Subscription subscription;
 
   /// The user's username.
   final String username;

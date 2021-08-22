@@ -1,6 +1,7 @@
 part of '../wanikani_services.dart';
 
 @RestApi(baseUrl: 'https://api.wanikani.com/v2/assignments/')
+@DateTimeConverter()
 abstract class _Assignments {
   factory _Assignments(Dio dio) = __Assignments;
 

@@ -18,8 +18,12 @@ class Resource<T> implements IResponse<T> {
   factory Resource.fromJson(
     Map<String, dynamic> json,
     GenericFromJson<T> fromJsonT,
-  ) =>
-      _$ResourceFromJson(json, fromJsonT);
+  ) {
+    return _$ResourceFromJson(
+      json,
+      (dynamic o) => fromJsonT(o..['object'] = json['object']),
+    );
+  }
   Map<String, dynamic> toJson(GenericToJson<T> toJsonT) =>
       _$ResourceToJson(this, toJsonT);
 
