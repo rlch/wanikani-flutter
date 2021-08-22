@@ -466,3 +466,99 @@ class __SpacedRepetitionSystems implements _SpacedRepetitionSystems {
     return requestOptions;
   }
 }
+
+class __StudyMaterials implements _StudyMaterials {
+  __StudyMaterials(this._dio, {this.baseUrl}) {
+    baseUrl ??= 'https://api.wanikani.com/v2/study_materials/';
+  }
+
+  final Dio _dio;
+
+  String? baseUrl;
+
+  @override
+  Future<Collection<StudyMaterial>> getAll({ids, updatedAfter}) async {
+    const _extra = <String, dynamic>{};
+    final queryParameters = <String, dynamic>{
+      r'ids': ids,
+      r'updated_after': updatedAfter?.toJson()
+    };
+    queryParameters.removeWhere((k, v) => v == null);
+    final _data = <String, dynamic>{};
+    final _result = await _dio.fetch<Map<String, dynamic>>(
+        _setStreamType<Collection<StudyMaterial>>(
+            Options(method: 'GET', headers: <String, dynamic>{}, extra: _extra)
+                .compose(_dio.options, '/',
+                    queryParameters: queryParameters, data: _data)
+                .copyWith(baseUrl: baseUrl ?? _dio.options.baseUrl)));
+    final value = Collection<StudyMaterial>.fromJson(
+      _result.data!,
+      (json) => StudyMaterial.fromJson(json as Map<String, dynamic>),
+    );
+    return value;
+  }
+
+  @override
+  Future<Resource<StudyMaterial>> getById(id) async {
+    const _extra = <String, dynamic>{};
+    final queryParameters = <String, dynamic>{};
+    final _data = <String, dynamic>{};
+    final _result = await _dio.fetch<Map<String, dynamic>>(
+        _setStreamType<Resource<StudyMaterial>>(
+            Options(method: 'GET', headers: <String, dynamic>{}, extra: _extra)
+                .compose(_dio.options, '/$id',
+                    queryParameters: queryParameters, data: _data)
+                .copyWith(baseUrl: baseUrl ?? _dio.options.baseUrl)));
+    final value = Resource<StudyMaterial>.fromJson(
+      _result.data!,
+      (json) => StudyMaterial.fromJson(json as Map<String, dynamic>),
+    );
+    return value;
+  }
+
+  @override
+  Future<Resource<StudyMaterial>> create(studyMaterial) async {
+    const _extra = <String, dynamic>{};
+    final queryParameters = <String, dynamic>{};
+    final _data = <String, dynamic>{};
+    _data.addAll(studyMaterial.toJson());
+    final _result = await _dio.fetch<Map<String, dynamic>>(
+        _setStreamType<Resource<StudyMaterial>>(
+            Options(method: 'POST', headers: <String, dynamic>{}, extra: _extra)
+                .compose(_dio.options, '/',
+                    queryParameters: queryParameters, data: _data)
+                .copyWith(baseUrl: baseUrl ?? _dio.options.baseUrl)));
+    final value = Resource<StudyMaterial>.fromJson(
+      _result.data!,
+      (json) => StudyMaterial.fromJson(json as Map<String, dynamic>),
+    );
+    return value;
+  }
+
+  @override
+  Future<void> update(id, studyMaterial) async {
+    const _extra = <String, dynamic>{};
+    final queryParameters = <String, dynamic>{};
+    final _data = <String, dynamic>{};
+    _data.addAll(studyMaterial.toJson());
+    await _dio.fetch<void>(_setStreamType<void>(
+        Options(method: 'PUT', headers: <String, dynamic>{}, extra: _extra)
+            .compose(_dio.options, '/$id',
+                queryParameters: queryParameters, data: _data)
+            .copyWith(baseUrl: baseUrl ?? _dio.options.baseUrl)));
+    return null;
+  }
+
+  RequestOptions _setStreamType<T>(RequestOptions requestOptions) {
+    if (T != dynamic &&
+        !(requestOptions.responseType == ResponseType.bytes ||
+            requestOptions.responseType == ResponseType.stream)) {
+      if (T == String) {
+        requestOptions.responseType = ResponseType.plain;
+      } else {
+        requestOptions.responseType = ResponseType.json;
+      }
+    }
+    return requestOptions;
+  }
+}

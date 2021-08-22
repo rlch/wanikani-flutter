@@ -9,6 +9,7 @@ import 'package:wanikani_flutter/models/reset.dart';
 import 'package:wanikani_flutter/models/review.dart';
 import 'package:wanikani_flutter/models/review_statistic.dart';
 import 'package:wanikani_flutter/models/spaced_repetition_system.dart';
+import 'package:wanikani_flutter/models/study_material.dart';
 
 part 'wanikani_services.g.dart';
 
@@ -18,6 +19,7 @@ part 'resources/resets.dart';
 part 'resources/reviews.dart';
 part 'resources/review_statistics.dart';
 part 'resources/spaced_repetition_systems.dart';
+part 'resources/study_materials.dart';
 
 class WaniKaniServices {
   WaniKaniServices({required this.apiToken, Dio? dio}) : dio = dio ?? Dio() {
@@ -35,4 +37,5 @@ class WaniKaniServices {
   _Reviews get reviews => _Reviews(dio);
   _ReviewStatistics get reviewStatistics => _ReviewStatistics(dio);
   _SpacedRepetitionSystems get srs => _SpacedRepetitionSystems(dio);
+  _StudyMaterials get studyMaterials => _StudyMaterials(dio);
 }
