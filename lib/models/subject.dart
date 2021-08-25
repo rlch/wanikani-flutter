@@ -1,6 +1,5 @@
 import 'package:json_annotation/json_annotation.dart';
 import 'package:wanikani_flutter/enums/auxiliary_meaning_type.dart';
-import 'package:wanikani_flutter/enums/subject_type.dart';
 
 import 'kanji.dart';
 import 'radical.dart';
@@ -25,17 +24,17 @@ abstract class Subject {
     required this.spacedRepetitionSystemId,
   });
 
-  factory Subject.fromJson(
-    Map<String, dynamic> json, {
-    required SubjectType type,
-  }) {
-    switch (type) {
-      case SubjectType.kanji:
+  factory Subject.fromJson(Map<String, dynamic> json) {
+    switch (json['object']) {
+      case 'kanji':
         return Kanji.fromJson(json);
-      case SubjectType.radical:
+      case 'radical':
         return Radical.fromJson(json);
-      case SubjectType.vocabulary:
+      case 'vocabulary':
         return Vocabulary.fromJson(json);
+      default:
+        throw Exception(
+            'Attempted to parse invalid subject ${json['object']}.');
     }
   }
 

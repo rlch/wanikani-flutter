@@ -8,7 +8,7 @@ part of 'wanikani_services.dart';
 
 class __Assignments implements _Assignments {
   __Assignments(this._dio, {this.baseUrl}) {
-    baseUrl ??= 'https://api.wanikani.com/v2/assignments/';
+    baseUrl ??= 'https://api.wanikani.com/v2/assignments';
   }
 
   final Dio _dio;
@@ -55,7 +55,7 @@ class __Assignments implements _Assignments {
     final _result = await _dio.fetch<Map<String, dynamic>>(
         _setStreamType<Collection<Assignment>>(
             Options(method: 'GET', headers: <String, dynamic>{}, extra: _extra)
-                .compose(_dio.options, '/',
+                .compose(_dio.options, '',
                     queryParameters: queryParameters, data: _data)
                 .copyWith(baseUrl: baseUrl ?? _dio.options.baseUrl)));
     final value = Collection<Assignment>.fromJson(
@@ -340,10 +340,10 @@ class __ReviewStatistics implements _ReviewStatistics {
 
   @override
   Future<Collection<ReviewStatistic>> getAll(
-      {required hidden,
+      {hidden,
       ids,
-      required percentagesGreaterThan,
-      required percentagesLessThan,
+      percentagesGreaterThan,
+      percentagesLessThan,
       subjectIds,
       subjectTypes,
       updatedAfter}) async {
@@ -574,7 +574,7 @@ class __Subjects implements _Subjects {
 
   @override
   Future<Collection<Subject>> getAll(
-      {ids, types, slugs, levels, required hidden, updatedAfter}) async {
+      {ids, types, slugs, levels, hidden, updatedAfter}) async {
     const _extra = <String, dynamic>{};
     final queryParameters = <String, dynamic>{
       r'ids': ids,

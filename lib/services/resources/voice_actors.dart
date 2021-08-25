@@ -1,6 +1,6 @@
 part of '../wanikani_services.dart';
 
-@RestApi(baseUrl: 'https://api.wanikani.com/v2/voice_actors/')
+@RestApi(baseUrl: '${WaniKaniServices.basePath}/voice_actors/')
 abstract class _VoiceActors {
   factory _VoiceActors(Dio dio) = __VoiceActors;
 

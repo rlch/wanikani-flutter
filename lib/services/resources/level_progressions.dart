@@ -1,6 +1,6 @@
 part of '../wanikani_services.dart';
 
-@RestApi(baseUrl: 'https://api.wanikani.com/v2/level_progressions/')
+@RestApi(baseUrl: '${WaniKaniServices.basePath}/level_progressions/')
 abstract class _LevelProgressions {
   factory _LevelProgressions(Dio dio) = __LevelProgressions;
 

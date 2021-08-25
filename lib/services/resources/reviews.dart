@@ -1,6 +1,6 @@
 part of '../wanikani_services.dart';
 
-@RestApi(baseUrl: 'https://api.wanikani.com/v2/reviews/')
+@RestApi(baseUrl: '${WaniKaniServices.basePath}/reviews/')
 abstract class _Reviews {
   factory _Reviews(Dio dio) = __Reviews;
 
@@ -19,5 +19,5 @@ abstract class _Reviews {
 
   // TODO: `resources_updated`
   @POST('/reviews')
-  Future<Resource<Assignment>> create({@Body() Review review});
+  Future<Resource<Assignment>> create({@Body() required Review review});
 }

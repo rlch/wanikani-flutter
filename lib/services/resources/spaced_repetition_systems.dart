@@ -1,6 +1,6 @@
 part of '../wanikani_services.dart';
 
-@RestApi(baseUrl: 'https://api.wanikani.com/v2/spaced_repetition_systems/')
+@RestApi(baseUrl: '${WaniKaniServices.basePath}/spaced_repetition_systems/')
 abstract class _SpacedRepetitionSystems {
   factory _SpacedRepetitionSystems(Dio dio) = __SpacedRepetitionSystems;
 

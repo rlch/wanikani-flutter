@@ -15,6 +15,7 @@ import 'package:wanikani_flutter/models/summary.dart';
 import 'package:wanikani_flutter/models/user.dart';
 import 'package:wanikani_flutter/models/voice_actor.dart';
 import 'package:wanikani_flutter/utils/converters/date_time.dart';
+import 'package:pretty_dio_logger/pretty_dio_logger.dart';
 
 part 'wanikani_services.g.dart';
 
@@ -35,6 +36,7 @@ class WaniKaniServices {
     this.dio.options.headers
       ..['Wanikani-Revision'] = '20170710'
       ..['Authorization'] = 'Bearer $apiToken';
+    this.dio.interceptors.add(PrettyDioLogger(requestHeader: true));
   }
 
   late final Dio dio;
@@ -51,6 +53,8 @@ class WaniKaniServices {
   _Summary get summary => _Summary(dio);
   _User get user => _User(dio);
   _VoiceActors get voiceActors => _VoiceActors(dio);
+
+  static const basePath = 'https://api.wanikani.com/v2';
 }
 
 extension on DateTime {

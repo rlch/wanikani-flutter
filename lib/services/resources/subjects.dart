@@ -1,6 +1,6 @@
 part of '../wanikani_services.dart';
 
-@RestApi(baseUrl: 'https://api.wanikani.com/v2/subjects/')
+@RestApi(baseUrl: '${WaniKaniServices.basePath}/subjects/')
 abstract class _Subjects {
   factory _Subjects(Dio dio) = __Subjects;
 
@@ -11,7 +11,7 @@ abstract class _Subjects {
     @Query('types') List<SubjectType>? types,
     @Query('slugs') List<String>? slugs,
     @Query('levels') List<int>? levels,
-    @Query('hidden') bool hidden,
+    @Query('hidden') bool? hidden,
     @Query('updated_after') DateTime? updatedAfter,
   });
 

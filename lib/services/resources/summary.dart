@@ -1,6 +1,6 @@
 part of '../wanikani_services.dart';
 
-@RestApi(baseUrl: 'https://api.wanikani.com/v2/summary/')
+@RestApi(baseUrl: '${WaniKaniServices.basePath}/summary/')
 abstract class _Summary {
   factory _Summary(Dio dio) = __Summary;
 

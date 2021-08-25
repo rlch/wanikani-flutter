@@ -1,6 +1,6 @@
 part of '../wanikani_services.dart';
 
-@RestApi(baseUrl: 'https://api.wanikani.com/v2/user/')
+@RestApi(baseUrl: '${WaniKaniServices.basePath}/user/')
 abstract class _User {
   factory _User(Dio dio) = __User;
 

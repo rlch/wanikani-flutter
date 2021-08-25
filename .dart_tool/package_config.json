@@ -206,6 +206,12 @@
       "languageVersion": "2.12"
     },
     {
+      "name": "http_mock_adapter",
+      "rootUri": "file:///Users/rjm/flutter/.pub-cache/hosted/pub.dartlang.org/http_mock_adapter-0.3.2",
+      "packageUri": "lib/",
+      "languageVersion": "2.12"
+    },
+    {
       "name": "http_multi_server",
       "rootUri": "file:///Users/rjm/flutter/.pub-cache/hosted/pub.dartlang.org/http_multi_server-3.0.1",
       "packageUri": "lib/",
@@ -272,6 +278,12 @@
       "languageVersion": "2.12"
     },
     {
+      "name": "mockito",
+      "rootUri": "file:///Users/rjm/flutter/.pub-cache/hosted/pub.dartlang.org/mockito-5.0.15",
+      "packageUri": "lib/",
+      "languageVersion": "2.12"
+    },
+    {
       "name": "node_preamble",
       "rootUri": "file:///Users/rjm/flutter/.pub-cache/hosted/pub.dartlang.org/node_preamble-2.0.1",
       "packageUri": "lib/",
@@ -298,6 +310,12 @@
     {
       "name": "pool",
       "rootUri": "file:///Users/rjm/flutter/.pub-cache/hosted/pub.dartlang.org/pool-1.5.0",
+      "packageUri": "lib/",
+      "languageVersion": "2.12"
+    },
+    {
+      "name": "pretty_dio_logger",
+      "rootUri": "file:///Users/rjm/flutter/.pub-cache/hosted/pub.dartlang.org/pretty_dio_logger-1.2.0-beta-1",
       "packageUri": "lib/",
       "languageVersion": "2.12"
     },
@@ -494,7 +512,7 @@
       "languageVersion": "2.13"
     }
   ],
-  "generated": "2021-08-23T13:51:58.545765Z",
+  "generated": "2021-08-25T02:11:41.603869Z",
   "generator": "pub",
   "generatorVersion": "2.13.4"
 }

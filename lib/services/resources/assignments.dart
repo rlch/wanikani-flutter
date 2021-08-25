@@ -1,12 +1,12 @@
 part of '../wanikani_services.dart';
 
-@RestApi(baseUrl: 'https://api.wanikani.com/v2/assignments/')
+@RestApi(baseUrl: '${WaniKaniServices.basePath}/assignments')
 @DateTimeConverter()
 abstract class _Assignments {
   factory _Assignments(Dio dio) = __Assignments;
 
   /// Returns a collection of all assignments, ordered by ascending `created_at`, 500 at a time.
-  @GET('/')
+  @GET('')
   Future<Collection<Assignment>> getAll({
     @Query('available_after') DateTime? availableAfter,
     @Query('available_before') DateTime? availableBefore,

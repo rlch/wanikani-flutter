@@ -1,6 +1,6 @@
 part of '../wanikani_services.dart';
 
-@RestApi(baseUrl: 'https://api.wanikani.com/v2/study_materials/')
+@RestApi(baseUrl: '${WaniKaniServices.basePath}/study_materials/')
 abstract class _StudyMaterials {
   factory _StudyMaterials(Dio dio) = __StudyMaterials;
 

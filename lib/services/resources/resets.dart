@@ -1,6 +1,6 @@
 part of '../wanikani_services.dart';
 
-@RestApi(baseUrl: 'https://api.wanikani.com/v2/resets/')
+@RestApi(baseUrl: '${WaniKaniServices.basePath}/resets/')
 abstract class _Resets {
   factory _Resets(Dio dio) = __Resets;
 
