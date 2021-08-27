@@ -16,7 +16,7 @@ class __Assignments implements _Assignments {
   String? baseUrl;
 
   @override
-  Future<Collection<Assignment>> getAll(
+  Future<Collection<dynamic>> getAll(
       {availableAfter,
       availableBefore,
       burned,
@@ -53,38 +53,38 @@ class __Assignments implements _Assignments {
     queryParameters.removeWhere((k, v) => v == null);
     final _data = <String, dynamic>{};
     final _result = await _dio.fetch<Map<String, dynamic>>(
-        _setStreamType<Collection<Assignment>>(
+        _setStreamType<Collection<dynamic>>(
             Options(method: 'GET', headers: <String, dynamic>{}, extra: _extra)
                 .compose(_dio.options, '',
                     queryParameters: queryParameters, data: _data)
                 .copyWith(baseUrl: baseUrl ?? _dio.options.baseUrl)));
-    final value = Collection<Assignment>.fromJson(
+    final value = Collection<dynamic>.fromJson(
       _result.data!,
-      (json) => Assignment.fromJson(json as Map<String, dynamic>),
+      (json) => json as dynamic,
     );
     return value;
   }
 
   @override
-  Future<Resource<Assignment>> getById(id) async {
+  Future<Resource<dynamic>> getById(id) async {
     const _extra = <String, dynamic>{};
     final queryParameters = <String, dynamic>{};
     final _data = <String, dynamic>{};
     final _result = await _dio.fetch<Map<String, dynamic>>(
-        _setStreamType<Resource<Assignment>>(
+        _setStreamType<Resource<dynamic>>(
             Options(method: 'GET', headers: <String, dynamic>{}, extra: _extra)
                 .compose(_dio.options, '/$id',
                     queryParameters: queryParameters, data: _data)
                 .copyWith(baseUrl: baseUrl ?? _dio.options.baseUrl)));
-    final value = Resource<Assignment>.fromJson(
+    final value = Resource<dynamic>.fromJson(
       _result.data!,
-      (json) => Assignment.fromJson(json as Map<String, dynamic>),
+      (json) => json as dynamic,
     );
     return value;
   }
 
   @override
-  Future<Resource<Assignment>> start(id, {startedAt}) async {
+  Future<Resource<dynamic>> start(id, {startedAt}) async {
     const _extra = <String, dynamic>{};
     final queryParameters = <String, dynamic>{
       r'started_at': startedAt?.toJson()
@@ -92,14 +92,14 @@ class __Assignments implements _Assignments {
     queryParameters.removeWhere((k, v) => v == null);
     final _data = <String, dynamic>{};
     final _result = await _dio.fetch<Map<String, dynamic>>(
-        _setStreamType<Resource<Assignment>>(
+        _setStreamType<Resource<dynamic>>(
             Options(method: 'PUT', headers: <String, dynamic>{}, extra: _extra)
                 .compose(_dio.options, '/$id/start',
                     queryParameters: queryParameters, data: _data)
                 .copyWith(baseUrl: baseUrl ?? _dio.options.baseUrl)));
-    final value = Resource<Assignment>.fromJson(
+    final value = Resource<dynamic>.fromJson(
       _result.data!,
-      (json) => Assignment.fromJson(json as Map<String, dynamic>),
+      (json) => json as dynamic,
     );
     return value;
   }
@@ -128,7 +128,7 @@ class __LevelProgressions implements _LevelProgressions {
   String? baseUrl;
 
   @override
-  Future<Collection<LevelProgression>> getAll({ids, updatedAfter}) async {
+  Future<Collection<dynamic>> getAll({ids, updatedAfter}) async {
     const _extra = <String, dynamic>{};
     final queryParameters = <String, dynamic>{
       r'ids': ids,
@@ -137,32 +137,32 @@ class __LevelProgressions implements _LevelProgressions {
     queryParameters.removeWhere((k, v) => v == null);
     final _data = <String, dynamic>{};
     final _result = await _dio.fetch<Map<String, dynamic>>(
-        _setStreamType<Collection<LevelProgression>>(
+        _setStreamType<Collection<dynamic>>(
             Options(method: 'GET', headers: <String, dynamic>{}, extra: _extra)
                 .compose(_dio.options, '/',
                     queryParameters: queryParameters, data: _data)
                 .copyWith(baseUrl: baseUrl ?? _dio.options.baseUrl)));
-    final value = Collection<LevelProgression>.fromJson(
+    final value = Collection<dynamic>.fromJson(
       _result.data!,
-      (json) => LevelProgression.fromJson(json as Map<String, dynamic>),
+      (json) => json as dynamic,
     );
     return value;
   }
 
   @override
-  Future<Resource<LevelProgression>> getById(id) async {
+  Future<Resource<dynamic>> getById(id) async {
     const _extra = <String, dynamic>{};
     final queryParameters = <String, dynamic>{};
     final _data = <String, dynamic>{};
     final _result = await _dio.fetch<Map<String, dynamic>>(
-        _setStreamType<Resource<LevelProgression>>(
+        _setStreamType<Resource<dynamic>>(
             Options(method: 'GET', headers: <String, dynamic>{}, extra: _extra)
                 .compose(_dio.options, '/$id',
                     queryParameters: queryParameters, data: _data)
                 .copyWith(baseUrl: baseUrl ?? _dio.options.baseUrl)));
-    final value = Resource<LevelProgression>.fromJson(
+    final value = Resource<dynamic>.fromJson(
       _result.data!,
-      (json) => LevelProgression.fromJson(json as Map<String, dynamic>),
+      (json) => json as dynamic,
     );
     return value;
   }
@@ -191,7 +191,7 @@ class __Resets implements _Resets {
   String? baseUrl;
 
   @override
-  Future<Collection<Reset>> getAll({ids, updatedAfter}) async {
+  Future<Collection<dynamic>> getAll({ids, updatedAfter}) async {
     const _extra = <String, dynamic>{};
     final queryParameters = <String, dynamic>{
       r'ids': ids,
@@ -200,32 +200,32 @@ class __Resets implements _Resets {
     queryParameters.removeWhere((k, v) => v == null);
     final _data = <String, dynamic>{};
     final _result = await _dio.fetch<Map<String, dynamic>>(
-        _setStreamType<Collection<Reset>>(
+        _setStreamType<Collection<dynamic>>(
             Options(method: 'GET', headers: <String, dynamic>{}, extra: _extra)
                 .compose(_dio.options, '/',
                     queryParameters: queryParameters, data: _data)
                 .copyWith(baseUrl: baseUrl ?? _dio.options.baseUrl)));
-    final value = Collection<Reset>.fromJson(
+    final value = Collection<dynamic>.fromJson(
       _result.data!,
-      (json) => Reset.fromJson(json as Map<String, dynamic>),
+      (json) => json as dynamic,
     );
     return value;
   }
 
   @override
-  Future<Resource<Reset>> getById(id) async {
+  Future<Resource<dynamic>> getById(id) async {
     const _extra = <String, dynamic>{};
     final queryParameters = <String, dynamic>{};
     final _data = <String, dynamic>{};
     final _result = await _dio.fetch<Map<String, dynamic>>(
-        _setStreamType<Resource<Reset>>(
+        _setStreamType<Resource<dynamic>>(
             Options(method: 'GET', headers: <String, dynamic>{}, extra: _extra)
                 .compose(_dio.options, '/$id',
                     queryParameters: queryParameters, data: _data)
                 .copyWith(baseUrl: baseUrl ?? _dio.options.baseUrl)));
-    final value = Resource<Reset>.fromJson(
+    final value = Resource<dynamic>.fromJson(
       _result.data!,
-      (json) => Reset.fromJson(json as Map<String, dynamic>),
+      (json) => json as dynamic,
     );
     return value;
   }
@@ -254,7 +254,7 @@ class __Reviews implements _Reviews {
   String? baseUrl;
 
   @override
-  Future<Collection<Review>> getAll(
+  Future<Collection<dynamic>> getAll(
       {assignmentIds, ids, subjectIds, updatedAfter}) async {
     const _extra = <String, dynamic>{};
     final queryParameters = <String, dynamic>{
@@ -266,51 +266,50 @@ class __Reviews implements _Reviews {
     queryParameters.removeWhere((k, v) => v == null);
     final _data = <String, dynamic>{};
     final _result = await _dio.fetch<Map<String, dynamic>>(
-        _setStreamType<Collection<Review>>(
+        _setStreamType<Collection<dynamic>>(
             Options(method: 'GET', headers: <String, dynamic>{}, extra: _extra)
                 .compose(_dio.options, '/',
                     queryParameters: queryParameters, data: _data)
                 .copyWith(baseUrl: baseUrl ?? _dio.options.baseUrl)));
-    final value = Collection<Review>.fromJson(
+    final value = Collection<dynamic>.fromJson(
       _result.data!,
-      (json) => Review.fromJson(json as Map<String, dynamic>),
+      (json) => json as dynamic,
     );
     return value;
   }
 
   @override
-  Future<Resource<Review>> getById(id) async {
+  Future<Resource<dynamic>> getById(id) async {
     const _extra = <String, dynamic>{};
     final queryParameters = <String, dynamic>{};
     final _data = <String, dynamic>{};
     final _result = await _dio.fetch<Map<String, dynamic>>(
-        _setStreamType<Resource<Review>>(
+        _setStreamType<Resource<dynamic>>(
             Options(method: 'GET', headers: <String, dynamic>{}, extra: _extra)
                 .compose(_dio.options, '/$id',
                     queryParameters: queryParameters, data: _data)
                 .copyWith(baseUrl: baseUrl ?? _dio.options.baseUrl)));
-    final value = Resource<Review>.fromJson(
+    final value = Resource<dynamic>.fromJson(
       _result.data!,
-      (json) => Review.fromJson(json as Map<String, dynamic>),
+      (json) => json as dynamic,
     );
     return value;
   }
 
   @override
-  Future<Resource<Assignment>> create({required review}) async {
+  Future<Resource<dynamic>> create({required review}) async {
     const _extra = <String, dynamic>{};
     final queryParameters = <String, dynamic>{};
-    final _data = <String, dynamic>{};
-    _data.addAll(review.toJson());
+    final _data = review;
     final _result = await _dio.fetch<Map<String, dynamic>>(
-        _setStreamType<Resource<Assignment>>(
+        _setStreamType<Resource<dynamic>>(
             Options(method: 'POST', headers: <String, dynamic>{}, extra: _extra)
                 .compose(_dio.options, '/reviews',
                     queryParameters: queryParameters, data: _data)
                 .copyWith(baseUrl: baseUrl ?? _dio.options.baseUrl)));
-    final value = Resource<Assignment>.fromJson(
+    final value = Resource<dynamic>.fromJson(
       _result.data!,
-      (json) => Assignment.fromJson(json as Map<String, dynamic>),
+      (json) => json as dynamic,
     );
     return value;
   }
@@ -339,7 +338,7 @@ class __ReviewStatistics implements _ReviewStatistics {
   String? baseUrl;
 
   @override
-  Future<Collection<ReviewStatistic>> getAll(
+  Future<Collection<dynamic>> getAll(
       {hidden,
       ids,
       percentagesGreaterThan,
@@ -360,32 +359,32 @@ class __ReviewStatistics implements _ReviewStatistics {
     queryParameters.removeWhere((k, v) => v == null);
     final _data = <String, dynamic>{};
     final _result = await _dio.fetch<Map<String, dynamic>>(
-        _setStreamType<Collection<ReviewStatistic>>(
+        _setStreamType<Collection<dynamic>>(
             Options(method: 'GET', headers: <String, dynamic>{}, extra: _extra)
                 .compose(_dio.options, '/',
                     queryParameters: queryParameters, data: _data)
                 .copyWith(baseUrl: baseUrl ?? _dio.options.baseUrl)));
-    final value = Collection<ReviewStatistic>.fromJson(
+    final value = Collection<dynamic>.fromJson(
       _result.data!,
-      (json) => ReviewStatistic.fromJson(json as Map<String, dynamic>),
+      (json) => json as dynamic,
     );
     return value;
   }
 
   @override
-  Future<Resource<ReviewStatistic>> getById(id) async {
+  Future<Resource<dynamic>> getById(id) async {
     const _extra = <String, dynamic>{};
     final queryParameters = <String, dynamic>{};
     final _data = <String, dynamic>{};
     final _result = await _dio.fetch<Map<String, dynamic>>(
-        _setStreamType<Resource<ReviewStatistic>>(
+        _setStreamType<Resource<dynamic>>(
             Options(method: 'GET', headers: <String, dynamic>{}, extra: _extra)
                 .compose(_dio.options, '/$id',
                     queryParameters: queryParameters, data: _data)
                 .copyWith(baseUrl: baseUrl ?? _dio.options.baseUrl)));
-    final value = Resource<ReviewStatistic>.fromJson(
+    final value = Resource<dynamic>.fromJson(
       _result.data!,
-      (json) => ReviewStatistic.fromJson(json as Map<String, dynamic>),
+      (json) => json as dynamic,
     );
     return value;
   }
@@ -414,7 +413,7 @@ class __SpacedRepetitionSystems implements _SpacedRepetitionSystems {
   String? baseUrl;
 
   @override
-  Future<Collection<SpacedRepetitionSystem>> getAll({ids, updatedAfter}) async {
+  Future<Collection<dynamic>> getAll({ids, updatedAfter}) async {
     const _extra = <String, dynamic>{};
     final queryParameters = <String, dynamic>{
       r'ids': ids,
@@ -423,32 +422,32 @@ class __SpacedRepetitionSystems implements _SpacedRepetitionSystems {
     queryParameters.removeWhere((k, v) => v == null);
     final _data = <String, dynamic>{};
     final _result = await _dio.fetch<Map<String, dynamic>>(
-        _setStreamType<Collection<SpacedRepetitionSystem>>(
+        _setStreamType<Collection<dynamic>>(
             Options(method: 'GET', headers: <String, dynamic>{}, extra: _extra)
                 .compose(_dio.options, '/',
                     queryParameters: queryParameters, data: _data)
                 .copyWith(baseUrl: baseUrl ?? _dio.options.baseUrl)));
-    final value = Collection<SpacedRepetitionSystem>.fromJson(
+    final value = Collection<dynamic>.fromJson(
       _result.data!,
-      (json) => SpacedRepetitionSystem.fromJson(json as Map<String, dynamic>),
+      (json) => json as dynamic,
     );
     return value;
   }
 
   @override
-  Future<Resource<SpacedRepetitionSystem>> getById(id) async {
+  Future<Resource<dynamic>> getById(id) async {
     const _extra = <String, dynamic>{};
     final queryParameters = <String, dynamic>{};
     final _data = <String, dynamic>{};
     final _result = await _dio.fetch<Map<String, dynamic>>(
-        _setStreamType<Resource<SpacedRepetitionSystem>>(
+        _setStreamType<Resource<dynamic>>(
             Options(method: 'GET', headers: <String, dynamic>{}, extra: _extra)
                 .compose(_dio.options, '/$id',
                     queryParameters: queryParameters, data: _data)
                 .copyWith(baseUrl: baseUrl ?? _dio.options.baseUrl)));
-    final value = Resource<SpacedRepetitionSystem>.fromJson(
+    final value = Resource<dynamic>.fromJson(
       _result.data!,
-      (json) => SpacedRepetitionSystem.fromJson(json as Map<String, dynamic>),
+      (json) => json as dynamic,
     );
     return value;
   }
@@ -477,7 +476,7 @@ class __StudyMaterials implements _StudyMaterials {
   String? baseUrl;
 
   @override
-  Future<Collection<StudyMaterial>> getAll({ids, updatedAfter}) async {
+  Future<Collection<dynamic>> getAll({ids, updatedAfter}) async {
     const _extra = <String, dynamic>{};
     final queryParameters = <String, dynamic>{
       r'ids': ids,
@@ -486,51 +485,50 @@ class __StudyMaterials implements _StudyMaterials {
     queryParameters.removeWhere((k, v) => v == null);
     final _data = <String, dynamic>{};
     final _result = await _dio.fetch<Map<String, dynamic>>(
-        _setStreamType<Collection<StudyMaterial>>(
+        _setStreamType<Collection<dynamic>>(
             Options(method: 'GET', headers: <String, dynamic>{}, extra: _extra)
                 .compose(_dio.options, '/',
                     queryParameters: queryParameters, data: _data)
                 .copyWith(baseUrl: baseUrl ?? _dio.options.baseUrl)));
-    final value = Collection<StudyMaterial>.fromJson(
+    final value = Collection<dynamic>.fromJson(
       _result.data!,
-      (json) => StudyMaterial.fromJson(json as Map<String, dynamic>),
+      (json) => json as dynamic,
     );
     return value;
   }
 
   @override
-  Future<Resource<StudyMaterial>> getById(id) async {
+  Future<Resource<dynamic>> getById(id) async {
     const _extra = <String, dynamic>{};
     final queryParameters = <String, dynamic>{};
     final _data = <String, dynamic>{};
     final _result = await _dio.fetch<Map<String, dynamic>>(
-        _setStreamType<Resource<StudyMaterial>>(
+        _setStreamType<Resource<dynamic>>(
             Options(method: 'GET', headers: <String, dynamic>{}, extra: _extra)
                 .compose(_dio.options, '/$id',
                     queryParameters: queryParameters, data: _data)
                 .copyWith(baseUrl: baseUrl ?? _dio.options.baseUrl)));
-    final value = Resource<StudyMaterial>.fromJson(
+    final value = Resource<dynamic>.fromJson(
       _result.data!,
-      (json) => StudyMaterial.fromJson(json as Map<String, dynamic>),
+      (json) => json as dynamic,
     );
     return value;
   }
 
   @override
-  Future<Resource<StudyMaterial>> create(studyMaterial) async {
+  Future<Resource<dynamic>> create(studyMaterial) async {
     const _extra = <String, dynamic>{};
     final queryParameters = <String, dynamic>{};
-    final _data = <String, dynamic>{};
-    _data.addAll(studyMaterial.toJson());
+    final _data = studyMaterial;
     final _result = await _dio.fetch<Map<String, dynamic>>(
-        _setStreamType<Resource<StudyMaterial>>(
+        _setStreamType<Resource<dynamic>>(
             Options(method: 'POST', headers: <String, dynamic>{}, extra: _extra)
                 .compose(_dio.options, '/',
                     queryParameters: queryParameters, data: _data)
                 .copyWith(baseUrl: baseUrl ?? _dio.options.baseUrl)));
-    final value = Resource<StudyMaterial>.fromJson(
+    final value = Resource<dynamic>.fromJson(
       _result.data!,
-      (json) => StudyMaterial.fromJson(json as Map<String, dynamic>),
+      (json) => json as dynamic,
     );
     return value;
   }
@@ -539,8 +537,7 @@ class __StudyMaterials implements _StudyMaterials {
   Future<void> update(id, studyMaterial) async {
     const _extra = <String, dynamic>{};
     final queryParameters = <String, dynamic>{};
-    final _data = <String, dynamic>{};
-    _data.addAll(studyMaterial.toJson());
+    final _data = studyMaterial;
     await _dio.fetch<void>(_setStreamType<void>(
         Options(method: 'PUT', headers: <String, dynamic>{}, extra: _extra)
             .compose(_dio.options, '/$id',
@@ -573,7 +570,7 @@ class __Subjects implements _Subjects {
   String? baseUrl;
 
   @override
-  Future<Collection<Subject>> getAll(
+  Future<Collection<dynamic>> getAll(
       {ids, types, slugs, levels, hidden, updatedAfter}) async {
     const _extra = <String, dynamic>{};
     final queryParameters = <String, dynamic>{
@@ -587,32 +584,32 @@ class __Subjects implements _Subjects {
     queryParameters.removeWhere((k, v) => v == null);
     final _data = <String, dynamic>{};
     final _result = await _dio.fetch<Map<String, dynamic>>(
-        _setStreamType<Collection<Subject>>(
+        _setStreamType<Collection<dynamic>>(
             Options(method: 'GET', headers: <String, dynamic>{}, extra: _extra)
                 .compose(_dio.options, '/',
                     queryParameters: queryParameters, data: _data)
                 .copyWith(baseUrl: baseUrl ?? _dio.options.baseUrl)));
-    final value = Collection<Subject>.fromJson(
+    final value = Collection<dynamic>.fromJson(
       _result.data!,
-      (json) => Subject.fromJson(json as Map<String, dynamic>),
+      (json) => json as dynamic,
     );
     return value;
   }
 
   @override
-  Future<Resource<Subject>> getById(id) async {
+  Future<Resource<dynamic>> getById(id) async {
     const _extra = <String, dynamic>{};
     final queryParameters = <String, dynamic>{};
     final _data = <String, dynamic>{};
     final _result = await _dio.fetch<Map<String, dynamic>>(
-        _setStreamType<Resource<Subject>>(
+        _setStreamType<Resource<dynamic>>(
             Options(method: 'GET', headers: <String, dynamic>{}, extra: _extra)
                 .compose(_dio.options, '/$id',
                     queryParameters: queryParameters, data: _data)
                 .copyWith(baseUrl: baseUrl ?? _dio.options.baseUrl)));
-    final value = Resource<Subject>.fromJson(
+    final value = Resource<dynamic>.fromJson(
       _result.data!,
-      (json) => Subject.fromJson(json as Map<String, dynamic>),
+      (json) => json as dynamic,
     );
     return value;
   }
@@ -641,19 +638,19 @@ class __Summary implements _Summary {
   String? baseUrl;
 
   @override
-  Future<Resource<Summary>> getReport() async {
+  Future<Resource<dynamic>> getReport() async {
     const _extra = <String, dynamic>{};
     final queryParameters = <String, dynamic>{};
     final _data = <String, dynamic>{};
     final _result = await _dio.fetch<Map<String, dynamic>>(
-        _setStreamType<Resource<Summary>>(
+        _setStreamType<Resource<dynamic>>(
             Options(method: 'GET', headers: <String, dynamic>{}, extra: _extra)
                 .compose(_dio.options, '/',
                     queryParameters: queryParameters, data: _data)
                 .copyWith(baseUrl: baseUrl ?? _dio.options.baseUrl)));
-    final value = Resource<Summary>.fromJson(
+    final value = Resource<dynamic>.fromJson(
       _result.data!,
-      (json) => Summary.fromJson(json as Map<String, dynamic>),
+      (json) => json as dynamic,
     );
     return value;
   }
@@ -682,38 +679,38 @@ class __User implements _User {
   String? baseUrl;
 
   @override
-  Future<Resource<User>> getInformation() async {
+  Future<Resource<dynamic>> getInformation() async {
     const _extra = <String, dynamic>{};
     final queryParameters = <String, dynamic>{};
     final _data = <String, dynamic>{};
     final _result = await _dio.fetch<Map<String, dynamic>>(
-        _setStreamType<Resource<User>>(
+        _setStreamType<Resource<dynamic>>(
             Options(method: 'GET', headers: <String, dynamic>{}, extra: _extra)
                 .compose(_dio.options, '/',
                     queryParameters: queryParameters, data: _data)
                 .copyWith(baseUrl: baseUrl ?? _dio.options.baseUrl)));
-    final value = Resource<User>.fromJson(
+    final value = Resource<dynamic>.fromJson(
       _result.data!,
-      (json) => User.fromJson(json as Map<String, dynamic>),
+      (json) => json as dynamic,
     );
     return value;
   }
 
   @override
-  Future<Resource<User>> _update(userPreferences) async {
+  Future<Resource<dynamic>> _update(userPreferences) async {
     const _extra = <String, dynamic>{};
     final queryParameters = <String, dynamic>{};
     final _data = <String, dynamic>{};
     _data.addAll(userPreferences);
     final _result = await _dio.fetch<Map<String, dynamic>>(
-        _setStreamType<Resource<User>>(
+        _setStreamType<Resource<dynamic>>(
             Options(method: 'PUT', headers: <String, dynamic>{}, extra: _extra)
                 .compose(_dio.options, '/',
                     queryParameters: queryParameters, data: _data)
                 .copyWith(baseUrl: baseUrl ?? _dio.options.baseUrl)));
-    final value = Resource<User>.fromJson(
+    final value = Resource<dynamic>.fromJson(
       _result.data!,
-      (json) => User.fromJson(json as Map<String, dynamic>),
+      (json) => json as dynamic,
     );
     return value;
   }
@@ -742,7 +739,7 @@ class __VoiceActors implements _VoiceActors {
   String? baseUrl;
 
   @override
-  Future<Collection<VoiceActor>> getAll({ids, updatedAfter}) async {
+  Future<Collection<dynamic>> getAll({ids, updatedAfter}) async {
     const _extra = <String, dynamic>{};
     final queryParameters = <String, dynamic>{
       r'ids': ids,
@@ -751,32 +748,32 @@ class __VoiceActors implements _VoiceActors {
     queryParameters.removeWhere((k, v) => v == null);
     final _data = <String, dynamic>{};
     final _result = await _dio.fetch<Map<String, dynamic>>(
-        _setStreamType<Collection<VoiceActor>>(
+        _setStreamType<Collection<dynamic>>(
             Options(method: 'GET', headers: <String, dynamic>{}, extra: _extra)
                 .compose(_dio.options, '/',
                     queryParameters: queryParameters, data: _data)
                 .copyWith(baseUrl: baseUrl ?? _dio.options.baseUrl)));
-    final value = Collection<VoiceActor>.fromJson(
+    final value = Collection<dynamic>.fromJson(
       _result.data!,
-      (json) => VoiceActor.fromJson(json as Map<String, dynamic>),
+      (json) => json as dynamic,
     );
     return value;
   }
 
   @override
-  Future<Resource<VoiceActor>> getById(id) async {
+  Future<Resource<dynamic>> getById(id) async {
     const _extra = <String, dynamic>{};
     final queryParameters = <String, dynamic>{};
     final _data = <String, dynamic>{};
     final _result = await _dio.fetch<Map<String, dynamic>>(
-        _setStreamType<Resource<VoiceActor>>(
+        _setStreamType<Resource<dynamic>>(
             Options(method: 'GET', headers: <String, dynamic>{}, extra: _extra)
                 .compose(_dio.options, '/$id',
                     queryParameters: queryParameters, data: _data)
                 .copyWith(baseUrl: baseUrl ?? _dio.options.baseUrl)));
-    final value = Resource<VoiceActor>.fromJson(
+    final value = Resource<dynamic>.fromJson(
       _result.data!,
-      (json) => VoiceActor.fromJson(json as Map<String, dynamic>),
+      (json) => json as dynamic,
     );
     return value;
   }
