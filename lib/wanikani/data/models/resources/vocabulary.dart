@@ -1,6 +1,7 @@
 import 'package:json_annotation/json_annotation.dart';
-import 'package:wanikani_flutter/data/models/subject.dart';
-import 'package:wanikani_flutter/domain/entities/vocabulary.dart';
+import 'package:wanikani_flutter/wanikani/domain/entities/resources/vocabulary.dart';
+
+import 'subject.dart';
 
 part 'vocabulary.g.dart';
 

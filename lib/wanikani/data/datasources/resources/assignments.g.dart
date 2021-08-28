@@ -58,10 +58,7 @@ class _AssignmentsRemoteDataSource implements AssignmentsRemoteDataSource {
                 .compose(_dio.options, '',
                     queryParameters: queryParameters, data: _data)
                 .copyWith(baseUrl: baseUrl ?? _dio.options.baseUrl)));
-    final value = CollectionModel<AssignmentModel>.fromJson(
-      _result.data!,
-      (json) => AssignmentModel.fromJson(json as Map<String, dynamic>),
-    );
+    final value = CollectionModel<AssignmentModel>.fromJson(_result.data!);
     return value;
   }
 
@@ -76,10 +73,7 @@ class _AssignmentsRemoteDataSource implements AssignmentsRemoteDataSource {
                 .compose(_dio.options, '/$id',
                     queryParameters: queryParameters, data: _data)
                 .copyWith(baseUrl: baseUrl ?? _dio.options.baseUrl)));
-    final value = ResourceModel<AssignmentModel>.fromJson(
-      _result.data!,
-      (json) => AssignmentModel.fromJson(json as Map<String, dynamic>),
-    );
+    final value = ResourceModel<AssignmentModel>.fromJson(_result.data!);
     return value;
   }
 
@@ -97,10 +91,7 @@ class _AssignmentsRemoteDataSource implements AssignmentsRemoteDataSource {
                 .compose(_dio.options, '/$id/start',
                     queryParameters: queryParameters, data: _data)
                 .copyWith(baseUrl: baseUrl ?? _dio.options.baseUrl)));
-    final value = ResourceModel<AssignmentModel>.fromJson(
-      _result.data!,
-      (json) => AssignmentModel.fromJson(json as Map<String, dynamic>),
-    );
+    final value = ResourceModel<AssignmentModel>.fromJson(_result.data!);
     return value;
   }
 

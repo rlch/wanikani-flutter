@@ -6,11 +6,11 @@ part of 'resource.dart';
 // JsonSerializableGenerator
 // **************************************************************************
 
-ResourceModel<T> _$ResourceModelFromJson<T>(
+_$Data<T> _$_$DataFromJson<T>(
   Map<String, dynamic> json,
   T Function(Object? json) fromJsonT,
 ) {
-  return ResourceModel<T>(
+  return _$Data<T>(
     json['id'] as int,
     object: json['object'] as String,
     url: json['url'] as String,
@@ -19,8 +19,8 @@ ResourceModel<T> _$ResourceModelFromJson<T>(
   );
 }
 
-Map<String, dynamic> _$ResourceModelToJson<T>(
-  ResourceModel<T> instance,
+Map<String, dynamic> _$_$DataToJson<T>(
+  _$Data<T> instance,
   Object? Function(T value) toJsonT,
 ) =>
     <String, dynamic>{

@@ -32,10 +32,7 @@ class _StudyMaterialsRemoteDataSource
                 .compose(_dio.options, '/',
                     queryParameters: queryParameters, data: _data)
                 .copyWith(baseUrl: baseUrl ?? _dio.options.baseUrl)));
-    final value = CollectionModel<StudyMaterialModel>.fromJson(
-      _result.data!,
-      (json) => StudyMaterialModel.fromJson(json as Map<String, dynamic>),
-    );
+    final value = CollectionModel<StudyMaterialModel>.fromJson(_result.data!);
     return value;
   }
 
@@ -50,10 +47,7 @@ class _StudyMaterialsRemoteDataSource
                 .compose(_dio.options, '/$id',
                     queryParameters: queryParameters, data: _data)
                 .copyWith(baseUrl: baseUrl ?? _dio.options.baseUrl)));
-    final value = ResourceModel<StudyMaterialModel>.fromJson(
-      _result.data!,
-      (json) => StudyMaterialModel.fromJson(json as Map<String, dynamic>),
-    );
+    final value = ResourceModel<StudyMaterialModel>.fromJson(_result.data!);
     return value;
   }
 
@@ -69,10 +63,7 @@ class _StudyMaterialsRemoteDataSource
                 .compose(_dio.options, '/',
                     queryParameters: queryParameters, data: _data)
                 .copyWith(baseUrl: baseUrl ?? _dio.options.baseUrl)));
-    final value = ResourceModel<StudyMaterialModel>.fromJson(
-      _result.data!,
-      (json) => StudyMaterialModel.fromJson(json as Map<String, dynamic>),
-    );
+    final value = ResourceModel<StudyMaterialModel>.fromJson(_result.data!);
     return value;
   }
 

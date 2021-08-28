@@ -1,5 +1,5 @@
 import 'package:json_annotation/json_annotation.dart';
-import 'package:wanikani_flutter/domain/entities/subject.dart';
+import 'package:wanikani_flutter/wanikani/domain/entities/resources/subject.dart';
 
 import 'kanji.dart';
 import 'radical.dart';

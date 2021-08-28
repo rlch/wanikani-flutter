@@ -1,6 +1,6 @@
 import 'package:json_annotation/json_annotation.dart';
-import 'package:wanikani_flutter/domain/entities/assignment.dart';
-import 'package:wanikani_flutter/enums/subject_type.dart';
+import 'package:wanikani_flutter/wanikani/domain/entities/enums/subject_type.dart';
+import 'package:wanikani_flutter/wanikani/domain/entities/resources/assignment.dart';
 
 part 'assignment.g.dart';
 

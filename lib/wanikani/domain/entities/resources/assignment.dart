@@ -1,4 +1,4 @@
-import 'package:wanikani_flutter/wanikani/enums/subject_type.dart';
+import 'package:wanikani_flutter/wanikani/domain/entities/enums/subject_type.dart';
 
 /// Assignments contain information about a user's progress on a particular subject,
 /// including their current state and timestamps for various progress milestones.

@@ -188,6 +188,18 @@
       "languageVersion": "2.12"
     },
     {
+      "name": "freezed",
+      "rootUri": "file:///home/rjm/flutter/.pub-cache/hosted/pub.dartlang.org/freezed-0.14.2",
+      "packageUri": "lib/",
+      "languageVersion": "2.12"
+    },
+    {
+      "name": "freezed_annotation",
+      "rootUri": "file:///home/rjm/flutter/.pub-cache/hosted/pub.dartlang.org/freezed_annotation-0.14.2",
+      "packageUri": "lib/",
+      "languageVersion": "2.12"
+    },
+    {
       "name": "frontend_server_client",
       "rootUri": "file:///home/rjm/flutter/.pub-cache/hosted/pub.dartlang.org/frontend_server_client-2.1.2",
       "packageUri": "lib/",
@@ -530,7 +542,7 @@
       "languageVersion": "2.13"
     }
   ],
-  "generated": "2021-08-28T08:45:15.679630Z",
+  "generated": "2021-08-28T10:39:11.726488Z",
   "generator": "pub",
   "generatorVersion": "2.13.4"
 }

@@ -35,10 +35,7 @@ class _SubjectsRemoteDataSource implements SubjectsRemoteDataSource {
                 .compose(_dio.options, '/',
                     queryParameters: queryParameters, data: _data)
                 .copyWith(baseUrl: baseUrl ?? _dio.options.baseUrl)));
-    final value = CollectionModel<SubjectModel>.fromJson(
-      _result.data!,
-      (json) => SubjectModel.fromJson(json as Map<String, dynamic>),
-    );
+    final value = CollectionModel<SubjectModel>.fromJson(_result.data!);
     return value;
   }
 
@@ -53,10 +50,7 @@ class _SubjectsRemoteDataSource implements SubjectsRemoteDataSource {
                 .compose(_dio.options, '/$id',
                     queryParameters: queryParameters, data: _data)
                 .copyWith(baseUrl: baseUrl ?? _dio.options.baseUrl)));
-    final value = ResourceModel<SubjectModel>.fromJson(
-      _result.data!,
-      (json) => SubjectModel.fromJson(json as Map<String, dynamic>),
-    );
+    final value = ResourceModel<SubjectModel>.fromJson(_result.data!);
     return value;
   }
 

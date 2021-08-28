@@ -43,10 +43,7 @@ class _ReviewStatisticsRemoteDataSource
                 .compose(_dio.options, '/',
                     queryParameters: queryParameters, data: _data)
                 .copyWith(baseUrl: baseUrl ?? _dio.options.baseUrl)));
-    final value = CollectionModel<ReviewStatisticModel>.fromJson(
-      _result.data!,
-      (json) => ReviewStatisticModel.fromJson(json as Map<String, dynamic>),
-    );
+    final value = CollectionModel<ReviewStatisticModel>.fromJson(_result.data!);
     return value;
   }
 
@@ -61,10 +58,7 @@ class _ReviewStatisticsRemoteDataSource
                 .compose(_dio.options, '/$id',
                     queryParameters: queryParameters, data: _data)
                 .copyWith(baseUrl: baseUrl ?? _dio.options.baseUrl)));
-    final value = ResourceModel<ReviewStatisticModel>.fromJson(
-      _result.data!,
-      (json) => ReviewStatisticModel.fromJson(json as Map<String, dynamic>),
-    );
+    final value = ResourceModel<ReviewStatisticModel>.fromJson(_result.data!);
     return value;
   }
 

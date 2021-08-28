@@ -32,10 +32,8 @@ class _LevelProgressionsRemoteDataSource
                 .compose(_dio.options, '/',
                     queryParameters: queryParameters, data: _data)
                 .copyWith(baseUrl: baseUrl ?? _dio.options.baseUrl)));
-    final value = CollectionModel<LevelProgressionModel>.fromJson(
-      _result.data!,
-      (json) => LevelProgressionModel.fromJson(json as Map<String, dynamic>),
-    );
+    final value =
+        CollectionModel<LevelProgressionModel>.fromJson(_result.data!);
     return value;
   }
 
@@ -50,10 +48,7 @@ class _LevelProgressionsRemoteDataSource
                 .compose(_dio.options, '/$id',
                     queryParameters: queryParameters, data: _data)
                 .copyWith(baseUrl: baseUrl ?? _dio.options.baseUrl)));
-    final value = ResourceModel<LevelProgressionModel>.fromJson(
-      _result.data!,
-      (json) => LevelProgressionModel.fromJson(json as Map<String, dynamic>),
-    );
+    final value = ResourceModel<LevelProgressionModel>.fromJson(_result.data!);
     return value;
   }
 

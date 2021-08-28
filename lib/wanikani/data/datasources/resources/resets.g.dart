@@ -30,10 +30,7 @@ class _ResetsRemoteDataSource implements ResetsRemoteDataSource {
                 .compose(_dio.options, '/',
                     queryParameters: queryParameters, data: _data)
                 .copyWith(baseUrl: baseUrl ?? _dio.options.baseUrl)));
-    final value = CollectionModel<ResetModel>.fromJson(
-      _result.data!,
-      (json) => ResetModel.fromJson(json as Map<String, dynamic>),
-    );
+    final value = CollectionModel<ResetModel>.fromJson(_result.data!);
     return value;
   }
 
@@ -48,10 +45,7 @@ class _ResetsRemoteDataSource implements ResetsRemoteDataSource {
                 .compose(_dio.options, '/$id',
                     queryParameters: queryParameters, data: _data)
                 .copyWith(baseUrl: baseUrl ?? _dio.options.baseUrl)));
-    final value = ResourceModel<ResetModel>.fromJson(
-      _result.data!,
-      (json) => ResetModel.fromJson(json as Map<String, dynamic>),
-    );
+    final value = ResourceModel<ResetModel>.fromJson(_result.data!);
     return value;
   }
 

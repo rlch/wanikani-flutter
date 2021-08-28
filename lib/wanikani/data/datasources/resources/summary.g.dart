@@ -26,10 +26,7 @@ class _SummaryRemoteDataSource implements SummaryRemoteDataSource {
                 .compose(_dio.options, '/',
                     queryParameters: queryParameters, data: _data)
                 .copyWith(baseUrl: baseUrl ?? _dio.options.baseUrl)));
-    final value = ResourceModel<SummaryModel>.fromJson(
-      _result.data!,
-      (json) => SummaryModel.fromJson(json as Map<String, dynamic>),
-    );
+    final value = ResourceModel<SummaryModel>.fromJson(_result.data!);
     return value;
   }
 

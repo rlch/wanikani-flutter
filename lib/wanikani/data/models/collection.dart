@@ -1,3 +1,4 @@
+import 'package:freezed_annotation/freezed_annotation.dart';
 import 'package:json_annotation/json_annotation.dart';
 import 'package:wanikani_flutter/core/utils/typedefs/generic_serializers.dart';
 import 'package:wanikani_flutter/wanikani/domain/entities/collection.dart';
@@ -6,44 +7,34 @@ import 'package:wanikani_flutter/wanikani/domain/entities/response.dart';
 import 'resource.dart';
 
 part 'collection.g.dart';
+part 'collection.freezed.dart';
 
-@JsonSerializable(genericArgumentFactories: true)
-class CollectionModel<T> extends Collection<T> implements IResponse<T> {
-  const CollectionModel(
+@freezed
+class CollectionModel<T> with _$CollectionModel<T> {
+  @JsonSerializable(genericArgumentFactories: true)
+  @Implements.fromString('Collection<T>')
+  @Implements.fromString('IResponse<T>')
+  const factory CollectionModel(
     int id, {
-    required this.data,
-    required this.pages,
+    required List<ResourceModel<T>> data,
+    required PagesModel pages,
     required String object,
     required String url,
     required DateTime dataUpdatedAt,
     required int totalCount,
-  }) : super(
-          id,
-          data: data,
-          object: object,
-          url: url,
-          dataUpdatedAt: dataUpdatedAt,
-          pages: pages,
-          totalCount: totalCount,
-        );
+  }) = Data;
+
+  const factory CollectionModel.loading() = Loading;
+  const factory CollectionModel.error(Exception exception) = ErrorDetails;
 
   factory CollectionModel.fromJson(
     Map<String, dynamic> json,
     GenericFromJson<T> fromJsonT,
-  ) {
-    return _$CollectionModelFromJson(
-      json,
-      (dynamic o) => fromJsonT(o..['object'] = json['object']),
-    );
-  }
-
-  Map<String, dynamic> toJson(GenericToJson<T> toJsonT) =>
-      _$CollectionModelToJson(this, toJsonT);
-
-  @override
-  final PagesModel pages;
-  @override
-  final List<ResourceModel<T>> data;
+  ) =>
+      _$_$DataFromJson(
+        json,
+        (dynamic o) => fromJsonT(o..['object'] = json['object']),
+      );
 }
 
 @JsonSerializable()

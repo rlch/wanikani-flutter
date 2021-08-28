@@ -33,10 +33,7 @@ class _ReviewsRemoteDataSource implements ReviewsRemoteDataSource {
                 .compose(_dio.options, '/',
                     queryParameters: queryParameters, data: _data)
                 .copyWith(baseUrl: baseUrl ?? _dio.options.baseUrl)));
-    final value = CollectionModel<ReviewModel>.fromJson(
-      _result.data!,
-      (json) => ReviewModel.fromJson(json as Map<String, dynamic>),
-    );
+    final value = CollectionModel<ReviewModel>.fromJson(_result.data!);
     return value;
   }
 
@@ -51,10 +48,7 @@ class _ReviewsRemoteDataSource implements ReviewsRemoteDataSource {
                 .compose(_dio.options, '/$id',
                     queryParameters: queryParameters, data: _data)
                 .copyWith(baseUrl: baseUrl ?? _dio.options.baseUrl)));
-    final value = ResourceModel<ReviewModel>.fromJson(
-      _result.data!,
-      (json) => ReviewModel.fromJson(json as Map<String, dynamic>),
-    );
+    final value = ResourceModel<ReviewModel>.fromJson(_result.data!);
     return value;
   }
 
@@ -70,10 +64,7 @@ class _ReviewsRemoteDataSource implements ReviewsRemoteDataSource {
                 .compose(_dio.options, '/reviews',
                     queryParameters: queryParameters, data: _data)
                 .copyWith(baseUrl: baseUrl ?? _dio.options.baseUrl)));
-    final value = ResourceModel<AssignmentModel>.fromJson(
-      _result.data!,
-      (json) => AssignmentModel.fromJson(json as Map<String, dynamic>),
-    );
+    final value = ResourceModel<AssignmentModel>.fromJson(_result.data!);
     return value;
   }
 

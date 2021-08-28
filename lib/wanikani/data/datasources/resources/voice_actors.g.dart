@@ -30,10 +30,7 @@ class _VoiceActorsRemoteDataSource implements VoiceActorsRemoteDataSource {
                 .compose(_dio.options, '/',
                     queryParameters: queryParameters, data: _data)
                 .copyWith(baseUrl: baseUrl ?? _dio.options.baseUrl)));
-    final value = CollectionModel<VoiceActorModel>.fromJson(
-      _result.data!,
-      (json) => VoiceActorModel.fromJson(json as Map<String, dynamic>),
-    );
+    final value = CollectionModel<VoiceActorModel>.fromJson(_result.data!);
     return value;
   }
 
@@ -48,10 +45,7 @@ class _VoiceActorsRemoteDataSource implements VoiceActorsRemoteDataSource {
                 .compose(_dio.options, '/$id',
                     queryParameters: queryParameters, data: _data)
                 .copyWith(baseUrl: baseUrl ?? _dio.options.baseUrl)));
-    final value = ResourceModel<VoiceActorModel>.fromJson(
-      _result.data!,
-      (json) => VoiceActorModel.fromJson(json as Map<String, dynamic>),
-    );
+    final value = ResourceModel<VoiceActorModel>.fromJson(_result.data!);
     return value;
   }
 

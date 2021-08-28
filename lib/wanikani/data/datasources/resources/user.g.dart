@@ -24,10 +24,7 @@ class _UserRemoteDataSource implements UserRemoteDataSource {
                 .compose(_dio.options, '/',
                     queryParameters: queryParameters, data: _data)
                 .copyWith(baseUrl: baseUrl ?? _dio.options.baseUrl)));
-    final value = ResourceModel<UserModel>.fromJson(
-      _result.data!,
-      (json) => UserModel.fromJson(json as Map<String, dynamic>),
-    );
+    final value = ResourceModel<UserModel>.fromJson(_result.data!);
     return value;
   }
 
@@ -43,10 +40,7 @@ class _UserRemoteDataSource implements UserRemoteDataSource {
                 .compose(_dio.options, '/',
                     queryParameters: queryParameters, data: _data)
                 .copyWith(baseUrl: baseUrl ?? _dio.options.baseUrl)));
-    final value = ResourceModel<UserModel>.fromJson(
-      _result.data!,
-      (json) => UserModel.fromJson(json as Map<String, dynamic>),
-    );
+    final value = ResourceModel<UserModel>.fromJson(_result.data!);
     return value;
   }
 

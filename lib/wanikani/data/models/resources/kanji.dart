@@ -1,7 +1,7 @@
 import 'package:json_annotation/json_annotation.dart';
-import 'package:wanikani_flutter/data/models/subject.dart';
-import 'package:wanikani_flutter/domain/entities/kanji.dart';
-import 'package:wanikani_flutter/domain/entities/reading.dart';
+import 'package:wanikani_flutter/wanikani/data/models/resources/subject.dart';
+import 'package:wanikani_flutter/wanikani/domain/entities/resources/kanji.dart';
+import 'package:wanikani_flutter/wanikani/domain/entities/resources/reading.dart';
 
 part 'kanji.g.dart';
 

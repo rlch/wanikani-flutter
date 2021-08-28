@@ -118,6 +118,14 @@ fixnum
 2.12
 file:///home/rjm/flutter/.pub-cache/hosted/pub.dartlang.org/fixnum-1.0.0/
 file:///home/rjm/flutter/.pub-cache/hosted/pub.dartlang.org/fixnum-1.0.0/lib/
+freezed
+2.12
+file:///home/rjm/flutter/.pub-cache/hosted/pub.dartlang.org/freezed-0.14.2/
+file:///home/rjm/flutter/.pub-cache/hosted/pub.dartlang.org/freezed-0.14.2/lib/
+freezed_annotation
+2.12
+file:///home/rjm/flutter/.pub-cache/hosted/pub.dartlang.org/freezed_annotation-0.14.2/
+file:///home/rjm/flutter/.pub-cache/hosted/pub.dartlang.org/freezed_annotation-0.14.2/lib/
 frontend_server_client
 2.12
 file:///home/rjm/flutter/.pub-cache/hosted/pub.dartlang.org/frontend_server_client-2.1.2/
