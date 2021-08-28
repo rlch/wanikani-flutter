@@ -1,13 +1,12 @@
 import 'package:json_annotation/json_annotation.dart';
+import 'package:wanikani_flutter/core/utils/typedefs/generic_serializers.dart';
 import 'package:wanikani_flutter/wanikani/domain/entities/collection.dart';
-import 'package:wanikani_flutter/wanikani/typedefs/generic_serializers.dart';
+import 'package:wanikani_flutter/wanikani/domain/entities/response.dart';
 
-import 'response.dart';
 import 'resource.dart';
 
 part 'collection.g.dart';
 
-/// Collections contain summary data about a bunch of resources, and also include each of the resources.
 @JsonSerializable(genericArgumentFactories: true)
 class CollectionModel<T> extends Collection<T> implements IResponse<T> {
   const CollectionModel(

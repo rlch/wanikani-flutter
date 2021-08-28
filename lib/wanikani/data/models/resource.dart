@@ -1,7 +1,7 @@
 import 'package:json_annotation/json_annotation.dart';
+import 'package:wanikani_flutter/core/utils/typedefs/generic_serializers.dart';
 import 'package:wanikani_flutter/wanikani/domain/entities/resource.dart';
 import 'package:wanikani_flutter/wanikani/domain/entities/response.dart';
-import 'package:wanikani_flutter/wanikani/typedefs/generic_serializers.dart';
 
 part 'resource.g.dart';
 
