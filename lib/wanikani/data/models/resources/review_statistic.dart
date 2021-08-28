@@ -1,12 +1,14 @@
 import 'package:json_annotation/json_annotation.dart';
-import 'package:wanikani_flutter/domain/entities/review_statistic.dart';
-import 'package:wanikani_flutter/enums/subject_type.dart';
+import 'package:wanikani_flutter/wanikani/domain/entities/enums/subject_type.dart';
+import 'package:wanikani_flutter/wanikani/domain/entities/resources/review_statistic.dart';
+
+import '../model.dart';
 
 part 'review_statistic.g.dart';
 
 @JsonSerializable()
-class ReviewStatisticModel extends ReviewStatistic {
-  const ReviewStatisticModel({
+class ReviewStatisticModel extends ReviewStatistic with IModel {
+  ReviewStatisticModel({
     required DateTime createdAt,
     required bool hidden,
     required int meaningCorrect,

@@ -1,14 +1,15 @@
 import 'package:json_annotation/json_annotation.dart';
 import 'package:wanikani_flutter/wanikani/domain/entities/resources/subject.dart';
 
+import '../model.dart';
 import 'kanji.dart';
 import 'radical.dart';
 import 'vocabulary.dart';
 
 part 'subject.g.dart';
 
-abstract class SubjectModel extends Subject {
-  const SubjectModel({
+abstract class SubjectModel extends Subject with IModel {
+  SubjectModel({
     required this.auxiliaryMeanings,
     required this.meanings,
     required DateTime createdAt,

@@ -1,12 +1,13 @@
 import 'package:json_annotation/json_annotation.dart';
-import 'package:wanikani_flutter/domain/entities/study_material.dart';
-import 'package:wanikani_flutter/enums/subject_type.dart';
+import 'package:wanikani_flutter/wanikani/data/models/model.dart';
+import 'package:wanikani_flutter/wanikani/domain/entities/enums/subject_type.dart';
+import 'package:wanikani_flutter/wanikani/domain/entities/resources/study_material.dart';
 
 part 'study_material.g.dart';
 
 @JsonSerializable()
-class StudyMaterialModel extends StudyMaterial {
-  const StudyMaterialModel({
+class StudyMaterialModel extends StudyMaterial with IModel {
+   StudyMaterialModel({
     required DateTime createdAt,
     required bool hidden,
     required List<String> meaningSynonyms,

@@ -40,11 +40,14 @@ VocabularyModel _$VocabularyModelFromJson(Map<String, dynamic> json) {
     hiddenAt: json['hidden_at'] == null
         ? null
         : DateTime.parse(json['hidden_at'] as String),
-  );
+  )..lastCheckedCacheAt = json['last_checked_cache_at'] == null
+      ? null
+      : DateTime.parse(json['last_checked_cache_at'] as String);
 }
 
 Map<String, dynamic> _$VocabularyModelToJson(VocabularyModel instance) =>
     <String, dynamic>{
+      'last_checked_cache_at': instance.lastCheckedCacheAt?.toIso8601String(),
       'created_at': instance.createdAt.toIso8601String(),
       'document_url': instance.documentUrl,
       'hidden_at': instance.hiddenAt?.toIso8601String(),

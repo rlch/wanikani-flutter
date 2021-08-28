@@ -1,4 +1,5 @@
 import 'package:json_annotation/json_annotation.dart';
+import 'package:wanikani_flutter/wanikani/data/models/model.dart';
 import 'package:wanikani_flutter/wanikani/domain/entities/resources/vocabulary.dart';
 
 import 'subject.dart';
@@ -6,8 +7,8 @@ import 'subject.dart';
 part 'vocabulary.g.dart';
 
 @JsonSerializable()
-class VocabularyModel extends Vocabulary implements SubjectModel {
-  const VocabularyModel({
+class VocabularyModel extends Vocabulary with IModel implements SubjectModel {
+  VocabularyModel({
     required this.contextSentences,
     required this.pronunciationAudios,
     required this.readings,

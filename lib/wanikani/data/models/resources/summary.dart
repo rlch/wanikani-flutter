@@ -1,11 +1,13 @@
 import 'package:json_annotation/json_annotation.dart';
-import 'package:wanikani_flutter/domain/entities/summary.dart';
+import 'package:wanikani_flutter/wanikani/domain/entities/resources/summary.dart';
+
+import '../model.dart';
 
 part 'summary.g.dart';
 
 @JsonSerializable()
-class SummaryModel extends Summary {
-  const SummaryModel({
+class SummaryModel extends Summary with IModel { 
+  SummaryModel({
     required this.lessons,
     required this.reviews,
     DateTime? nextReviewsAt,

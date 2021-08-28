@@ -2,11 +2,13 @@ import 'package:json_annotation/json_annotation.dart';
 import 'package:wanikani_flutter/wanikani/domain/entities/enums/subject_type.dart';
 import 'package:wanikani_flutter/wanikani/domain/entities/resources/assignment.dart';
 
+import '../model.dart';
+
 part 'assignment.g.dart';
 
 @JsonSerializable()
-class AssignmentModel extends Assignment {
-  const AssignmentModel({
+class AssignmentModel extends Assignment with IModel {
+  AssignmentModel({
     required DateTime? availableAt,
     required DateTime? burnedAt,
     required DateTime? createdAt,

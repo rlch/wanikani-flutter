@@ -1,12 +1,13 @@
 import 'package:json_annotation/json_annotation.dart';
-import 'package:wanikani_flutter/domain/entities/user.dart';
-import 'package:wanikani_flutter/enums/subscription_type.dart';
+import 'package:wanikani_flutter/wanikani/data/models/model.dart';
+import 'package:wanikani_flutter/wanikani/domain/entities/enums/subscription_type.dart';
+import 'package:wanikani_flutter/wanikani/domain/entities/resources/user.dart';
 
 part 'user.g.dart';
 
 @JsonSerializable()
-class UserModel extends User {
-  const UserModel({
+class UserModel extends User with IModel {
+  UserModel({
     required this.preferences,
     required this.subscription,
     required int level,

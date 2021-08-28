@@ -1,17 +1,19 @@
 import 'package:json_annotation/json_annotation.dart';
-import 'package:wanikani_flutter/domain/entities/spaced_repetition_system.dart';
+import 'package:wanikani_flutter/wanikani/domain/entities/resources/spaced_repetition_system.dart';
+
+import '../model.dart';
 
 part 'spaced_repetition_system.g.dart';
 
 @JsonSerializable()
-class SpacedRepetitionSystemModel extends SpacedRepetitionSystem {
-  const SpacedRepetitionSystemModel({
+class SpacedRepetitionSystemModel extends SpacedRepetitionSystem with IModel {
+  SpacedRepetitionSystemModel({
     required int burningStagePosition,
     required DateTime createdAt,
     required String description,
     required String name,
     required int passingStagePosition,
-    required List<StageModel> stages,
+    required this.stages,
     required int startingStagePosition,
     required int unlockingStagePosition,
   }) : super(
@@ -24,6 +26,9 @@ class SpacedRepetitionSystemModel extends SpacedRepetitionSystem {
           startingStagePosition: startingStagePosition,
           unlockingStagePosition: unlockingStagePosition,
         );
+
+  @override
+  final List<StageModel> stages;
 
   factory SpacedRepetitionSystemModel.fromJson(Map<String, dynamic> json) =>
       _$SpacedRepetitionSystemModelFromJson(json);

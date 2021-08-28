@@ -1,6 +1,6 @@
 import 'package:json_annotation/json_annotation.dart';
-import 'package:wanikani_flutter/domain/entities/reading.dart';
-import 'package:wanikani_flutter/enums/kanji_reading_type.dart';
+import 'package:wanikani_flutter/wanikani/domain/entities/enums/kanji_reading_type.dart';
+import 'package:wanikani_flutter/wanikani/domain/entities/resources/reading.dart';
 
 part 'reading.g.dart';
 

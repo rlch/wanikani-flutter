@@ -1,13 +1,13 @@
 import 'package:json_annotation/json_annotation.dart';
-import 'package:wanikani_flutter/domain/entities/radical.dart';
-
+import 'package:wanikani_flutter/wanikani/domain/entities/resources/radical.dart';
+import '../model.dart';
 import 'subject.dart';
 
 part 'radical.g.dart';
 
 @JsonSerializable()
-class RadicalModel extends Radical implements SubjectModel {
-  const RadicalModel({
+class RadicalModel extends Radical with IModel implements SubjectModel  {
+  RadicalModel({
     required this.auxiliaryMeanings,
     required this.characterImages,
     required this.meanings,

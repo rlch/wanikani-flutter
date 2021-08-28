@@ -1,11 +1,12 @@
 import 'package:json_annotation/json_annotation.dart';
-import 'package:wanikani_flutter/domain/entities/review.dart';
+import 'package:wanikani_flutter/wanikani/data/models/model.dart';
+import 'package:wanikani_flutter/wanikani/domain/entities/resources/review.dart';
 
 part 'review.g.dart';
 
 @JsonSerializable()
-class ReviewModel extends Review {
-  const ReviewModel({
+class ReviewModel extends Review with IModel {
+  ReviewModel({
     required int assignmentId,
     required DateTime createdAt,
     required int endingSrsStage,

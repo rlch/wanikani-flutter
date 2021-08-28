@@ -12,11 +12,26 @@ T _$identity<T>(T value) => value;
 final _privateConstructorUsedError = UnsupportedError(
     'It seems like you constructed your class using `MyClass._()`. This constructor is only meant to be used by freezed and you are not supposed to need it nor use it.\nPlease check the documentation here for more informations: https://github.com/rrousselGit/freezed#custom-getters-and-methods');
 
+ResourceModel<T> _$ResourceModelFromJson<T extends IModel>(
+    Map<String, dynamic> json) {
+  switch (json['runtimeType'] as String) {
+    case 'default':
+      return Data<T>.fromJson(json);
+    case 'loading':
+      return Loading<T>.fromJson(json);
+    case 'error':
+      return ErrorDetails<T>.fromJson(json);
+
+    default:
+      throw FallThroughError();
+  }
+}
+
 /// @nodoc
 class _$ResourceModelTearOff {
   const _$ResourceModelTearOff();
 
-  Data<T> call<T>(int id,
+  Data<T> call<T extends IModel>(int id,
       {required String object,
       required String url,
       required DateTime dataUpdatedAt,
@@ -30,14 +45,20 @@ class _$ResourceModelTearOff {
     );
   }
 
-  Loading<T> loading<T>() {
+  Loading<T> loading<T extends IModel>() {
     return Loading<T>();
   }
 
-  ErrorDetails<T> error<T>(Exception exception) {
+  ErrorDetails<T> error<T extends IModel>(
+      @JsonKey(toJson: ExceptionConverter.staticToJson, fromJson: ExceptionConverter.staticFromJson)
+          Exception exception) {
     return ErrorDetails<T>(
       exception,
     );
+  }
+
+  ResourceModel<T> fromJson<T extends IModel>(Map<String, Object> json) {
+    return ResourceModel<T>.fromJson(json);
   }
 }
 
@@ -45,14 +66,17 @@ class _$ResourceModelTearOff {
 const $ResourceModel = _$ResourceModelTearOff();
 
 /// @nodoc
-mixin _$ResourceModel<T> {
+mixin _$ResourceModel<T extends IModel> {
   @optionalTypeArgs
   TResult when<TResult extends Object?>(
     TResult Function(
             int id, String object, String url, DateTime dataUpdatedAt, T data)
         $default, {
     required TResult Function() loading,
-    required TResult Function(Exception exception) error,
+    required TResult Function(
+            @JsonKey(toJson: ExceptionConverter.staticToJson, fromJson: ExceptionConverter.staticFromJson)
+                Exception exception)
+        error,
   }) =>
       throw _privateConstructorUsedError;
   @optionalTypeArgs
@@ -61,7 +85,10 @@ mixin _$ResourceModel<T> {
             int id, String object, String url, DateTime dataUpdatedAt, T data)?
         $default, {
     TResult Function()? loading,
-    TResult Function(Exception exception)? error,
+    TResult Function(
+            @JsonKey(toJson: ExceptionConverter.staticToJson, fromJson: ExceptionConverter.staticFromJson)
+                Exception exception)?
+        error,
     required TResult orElse(),
   }) =>
       throw _privateConstructorUsedError;
@@ -80,17 +107,18 @@ mixin _$ResourceModel<T> {
     required TResult orElse(),
   }) =>
       throw _privateConstructorUsedError;
+  Map<String, dynamic> toJson() => throw _privateConstructorUsedError;
 }
 
 /// @nodoc
-abstract class $ResourceModelCopyWith<T, $Res> {
+abstract class $ResourceModelCopyWith<T extends IModel, $Res> {
   factory $ResourceModelCopyWith(
           ResourceModel<T> value, $Res Function(ResourceModel<T>) then) =
       _$ResourceModelCopyWithImpl<T, $Res>;
 }
 
 /// @nodoc
-class _$ResourceModelCopyWithImpl<T, $Res>
+class _$ResourceModelCopyWithImpl<T extends IModel, $Res>
     implements $ResourceModelCopyWith<T, $Res> {
   _$ResourceModelCopyWithImpl(this._value, this._then);
 
@@ -100,7 +128,7 @@ class _$ResourceModelCopyWithImpl<T, $Res>
 }
 
 /// @nodoc
-abstract class $DataCopyWith<T, $Res> {
+abstract class $DataCopyWith<T extends IModel, $Res> {
   factory $DataCopyWith(Data<T> value, $Res Function(Data<T>) then) =
       _$DataCopyWithImpl<T, $Res>;
   $Res call(
@@ -108,7 +136,8 @@ abstract class $DataCopyWith<T, $Res> {
 }
 
 /// @nodoc
-class _$DataCopyWithImpl<T, $Res> extends _$ResourceModelCopyWithImpl<T, $Res>
+class _$DataCopyWithImpl<T extends IModel, $Res>
+    extends _$ResourceModelCopyWithImpl<T, $Res>
     implements $DataCopyWith<T, $Res> {
   _$DataCopyWithImpl(Data<T> _value, $Res Function(Data<T>) _then)
       : super(_value, (v) => _then(v as Data<T>));
@@ -154,12 +183,14 @@ class _$DataCopyWithImpl<T, $Res> extends _$ResourceModelCopyWithImpl<T, $Res>
 @JsonSerializable(genericArgumentFactories: true)
 @Implements.fromString('Resource<T>')
 @Implements.fromString('IResponse<T>')
-class _$Data<T> implements Data<T> {
+class _$Data<T extends IModel> implements Data<T> {
   const _$Data(this.id,
       {required this.object,
       required this.url,
       required this.dataUpdatedAt,
       required this.data});
+
+  factory _$Data.fromJson(Map<String, dynamic> json) => _$_$DataFromJson(json);
 
   @override
   final int id;
@@ -215,7 +246,10 @@ class _$Data<T> implements Data<T> {
             int id, String object, String url, DateTime dataUpdatedAt, T data)
         $default, {
     required TResult Function() loading,
-    required TResult Function(Exception exception) error,
+    required TResult Function(
+            @JsonKey(toJson: ExceptionConverter.staticToJson, fromJson: ExceptionConverter.staticFromJson)
+                Exception exception)
+        error,
   }) {
     return $default(id, object, url, dataUpdatedAt, data);
   }
@@ -227,7 +261,10 @@ class _$Data<T> implements Data<T> {
             int id, String object, String url, DateTime dataUpdatedAt, T data)?
         $default, {
     TResult Function()? loading,
-    TResult Function(Exception exception)? error,
+    TResult Function(
+            @JsonKey(toJson: ExceptionConverter.staticToJson, fromJson: ExceptionConverter.staticFromJson)
+                Exception exception)?
+        error,
     required TResult orElse(),
   }) {
     if ($default != null) {
@@ -259,14 +296,22 @@ class _$Data<T> implements Data<T> {
     }
     return orElse();
   }
+
+  @override
+  Map<String, dynamic> toJson() {
+    return _$_$DataToJson(this)..['runtimeType'] = 'default';
+  }
 }
 
-abstract class Data<T> implements ResourceModel<T>, Resource<T>, IResponse<T> {
+abstract class Data<T extends IModel>
+    implements ResourceModel<T>, Resource<T>, IResponse<T> {
   const factory Data(int id,
       {required String object,
       required String url,
       required DateTime dataUpdatedAt,
       required T data}) = _$Data<T>;
+
+  factory Data.fromJson(Map<String, dynamic> json) = _$Data<T>.fromJson;
 
   int get id => throw _privateConstructorUsedError;
   String get object => throw _privateConstructorUsedError;
@@ -278,13 +323,13 @@ abstract class Data<T> implements ResourceModel<T>, Resource<T>, IResponse<T> {
 }
 
 /// @nodoc
-abstract class $LoadingCopyWith<T, $Res> {
+abstract class $LoadingCopyWith<T extends IModel, $Res> {
   factory $LoadingCopyWith(Loading<T> value, $Res Function(Loading<T>) then) =
       _$LoadingCopyWithImpl<T, $Res>;
 }
 
 /// @nodoc
-class _$LoadingCopyWithImpl<T, $Res>
+class _$LoadingCopyWithImpl<T extends IModel, $Res>
     extends _$ResourceModelCopyWithImpl<T, $Res>
     implements $LoadingCopyWith<T, $Res> {
   _$LoadingCopyWithImpl(Loading<T> _value, $Res Function(Loading<T>) _then)
@@ -295,9 +340,12 @@ class _$LoadingCopyWithImpl<T, $Res>
 }
 
 /// @nodoc
-
-class _$Loading<T> implements Loading<T> {
+@JsonSerializable()
+class _$Loading<T extends IModel> implements Loading<T> {
   const _$Loading();
+
+  factory _$Loading.fromJson(Map<String, dynamic> json) =>
+      _$_$LoadingFromJson(json);
 
   @override
   String toString() {
@@ -319,7 +367,10 @@ class _$Loading<T> implements Loading<T> {
             int id, String object, String url, DateTime dataUpdatedAt, T data)
         $default, {
     required TResult Function() loading,
-    required TResult Function(Exception exception) error,
+    required TResult Function(
+            @JsonKey(toJson: ExceptionConverter.staticToJson, fromJson: ExceptionConverter.staticFromJson)
+                Exception exception)
+        error,
   }) {
     return loading();
   }
@@ -331,7 +382,10 @@ class _$Loading<T> implements Loading<T> {
             int id, String object, String url, DateTime dataUpdatedAt, T data)?
         $default, {
     TResult Function()? loading,
-    TResult Function(Exception exception)? error,
+    TResult Function(
+            @JsonKey(toJson: ExceptionConverter.staticToJson, fromJson: ExceptionConverter.staticFromJson)
+                Exception exception)?
+        error,
     required TResult orElse(),
   }) {
     if (loading != null) {
@@ -363,22 +417,31 @@ class _$Loading<T> implements Loading<T> {
     }
     return orElse();
   }
+
+  @override
+  Map<String, dynamic> toJson() {
+    return _$_$LoadingToJson(this)..['runtimeType'] = 'loading';
+  }
 }
 
-abstract class Loading<T> implements ResourceModel<T> {
+abstract class Loading<T extends IModel> implements ResourceModel<T> {
   const factory Loading() = _$Loading<T>;
+
+  factory Loading.fromJson(Map<String, dynamic> json) = _$Loading<T>.fromJson;
 }
 
 /// @nodoc
-abstract class $ErrorDetailsCopyWith<T, $Res> {
+abstract class $ErrorDetailsCopyWith<T extends IModel, $Res> {
   factory $ErrorDetailsCopyWith(
           ErrorDetails<T> value, $Res Function(ErrorDetails<T>) then) =
       _$ErrorDetailsCopyWithImpl<T, $Res>;
-  $Res call({Exception exception});
+  $Res call(
+      {@JsonKey(toJson: ExceptionConverter.staticToJson, fromJson: ExceptionConverter.staticFromJson)
+          Exception exception});
 }
 
 /// @nodoc
-class _$ErrorDetailsCopyWithImpl<T, $Res>
+class _$ErrorDetailsCopyWithImpl<T extends IModel, $Res>
     extends _$ResourceModelCopyWithImpl<T, $Res>
     implements $ErrorDetailsCopyWith<T, $Res> {
   _$ErrorDetailsCopyWithImpl(
@@ -402,11 +465,19 @@ class _$ErrorDetailsCopyWithImpl<T, $Res>
 }
 
 /// @nodoc
+@JsonSerializable()
+class _$ErrorDetails<T extends IModel> implements ErrorDetails<T> {
+  const _$ErrorDetails(
+      @JsonKey(toJson: ExceptionConverter.staticToJson, fromJson: ExceptionConverter.staticFromJson)
+          this.exception);
 
-class _$ErrorDetails<T> implements ErrorDetails<T> {
-  const _$ErrorDetails(this.exception);
+  factory _$ErrorDetails.fromJson(Map<String, dynamic> json) =>
+      _$_$ErrorDetailsFromJson(json);
 
   @override
+  @JsonKey(
+      toJson: ExceptionConverter.staticToJson,
+      fromJson: ExceptionConverter.staticFromJson)
   final Exception exception;
 
   @override
@@ -439,7 +510,10 @@ class _$ErrorDetails<T> implements ErrorDetails<T> {
             int id, String object, String url, DateTime dataUpdatedAt, T data)
         $default, {
     required TResult Function() loading,
-    required TResult Function(Exception exception) error,
+    required TResult Function(
+            @JsonKey(toJson: ExceptionConverter.staticToJson, fromJson: ExceptionConverter.staticFromJson)
+                Exception exception)
+        error,
   }) {
     return error(exception);
   }
@@ -451,7 +525,10 @@ class _$ErrorDetails<T> implements ErrorDetails<T> {
             int id, String object, String url, DateTime dataUpdatedAt, T data)?
         $default, {
     TResult Function()? loading,
-    TResult Function(Exception exception)? error,
+    TResult Function(
+            @JsonKey(toJson: ExceptionConverter.staticToJson, fromJson: ExceptionConverter.staticFromJson)
+                Exception exception)?
+        error,
     required TResult orElse(),
   }) {
     if (error != null) {
@@ -483,11 +560,24 @@ class _$ErrorDetails<T> implements ErrorDetails<T> {
     }
     return orElse();
   }
+
+  @override
+  Map<String, dynamic> toJson() {
+    return _$_$ErrorDetailsToJson(this)..['runtimeType'] = 'error';
+  }
 }
 
-abstract class ErrorDetails<T> implements ResourceModel<T> {
-  const factory ErrorDetails(Exception exception) = _$ErrorDetails<T>;
+abstract class ErrorDetails<T extends IModel> implements ResourceModel<T> {
+  const factory ErrorDetails(
+      @JsonKey(toJson: ExceptionConverter.staticToJson, fromJson: ExceptionConverter.staticFromJson)
+          Exception exception) = _$ErrorDetails<T>;
 
+  factory ErrorDetails.fromJson(Map<String, dynamic> json) =
+      _$ErrorDetails<T>.fromJson;
+
+  @JsonKey(
+      toJson: ExceptionConverter.staticToJson,
+      fromJson: ExceptionConverter.staticFromJson)
   Exception get exception => throw _privateConstructorUsedError;
   @JsonKey(ignore: true)
   $ErrorDetailsCopyWith<T, ErrorDetails<T>> get copyWith =>

@@ -1,13 +1,15 @@
 import 'package:json_annotation/json_annotation.dart';
+import 'package:wanikani_flutter/wanikani/data/models/resources/reading.dart';
 import 'package:wanikani_flutter/wanikani/data/models/resources/subject.dart';
 import 'package:wanikani_flutter/wanikani/domain/entities/resources/kanji.dart';
-import 'package:wanikani_flutter/wanikani/domain/entities/resources/reading.dart';
+
+import '../model.dart';
 
 part 'kanji.g.dart';
 
 @JsonSerializable()
-class KanjiModel extends Kanji implements SubjectModel {
-  const KanjiModel({
+class KanjiModel extends Kanji with IModel implements SubjectModel {
+  KanjiModel({
     required this.readings,
     required this.auxiliaryMeanings,
     required this.meanings,
@@ -45,7 +47,7 @@ class KanjiModel extends Kanji implements SubjectModel {
           spacedRepetitionSystemId: spacedRepetitionSystemId,
         );
 
-  final List<KanjiReading> readings;
+  final List<KanjiReadingModel> readings;
   final List<AuxiliaryMeaningModel> auxiliaryMeanings;
   final List<MeaningModel> meanings;
 

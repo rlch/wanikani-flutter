@@ -1,11 +1,12 @@
 import 'package:json_annotation/json_annotation.dart';
-import 'package:wanikani_flutter/domain/entities/reset.dart';
+import 'package:wanikani_flutter/wanikani/data/models/model.dart';
+import 'package:wanikani_flutter/wanikani/domain/entities/resources/reset.dart';
 
 part 'reset.g.dart';
 
 @JsonSerializable()
-class ResetModel extends Reset {
-  const ResetModel({
+class ResetModel extends Reset with IModel {
+  ResetModel({
     required DateTime createdAt,
     required int originalLevel,
     required int targetLevel,

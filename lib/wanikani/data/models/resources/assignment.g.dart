@@ -33,11 +33,14 @@ AssignmentModel _$AssignmentModelFromJson(Map<String, dynamic> json) {
     unlockedAt: json['unlocked_at'] == null
         ? null
         : DateTime.parse(json['unlocked_at'] as String),
-  );
+  )..lastCheckedCacheAt = json['last_checked_cache_at'] == null
+      ? null
+      : DateTime.parse(json['last_checked_cache_at'] as String);
 }
 
 Map<String, dynamic> _$AssignmentModelToJson(AssignmentModel instance) =>
     <String, dynamic>{
+      'last_checked_cache_at': instance.lastCheckedCacheAt?.toIso8601String(),
       'available_at': instance.availableAt?.toIso8601String(),
       'burned_at': instance.burnedAt?.toIso8601String(),
       'created_at': instance.createdAt?.toIso8601String(),

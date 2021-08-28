@@ -1,11 +1,13 @@
 import 'package:json_annotation/json_annotation.dart';
 import 'package:wanikani_flutter/wanikani/domain/entities/resources/level_progression.dart';
 
+import '../model.dart';
+
 part 'level_progression.g.dart';
 
 @JsonSerializable()
-class LevelProgressionModel extends LevelProgression {
-  const LevelProgressionModel({
+class LevelProgressionModel extends LevelProgression with IModel {
+  LevelProgressionModel({
     required DateTime createdAt,
     required int level,
     DateTime? abandonedAt,
