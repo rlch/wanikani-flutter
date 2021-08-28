@@ -1,39 +1,27 @@
-import 'package:dio/dio.dart';
-import 'package:retrofit/retrofit.dart';
+import 'package:wanikani_flutter/wanikani/data/datasources/resources/user.dart';
 import 'package:wanikani_flutter/wanikani/data/models/resource.dart';
 import 'package:wanikani_flutter/wanikani/data/models/resources/user.dart';
-import 'package:wanikani_flutter/wanikani/services/wanikani_services.dart';
 
-part 'user.g.dart';
-
-abstract class IUserDataSource {
+abstract class IUserRepository {
   /// Returns a summary of user information.
   Future<ResourceModel<UserModel>> getInformation();
 
   /// Returns an updated summary of user information.
-  Future<ResourceModel<UserModel>> update(UserModel user) =>
-      _update(user.preferences.toJson());
-
-  Future<ResourceModel<UserModel>> _update(
-    Map<String, dynamic> userPreferences,
-  );
+  Future<ResourceModel<UserModel>> update(UserModel user);
 }
 
-@RestApi(baseUrl: '$wanikaniApiBasePath/user/')
-abstract class UserRemoteDataSource implements IUserDataSource {
-  factory UserRemoteDataSource(Dio dio) = _UserRemoteDataSource;
+class UserRepository implements IUserRepository {
+  const UserRepository({required this.remote});
 
-  /// Returns a summary of user information.
-  @GET('/')
-  Future<ResourceModel<UserModel>> getInformation();
+  final UserRemoteDataSource remote;
 
-  @PUT('/')
-  Future<ResourceModel<UserModel>> _update(
-    @Body() Map<String, dynamic> userPreferences,
-  );
+  @override
+  Future<ResourceModel<UserModel>> getInformation() {
+    return remote.getInformation();
+  }
 
-  /// Returns an updated summary of user information.
-  Future<ResourceModel<UserModel>> update(UserModel user) =>
-      _update(user.preferences.toJson());
+  @override
+  Future<ResourceModel<UserModel>> update(UserModel user) {
+    return remote.update(user);
+  }
 }
-

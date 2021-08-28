@@ -1,16 +1,10 @@
-import 'package:dio/dio.dart';
-import 'package:retrofit/retrofit.dart';
-import 'package:wanikani_flutter/wanikani/data/datasources/constants.dart';
-import 'package:wanikani_flutter/core/utils/extensions/date_time_x.dart';
+import 'package:wanikani_flutter/wanikani/data/datasources/resources/assignments.dart';
 import 'package:wanikani_flutter/wanikani/data/models/collection.dart';
 import 'package:wanikani_flutter/wanikani/data/models/resource.dart';
 import 'package:wanikani_flutter/wanikani/data/models/resources/assignment.dart';
 import 'package:wanikani_flutter/wanikani/domain/entities/enums/subject_type.dart';
 
-part 'assignments.g.dart';
-
-
-abstract class IAssignmentsDataSource {
+abstract class IAssignmentsRepository {
   /// Returns a collection of all assignments, ordered by ascending `created_at`, 500 at a time.
   Future<CollectionModel<AssignmentModel>> getAll({
     DateTime? availableAfter,
@@ -35,44 +29,64 @@ abstract class IAssignmentsDataSource {
 
   /// Mark the assignment as started, moving the assignment from the lessons queue to the review queue.
   /// Returns the updated assignment.
-  Future<ResourceModel<AssignmentModel>> start(String id, {DateTime? startedAt});
+  Future<ResourceModel<AssignmentModel>> start(
+    String id, {
+    DateTime? startedAt,
+  });
 }
 
-@RestApi(baseUrl: '$wanikaniApiBasePath/assignments')
-abstract class AssignmentsRemoteDataSource implements IAssignmentsDataSource {
-  factory AssignmentsRemoteDataSource(Dio dio) = _AssignmentsRemoteDataSource;
+class AssignmentsRepository implements IAssignmentsRepository {
+  const AssignmentsRepository({required this.remote});
 
-  /// Returns a collection of all assignments, ordered by ascending `created_at`, 500 at a time.
-  @GET('')
+  final AssignmentsRemoteDataSource remote;
+
+  @override
   Future<CollectionModel<AssignmentModel>> getAll({
-    @Query('available_after') DateTime? availableAfter,
-    @Query('available_before') DateTime? availableBefore,
-    @Query('burned') bool? burned,
-    @Query('hidden') bool? hidden,
-    @Query('ids') List<int>? ids,
-    @Query('immediately_available_for_lessons')
-        bool? immediatelyAvailableForLessons,
-    @Query('immediately_available_for_review')
-        bool? immediatelyAvailableForReview,
-    @Query('in_review') bool? inReview,
-    @Query('levels') List<int>? levels,
-    @Query('srs_stages') List<int>? srsStages,
-    @Query('started') bool? started,
-    @Query('subject_ids') List<int>? subjectIds,
-    @Query('subject_types') List<SubjectType>? subjectTypes,
-    @Query('unlocked') bool? unlocked,
-    @Query('updated_after') DateTime? updatedAfter,
-  });
+    DateTime? availableAfter,
+    DateTime? availableBefore,
+    bool? burned,
+    bool? hidden,
+    List<int>? ids,
+    bool? immediatelyAvailableForLessons,
+    bool? immediatelyAvailableForReview,
+    bool? inReview,
+    List<int>? levels,
+    List<int>? srsStages,
+    bool? started,
+    List<int>? subjectIds,
+    List<SubjectType>? subjectTypes,
+    bool? unlocked,
+    DateTime? updatedAfter,
+  }) {
+    return remote.getAll(
+      availableAfter: availableAfter,
+      availableBefore: availableBefore,
+      burned: burned,
+      hidden: hidden,
+      ids: ids,
+      immediatelyAvailableForLessons: immediatelyAvailableForLessons,
+      immediatelyAvailableForReview: immediatelyAvailableForReview,
+      inReview: inReview,
+      levels: levels,
+      srsStages: srsStages,
+      started: started,
+      subjectIds: subjectIds,
+      subjectTypes: subjectTypes,
+      unlocked: unlocked,
+      updatedAfter: updatedAfter,
+    );
+  }
 
-  /// Retrieves a specific assignment by its id.
-  @GET('/{id}')
-  Future<ResourceModel<AssignmentModel>> getById(@Path('id') String id);
+  @override
+  Future<ResourceModel<AssignmentModel>> getById(String id) {
+    return remote.getById(id);
+  }
 
-  /// Mark the assignment as started, moving the assignment from the lessons queue to the review queue.
-  /// Returns the updated assignment.
-  @PUT('/{id}/start')
+  @override
   Future<ResourceModel<AssignmentModel>> start(
-    @Path('id') String id, {
-    @Query('started_at') DateTime? startedAt,
-  });
+    String id, {
+    DateTime? startedAt,
+  }) {
+    return remote.start(id, startedAt: startedAt);
+  }
 }

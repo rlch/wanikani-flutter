@@ -1,21 +1,19 @@
-import 'package:dio/dio.dart';
-import 'package:retrofit/retrofit.dart';
-import 'package:wanikani_flutter/wanikani/data/datasources/constants.dart';
+import 'package:wanikani_flutter/wanikani/data/datasources/resources/summary.dart';
 import 'package:wanikani_flutter/wanikani/data/models/resource.dart';
 import 'package:wanikani_flutter/wanikani/data/models/resources/summary.dart';
 
-part 'summary.g.dart';
 
 abstract class ISummaryDataSource {
   /// Retrieves a summary report.
   Future<ResourceModel<SummaryModel>> getReport();
 }
 
-@RestApi(baseUrl: '$wanikaniApiBasePath/summary/')
-abstract class SummaryRemoteDataSource implements ISummaryDataSource {
-  factory SummaryRemoteDataSource(Dio dio) = _SummaryRemoteDataSource;
+class SummaryDataSource implements ISummaryDataSource {
+  const SummaryDataSource({required this.remote});
+  final SummaryRemoteDataSource remote;
 
-  /// Retrieves a summary report.
-  @GET('/')
-  Future<ResourceModel<SummaryModel>> getReport();
+  @override
+  Future<ResourceModel<SummaryModel>> getReport() {
+    return remote.getReport();
+  }
 }

@@ -1,14 +1,9 @@
-import 'package:dio/dio.dart';
-import 'package:retrofit/retrofit.dart';
-import 'package:wanikani_flutter/wanikani/data/datasources/constants.dart';
+import 'package:wanikani_flutter/wanikani/data/datasources/resources/voice_actors.dart';
 import 'package:wanikani_flutter/wanikani/data/models/collection.dart';
 import 'package:wanikani_flutter/wanikani/data/models/resource.dart';
 import 'package:wanikani_flutter/wanikani/data/models/resources/voice_actor.dart';
-import 'package:wanikani_flutter/core/utils/extensions/date_time_x.dart';
 
-part 'voice_actors.g.dart';
-
-abstract class IVoiceActorsDataSource {
+abstract class IVoiceActorsRepository {
   /// Returns a collection of all voice actors, ordered by ascending `id`, 500 at a time.
   Future<CollectionModel<VoiceActorModel>> getAll({
     List<int>? ids,
@@ -19,18 +14,20 @@ abstract class IVoiceActorsDataSource {
   Future<ResourceModel<VoiceActorModel>> getById(String id);
 }
 
-@RestApi(baseUrl: '$wanikaniApiBasePath/voice_actors/')
-abstract class VoiceActorsRemoteDataSource implements IVoiceActorsDataSource {
-  factory VoiceActorsRemoteDataSource(Dio dio) = _VoiceActorsRemoteDataSource;
+class VoiceActorsRepository implements IVoiceActorsRepository {
+  const VoiceActorsRepository({required this.remote});
+  final VoiceActorsRemoteDataSource remote;
 
-  /// Returns a collection of all voice actors, ordered by ascending `id`, 500 at a time.
-  @GET('/')
+  @override
   Future<CollectionModel<VoiceActorModel>> getAll({
-    @Query('ids') List<int>? ids,
-    @Query('updated_after') DateTime? updatedAfter,
-  });
+    List<int>? ids,
+    DateTime? updatedAfter,
+  }) {
+    return remote.getAll(ids: ids, updatedAfter: updatedAfter);
+  }
 
-  /// Retrieves a specific voice actor by its `id`.
-  @GET('/{id}')
-  Future<ResourceModel<VoiceActorModel>> getById(@Path('id') String id);
+  @override
+  Future<ResourceModel<VoiceActorModel>> getById(String id) {
+    return remote.getById(id);
+  }
 }

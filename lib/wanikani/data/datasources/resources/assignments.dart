@@ -9,7 +9,6 @@ import 'package:wanikani_flutter/wanikani/domain/entities/enums/subject_type.dar
 
 part 'assignments.g.dart';
 
-
 abstract class IAssignmentsDataSource {
   /// Returns a collection of all assignments, ordered by ascending `created_at`, 500 at a time.
   Future<CollectionModel<AssignmentModel>> getAll({
@@ -35,7 +34,10 @@ abstract class IAssignmentsDataSource {
 
   /// Mark the assignment as started, moving the assignment from the lessons queue to the review queue.
   /// Returns the updated assignment.
-  Future<ResourceModel<AssignmentModel>> start(String id, {DateTime? startedAt});
+  Future<ResourceModel<AssignmentModel>> start(
+    String id, {
+    DateTime? startedAt,
+  });
 }
 
 @RestApi(baseUrl: '$wanikaniApiBasePath/assignments')

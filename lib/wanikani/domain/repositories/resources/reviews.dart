@@ -1,15 +1,10 @@
-import 'package:dio/dio.dart';
-import 'package:retrofit/retrofit.dart';
-import 'package:wanikani_flutter/wanikani/data/datasources/constants.dart';
+import 'package:wanikani_flutter/wanikani/data/datasources/resources/reviews.dart';
 import 'package:wanikani_flutter/wanikani/data/models/collection.dart';
 import 'package:wanikani_flutter/wanikani/data/models/resource.dart';
 import 'package:wanikani_flutter/wanikani/data/models/resources/assignment.dart';
 import 'package:wanikani_flutter/wanikani/data/models/resources/review.dart';
-import 'package:wanikani_flutter/core/utils/extensions/date_time_x.dart';
 
-part 'reviews.g.dart';
-
-abstract class IReviewsDataSource {
+abstract class IReviewsRepository {
   /// Returns a collection of all reviews, ordered by ascending created_at, 1000 at a time.
   Future<CollectionModel<ReviewModel>> getAll({
     List<int>? assignmentIds,
@@ -25,24 +20,33 @@ abstract class IReviewsDataSource {
   Future<ResourceModel<AssignmentModel>> create({required ReviewModel review});
 }
 
-@RestApi(baseUrl: '$wanikaniApiBasePath/reviews/')
-abstract class ReviewsRemoteDataSource implements IReviewsDataSource {
-  factory ReviewsRemoteDataSource(Dio dio) = _ReviewsRemoteDataSource;
+class ReviewsRepository implements IReviewsRepository {
+  const ReviewsRepository({required this.remote});
 
-  /// Returns a collection of all reviews, ordered by ascending created_at, 1000 at a time.
-  @GET('/')
+  final ReviewsRemoteDataSource remote;
+
+  @override
+  Future<ResourceModel<AssignmentModel>> create({required ReviewModel review}) {
+    return remote.create(review: review);
+  }
+
+  @override
   Future<CollectionModel<ReviewModel>> getAll({
-    @Query('assignment_ids') List<int>? assignmentIds,
-    @Query('ids') List<int>? ids,
-    @Query('subject_ids') List<int>? subjectIds,
-    @Query('updated_after') DateTime? updatedAfter,
-  });
+    List<int>? ids,
+    List<int>? assignmentIds,
+    List<int>? subjectIds,
+    DateTime? updatedAfter,
+  }) {
+    return remote.getAll(
+      ids: ids,
+      assignmentIds: assignmentIds,
+      subjectIds: subjectIds,
+      updatedAfter: updatedAfter,
+    );
+  }
 
-  /// Retrieves a specific review by its id.
-  @GET('/{id}')
-  Future<ResourceModel<ReviewModel>> getById(@Path('id') String id);
-
-  @POST('/reviews')
-  Future<ResourceModel<AssignmentModel>> create(
-      {@Body() required ReviewModel review});
+  @override
+  Future<ResourceModel<ReviewModel>> getById(String id) {
+    return remote.getById(id);
+  }
 }

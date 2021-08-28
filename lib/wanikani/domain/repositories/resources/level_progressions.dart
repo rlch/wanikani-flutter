@@ -1,14 +1,9 @@
-import 'package:dio/dio.dart';
-import 'package:retrofit/retrofit.dart';
-import 'package:wanikani_flutter/wanikani/data/datasources/constants.dart';
+import 'package:wanikani_flutter/wanikani/data/datasources/resources/level_progressions.dart';
 import 'package:wanikani_flutter/wanikani/data/models/collection.dart';
-import 'package:wanikani_flutter/core/utils/extensions/date_time_x.dart';
 import 'package:wanikani_flutter/wanikani/data/models/resource.dart';
 import 'package:wanikani_flutter/wanikani/data/models/resources/level_progression.dart';
 
-part 'level_progressions.g.dart';
-
-abstract class ILevelProgressionsDataSource {
+abstract class ILevelProgressionsRepository {
   /// Returns a collection of all level progressions, ordered by ascending created_at, 500 at a time.
   Future<CollectionModel<LevelProgressionModel>> getAll({
     List<int>? ids,
@@ -19,20 +14,21 @@ abstract class ILevelProgressionsDataSource {
   Future<ResourceModel<LevelProgressionModel>> getById(String id);
 }
 
-@RestApi(baseUrl: '$wanikaniApiBasePath/level_progressions/')
-abstract class LevelProgressionsRemoteDataSource
-    implements ILevelProgressionsDataSource {
-  factory LevelProgressionsRemoteDataSource(Dio dio) =
-      _LevelProgressionsRemoteDataSource;
+class LevelProgressionsRepository implements ILevelProgressionsRepository {
+  const LevelProgressionsRepository({required this.remote});
 
-  /// Returns a collection of all level progressions, ordered by ascending created_at, 500 at a time.
-  @GET('/')
+  final LevelProgressionsRemoteDataSource remote;
+
+  @override
   Future<CollectionModel<LevelProgressionModel>> getAll({
-    @Query('ids') List<int>? ids,
-    @Query('updated_after') DateTime? updatedAfter,
-  });
+    List<int>? ids,
+    DateTime? updatedAfter,
+  }) {
+    return remote.getAll(ids: ids, updatedAfter: updatedAfter);
+  }
 
-  /// Retrieves a specific level-progression by its id.
-  @GET('/{id}')
-  Future<ResourceModel<LevelProgressionModel>> getById(@Path('id') String id);
+  @override
+  Future<ResourceModel<LevelProgressionModel>> getById(String id) {
+    return remote.getById(id);
+  }
 }

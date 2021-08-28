@@ -1,13 +1,8 @@
-import 'package:dio/dio.dart';
-import 'package:retrofit/retrofit.dart';
-import 'package:wanikani_flutter/wanikani/data/datasources/constants.dart';
+import 'package:wanikani_flutter/wanikani/data/datasources/resources/subjects.dart';
 import 'package:wanikani_flutter/wanikani/data/models/collection.dart';
 import 'package:wanikani_flutter/wanikani/data/models/resource.dart';
 import 'package:wanikani_flutter/wanikani/data/models/resources/subject.dart';
 import 'package:wanikani_flutter/wanikani/domain/entities/enums/subject_type.dart';
-import 'package:wanikani_flutter/core/utils/extensions/date_time_x.dart';
-
-part 'subjects.g.dart';
 
 abstract class ISubjectsDataSource {
   /// Returns a collection of all subjects, ordered by ascending id, 1000 at a time.
@@ -24,22 +19,32 @@ abstract class ISubjectsDataSource {
   Future<ResourceModel<SubjectModel>> getById(String id);
 }
 
-@RestApi(baseUrl: '$wanikaniApiBasePath/subjects/')
-abstract class SubjectsRemoteDataSource implements ISubjectsDataSource {
-  factory SubjectsRemoteDataSource(Dio dio) = _SubjectsRemoteDataSource;
+class SubjectsDataSource implements ISubjectsDataSource {
+  const SubjectsDataSource({required this.remote});
 
-  /// Returns a collection of all subjects, ordered by ascending id, 1000 at a time.
-  @GET('/')
+  final SubjectsRemoteDataSource remote;
+
+  @override
   Future<CollectionModel<SubjectModel>> getAll({
-    @Query('ids') List<int>? ids,
-    @Query('types') List<SubjectType>? types,
-    @Query('slugs') List<String>? slugs,
-    @Query('levels') List<int>? levels,
-    @Query('hidden') bool? hidden,
-    @Query('updated_after') DateTime? updatedAfter,
-  });
+    List<int>? ids,
+    List<SubjectType>? types,
+    List<String>? slugs,
+    List<int>? levels,
+    bool? hidden,
+    DateTime? updatedAfter,
+  }) {
+    return remote.getAll(
+      ids: ids,
+      types: types,
+      slugs: slugs,
+      levels: levels,
+      hidden: hidden,
+      updatedAfter: updatedAfter,
+    );
+  }
 
-  /// Retrieves a specific subject by its id.
-  @GET('/{id}')
-  Future<ResourceModel<SubjectModel>> getById(@Path('id') String id);
+  @override
+  Future<ResourceModel<SubjectModel>> getById(String id) {
+    return remote.getById(id);
+  }
 }
