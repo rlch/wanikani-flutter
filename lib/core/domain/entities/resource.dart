@@ -11,7 +11,7 @@ class Resource<T> implements IResponse<T> {
     required this.data,
   });
 
-  final int id;
+  final int? id;
 
   /// The kind of object returned.
   final ObjectType object;

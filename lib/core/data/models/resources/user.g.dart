@@ -8,6 +8,7 @@ part of 'user.dart';
 
 UserModel _$UserModelFromJson(Map<String, dynamic> json) {
   return UserModel(
+    json['id'] as String,
     preferences:
         PreferencesModel.fromJson(json['preferences'] as Map<String, dynamic>),
     subscription: SubscriptionModel.fromJson(
@@ -26,6 +27,7 @@ UserModel _$UserModelFromJson(Map<String, dynamic> json) {
 
 Map<String, dynamic> _$UserModelToJson(UserModel instance) => <String, dynamic>{
       'last_checked_cache_at': instance.lastCheckedCacheAt?.toIso8601String(),
+      'id': instance.id,
       'current_vacation_started_at':
           instance.currentVacationStartedAt?.toIso8601String(),
       'level': instance.level,
@@ -41,8 +43,8 @@ PreferencesModel _$PreferencesModelFromJson(Map<String, dynamic> json) {
     defaultVoiceActorId: json['default_voice_actor_id'] as int,
     lessonsAutoplayAudio: json['lessons_autoplay_audio'] as bool,
     lessonsBatchSize: json['lessons_batch_size'] as int,
-    lessonsPresentationOrder: _$enumDecode(
-        _$LessonsPresentationOrderEnumMap, json['lessons_presentation_order']),
+    lessonsPresentationOrder: LessonsPresentationOrder.fromJson(
+        json['lessons_presentation_order'] as String),
     reviewsAutoplayAudio: json['reviews_autoplay_audio'] as bool,
     reviewsDisplaySrsIndicator: json['reviews_display_srs_indicator'] as bool,
   );
@@ -53,45 +55,10 @@ Map<String, dynamic> _$PreferencesModelToJson(PreferencesModel instance) =>
       'default_voice_actor_id': instance.defaultVoiceActorId,
       'lessons_autoplay_audio': instance.lessonsAutoplayAudio,
       'lessons_batch_size': instance.lessonsBatchSize,
-      'lessons_presentation_order':
-          _$LessonsPresentationOrderEnumMap[instance.lessonsPresentationOrder],
+      'lessons_presentation_order': instance.lessonsPresentationOrder.toJson(),
       'reviews_autoplay_audio': instance.reviewsAutoplayAudio,
       'reviews_display_srs_indicator': instance.reviewsDisplaySrsIndicator,
     };
-
-K _$enumDecode<K, V>(
-  Map<K, V> enumValues,
-  Object? source, {
-  K? unknownValue,
-}) {
-  if (source == null) {
-    throw ArgumentError(
-      'A value must be provided. Supported values: '
-      '${enumValues.values.join(', ')}',
-    );
-  }
-
-  return enumValues.entries.singleWhere(
-    (e) => e.value == source,
-    orElse: () {
-      if (unknownValue == null) {
-        throw ArgumentError(
-          '`$source` is not one of the supported values: '
-          '${enumValues.values.join(', ')}',
-        );
-      }
-      return MapEntry(unknownValue, enumValues.values.first);
-    },
-  ).key;
-}
-
-const _$LessonsPresentationOrderEnumMap = {
-  LessonsPresentationOrder.ascendingLevelThenSubject:
-      'ascendingLevelThenSubject',
-  LessonsPresentationOrder.shuffled: 'shuffled',
-  LessonsPresentationOrder.ascendingLevelThenShuffled:
-      'ascendingLevelThenShuffled',
-};
 
 SubscriptionModel _$SubscriptionModelFromJson(Map<String, dynamic> json) {
   return SubscriptionModel(

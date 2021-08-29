@@ -1,5 +1,6 @@
 import 'package:json_annotation/json_annotation.dart';
 import 'package:wanikani_flutter/core/data/models/model.dart';
+import 'package:wanikani_flutter/core/domain/entities/enums/lessons_presentation_order.dart';
 import 'package:wanikani_flutter/core/domain/entities/enums/subscription_type.dart';
 import 'package:wanikani_flutter/core/domain/entities/resources/user.dart';
 
@@ -7,7 +8,8 @@ part 'user.g.dart';
 
 @JsonSerializable()
 class UserModel extends User with IModel {
-  UserModel({
+  UserModel(
+    String id, {
     required this.preferences,
     required this.subscription,
     required int level,
@@ -16,6 +18,7 @@ class UserModel extends User with IModel {
     required String username,
     DateTime? currentVacationStartedAt,
   }) : super(
+          id,
           level: level,
           preferences: preferences,
           profileUrl: profileUrl,

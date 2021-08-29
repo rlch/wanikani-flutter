@@ -19,10 +19,10 @@ class TestHelpers {
   static final TestHelpers _instance = TestHelpers._internal();
   factory TestHelpers() => _instance;
   TestHelpers._internal()
-      : remote = TestWanikaniRemoteDataSources(apiToken: apiToken);
+      : remoteDS = TestWanikaniRemoteDataSources(apiToken: apiToken);
 
   static const String apiToken = _apiToken;
-  late final TestWanikaniRemoteDataSources remote;
+  late final TestWanikaniRemoteDataSources remoteDS;
 }
 
 class TestWanikaniRemoteDataSources {
@@ -30,7 +30,7 @@ class TestWanikaniRemoteDataSources {
     (dio = this.dio = dio ?? Dio()).options.headers
       ..['Wanikani-Revision'] = '20170710'
       ..['Authorization'] = 'Bearer $apiToken';
-    /// dio.interceptors.add(PrettyDioLogger());
+    dio.interceptors.add(PrettyDioLogger());
 
     assignments = AssignmentsRemoteDataSource(dio);
     levelProgressions = LevelProgressionsRemoteDataSource(dio);

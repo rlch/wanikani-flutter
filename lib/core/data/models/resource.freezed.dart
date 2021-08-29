@@ -16,7 +16,7 @@ final _privateConstructorUsedError = UnsupportedError(
 class _$ResourceModelTearOff {
   const _$ResourceModelTearOff();
 
-  Data<T> call<T extends IModel>(int id,
+  Data<T> call<T extends IModel>(int? id,
       {required ObjectType object,
       required String url,
       required DateTime dataUpdatedAt,
@@ -48,7 +48,7 @@ const $ResourceModel = _$ResourceModelTearOff();
 mixin _$ResourceModel<T extends IModel> {
   @optionalTypeArgs
   TResult when<TResult extends Object?>(
-    TResult Function(int id, ObjectType object, String url,
+    TResult Function(int? id, ObjectType object, String url,
             DateTime dataUpdatedAt, T data)
         $default, {
     required TResult Function() loading,
@@ -57,7 +57,7 @@ mixin _$ResourceModel<T extends IModel> {
       throw _privateConstructorUsedError;
   @optionalTypeArgs
   TResult maybeWhen<TResult extends Object?>(
-    TResult Function(int id, ObjectType object, String url,
+    TResult Function(int? id, ObjectType object, String url,
             DateTime dataUpdatedAt, T data)?
         $default, {
     TResult Function()? loading,
@@ -104,7 +104,7 @@ abstract class $DataCopyWith<T extends IModel, $Res> {
   factory $DataCopyWith(Data<T> value, $Res Function(Data<T>) then) =
       _$DataCopyWithImpl<T, $Res>;
   $Res call(
-      {int id, ObjectType object, String url, DateTime dataUpdatedAt, T data});
+      {int? id, ObjectType object, String url, DateTime dataUpdatedAt, T data});
 }
 
 /// @nodoc
@@ -129,7 +129,7 @@ class _$DataCopyWithImpl<T extends IModel, $Res>
       id == freezed
           ? _value.id
           : id // ignore: cast_nullable_to_non_nullable
-              as int,
+              as int?,
       object: object == freezed
           ? _value.object
           : object // ignore: cast_nullable_to_non_nullable
@@ -163,7 +163,7 @@ class _$Data<T extends IModel> extends Data<T> {
       : super._();
 
   @override
-  final int id;
+  final int? id;
   @override
   final ObjectType object;
   @override
@@ -212,7 +212,7 @@ class _$Data<T extends IModel> extends Data<T> {
   @override
   @optionalTypeArgs
   TResult when<TResult extends Object?>(
-    TResult Function(int id, ObjectType object, String url,
+    TResult Function(int? id, ObjectType object, String url,
             DateTime dataUpdatedAt, T data)
         $default, {
     required TResult Function() loading,
@@ -224,7 +224,7 @@ class _$Data<T extends IModel> extends Data<T> {
   @override
   @optionalTypeArgs
   TResult maybeWhen<TResult extends Object?>(
-    TResult Function(int id, ObjectType object, String url,
+    TResult Function(int? id, ObjectType object, String url,
             DateTime dataUpdatedAt, T data)?
         $default, {
     TResult Function()? loading,
@@ -264,14 +264,14 @@ class _$Data<T extends IModel> extends Data<T> {
 
 abstract class Data<T extends IModel> extends ResourceModel<T>
     implements Resource<T>, IResponse<T> {
-  const factory Data(int id,
+  const factory Data(int? id,
       {required ObjectType object,
       required String url,
       required DateTime dataUpdatedAt,
       required T data}) = _$Data<T>;
   const Data._() : super._();
 
-  int get id => throw _privateConstructorUsedError;
+  int? get id => throw _privateConstructorUsedError;
   ObjectType get object => throw _privateConstructorUsedError;
   String get url => throw _privateConstructorUsedError;
   DateTime get dataUpdatedAt => throw _privateConstructorUsedError;
@@ -318,7 +318,7 @@ class _$Loading<T extends IModel> extends Loading<T> {
   @override
   @optionalTypeArgs
   TResult when<TResult extends Object?>(
-    TResult Function(int id, ObjectType object, String url,
+    TResult Function(int? id, ObjectType object, String url,
             DateTime dataUpdatedAt, T data)
         $default, {
     required TResult Function() loading,
@@ -330,7 +330,7 @@ class _$Loading<T extends IModel> extends Loading<T> {
   @override
   @optionalTypeArgs
   TResult maybeWhen<TResult extends Object?>(
-    TResult Function(int id, ObjectType object, String url,
+    TResult Function(int? id, ObjectType object, String url,
             DateTime dataUpdatedAt, T data)?
         $default, {
     TResult Function()? loading,
@@ -439,7 +439,7 @@ class _$ErrorDetails<T extends IModel> extends ErrorDetails<T> {
   @override
   @optionalTypeArgs
   TResult when<TResult extends Object?>(
-    TResult Function(int id, ObjectType object, String url,
+    TResult Function(int? id, ObjectType object, String url,
             DateTime dataUpdatedAt, T data)
         $default, {
     required TResult Function() loading,
@@ -451,7 +451,7 @@ class _$ErrorDetails<T extends IModel> extends ErrorDetails<T> {
   @override
   @optionalTypeArgs
   TResult maybeWhen<TResult extends Object?>(
-    TResult Function(int id, ObjectType object, String url,
+    TResult Function(int? id, ObjectType object, String url,
             DateTime dataUpdatedAt, T data)?
         $default, {
     TResult Function()? loading,

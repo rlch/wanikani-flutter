@@ -26,7 +26,7 @@ class ResourceModel<T extends IModel> with _$ResourceModel<T> {
   @Implements.fromString('Resource<T>')
   @Implements.fromString('IResponse<T>')
   const factory ResourceModel(
-    int id, {
+    int? id, {
     required ObjectType object,
     required String url,
     required DateTime dataUpdatedAt,
@@ -84,7 +84,7 @@ class ResourceModel<T extends IModel> with _$ResourceModel<T> {
     }
 
     return _$Data<T>(
-      json['id'] as int,
+      json['id'] as int?,
       object: object,
       url: json['url'] as String,
       dataUpdatedAt: DateTime.parse(json['data_updated_at'] as String),

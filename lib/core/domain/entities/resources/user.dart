@@ -1,9 +1,10 @@
+import 'package:wanikani_flutter/core/domain/entities/enums/lessons_presentation_order.dart';
 import 'package:wanikani_flutter/core/domain/entities/enums/subscription_type.dart';
 
 /// The summary report contains currently available lessons and reviews and the reviews that will become
 /// available in the next 24 hours, grouped by the hour.
 class User {
-  const User({
+  const User(this.id, {
     required this.currentVacationStartedAt,
     required this.level,
     required this.preferences,
@@ -12,6 +13,8 @@ class User {
     required this.subscription,
     required this.username,
   });
+
+  final String id;
 
   /// If the user is on vacation, this will be the timestamp of when that vacation started. If the user is not on vacation, this is null.
   final DateTime? currentVacationStartedAt;
@@ -35,11 +38,6 @@ class User {
   final String username;
 }
 
-enum LessonsPresentationOrder {
-  ascendingLevelThenSubject,
-  shuffled,
-  ascendingLevelThenShuffled,
-}
 
 class Preferences {
   const Preferences({

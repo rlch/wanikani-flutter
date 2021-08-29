@@ -16,7 +16,7 @@ void main() {
     });
 
     test('dio.options.headers returns the expected headers', () {
-      final dio = helpers.remote.dio;
+      final dio = helpers.remoteDS.dio;
       final apiToken = TestHelpers.apiToken;
       expect(
         dio.options.headers['Wanikani-Revision'],
