@@ -6,7 +6,7 @@ final gi = GetIt.instance;
 
 @InjectableInit(preferRelativeImports: true)
 void configureInjection({
-  String environment = Env.prod,
+  String environment = Env.dev,
 }) =>
     $initGetIt(gi, environment: environment);
 

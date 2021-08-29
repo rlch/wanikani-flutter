@@ -1,4 +1,4 @@
-config.json
+lib/config.dart
 
 # Miscellaneous
 *.class
