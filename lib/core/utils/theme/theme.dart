@@ -20,6 +20,10 @@ abstract class WanikaniTheme {
         brightness: roles.brightness,
         primaryColor: roles.primary,
         accentColor: roles.secondary,
+        appBarTheme: AppBarTheme(
+          color: Colors.white,
+          elevation: 1,
+        ),
 
         /// canvasColor: roles.canvas,
         /// shadowColor: roles.shadow,
