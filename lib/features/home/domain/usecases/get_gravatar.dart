@@ -1,12 +1,14 @@
-import 'package:crypto/crypto.dart';
+import 'package:flutter/material.dart';
+import 'package:injectable/injectable.dart';
+import 'package:wanikani_flutter/features/home/data/repositories/gravatar.dart';
 
+@Injectable()
 class GetGravatar {
-  String? email, hash, url;
+  const GetGravatar(this.repository);
 
-  String call(String email) {
-    if (this.email == email) return url!;
-    final reduced = (this.email = email).toLowerCase().trim();
-    hash = md5.convert(reduced.codeUnits).toString();
-    return url = 'https://www.gravatar.com/avatar/$hash';
+  final GravatarRepository repository;
+
+  Future<ImageProvider> call(String email) async {
+    return repository.getGravatar(email);
   }
 }
