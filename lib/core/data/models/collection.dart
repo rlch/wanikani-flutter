@@ -44,8 +44,7 @@ class CollectionModel<T extends IModel> with _$CollectionModel<T> {
 
   Map<String, dynamic> toJson() {
     return this.when(
-      (data, pages, object, url, dataUpdatedAt, totalCount) =>
-          <String, dynamic>{
+      (data, pages, object, url, dataUpdatedAt, totalCount) => <String, dynamic>{
         'data': data.map((e) => e.toJson()).toList(),
         'pages': pages.toJson(),
         'object': object.toJson(),
@@ -59,11 +58,9 @@ class CollectionModel<T extends IModel> with _$CollectionModel<T> {
   }
 
   List<Resource<T>> get resources => this.when(
-        (data, pages, object, url, dataUpdatedAt, totalCount) =>
-            data.cast<Resource<T>>(),
+        (data, pages, object, url, dataUpdatedAt, totalCount) => data.cast<Resource<T>>(),
         loading: () => [],
-        error: (e) =>
-            throw Exception('Attemped to retrieve resources with error $e'),
+        error: (e) => throw Exception('Attemped to retrieve resources with error $e'),
       );
 }
 
@@ -75,7 +72,6 @@ class PagesModel extends Pages {
     int perPage,
   ) : super(nextUrl, previousUrl, perPage);
 
-  factory PagesModel.fromJson(Map<String, dynamic> json) =>
-      _$PagesModelFromJson(json);
+  factory PagesModel.fromJson(Map<String, dynamic> json) => _$PagesModelFromJson(json);
   Map<String, dynamic> toJson() => _$PagesModelToJson(this);
 }

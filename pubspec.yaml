@@ -21,6 +21,7 @@ dependencies:
   path_provider: ^2.0.2
   auto_route: ^2.3.0
   crypto: ^3.0.1
+  flutter_riverpod: ^0.14.0+3
 
 dev_dependencies:
   flutter_test:
