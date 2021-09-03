@@ -39,7 +39,7 @@ class ResourceModel<T extends IModel> with _$ResourceModel<T> {
   factory ResourceModel.fromJson(Map<String, dynamic> json) {
     late final IModel Function() fromJson;
     final data = json['data'] as Map<String, dynamic>;
-    print(data);
+
     final ObjectType object = ObjectType.fromJson(json['object'] as String);
 
     switch (object) {

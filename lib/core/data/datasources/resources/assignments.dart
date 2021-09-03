@@ -1,4 +1,5 @@
 import 'package:dio/dio.dart';
+import 'package:injectable/injectable.dart';
 import 'package:retrofit/retrofit.dart';
 import 'package:wanikani_flutter/core/data/datasources/constants.dart';
 import 'package:wanikani_flutter/core/utils/extensions/date_time_x.dart';
@@ -40,9 +41,12 @@ abstract class IAssignmentsDataSource {
   });
 }
 
-@RestApi(baseUrl: '$wanikaniApiBasePath/assignments')
+@lazySingleton
+@RestApi()
 abstract class AssignmentsRemoteDataSource implements IAssignmentsDataSource {
-  factory AssignmentsRemoteDataSource(Dio dio) = _AssignmentsRemoteDataSource;
+  @factoryMethod
+  factory AssignmentsRemoteDataSource(Dio dio, {@Named('assignmentsUrl') String baseUrl}) =
+      _AssignmentsRemoteDataSource;
 
   /// Returns a collection of all assignments, ordered by ascending `created_at`, 500 at a time.
   @GET('')
@@ -52,10 +56,8 @@ abstract class AssignmentsRemoteDataSource implements IAssignmentsDataSource {
     @Query('burned') bool? burned,
     @Query('hidden') bool? hidden,
     @Query('ids') List<int>? ids,
-    @Query('immediately_available_for_lessons')
-        bool? immediatelyAvailableForLessons,
-    @Query('immediately_available_for_review')
-        bool? immediatelyAvailableForReview,
+    @Query('immediately_available_for_lessons') bool? immediatelyAvailableForLessons,
+    @Query('immediately_available_for_review') bool? immediatelyAvailableForReview,
     @Query('in_review') bool? inReview,
     @Query('levels') List<int>? levels,
     @Query('srs_stages') List<int>? srsStages,

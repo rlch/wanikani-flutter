@@ -7,9 +7,7 @@ part of 'summary.dart';
 // **************************************************************************
 
 class _SummaryRemoteDataSource implements SummaryRemoteDataSource {
-  _SummaryRemoteDataSource(this._dio, {this.baseUrl}) {
-    baseUrl ??= 'https://api.wanikani.com/v2/summary/';
-  }
+  _SummaryRemoteDataSource(this._dio, {this.baseUrl});
 
   final Dio _dio;
 

@@ -1,6 +1,6 @@
 import 'package:dio/dio.dart';
+import 'package:injectable/injectable.dart';
 import 'package:retrofit/retrofit.dart';
-import 'package:wanikani_flutter/core/data/datasources/constants.dart';
 import 'package:wanikani_flutter/core/data/models/resource.dart';
 import 'package:wanikani_flutter/core/data/models/resources/summary.dart';
 
@@ -11,9 +11,12 @@ abstract class ISummaryDataSource {
   Future<ResourceModel<SummaryModel>> getReport();
 }
 
-@RestApi(baseUrl: '$wanikaniApiBasePath/summary/')
+@LazySingleton()
+@RestApi()
 abstract class SummaryRemoteDataSource implements ISummaryDataSource {
-  factory SummaryRemoteDataSource(Dio dio) = _SummaryRemoteDataSource;
+  @factoryMethod
+  factory SummaryRemoteDataSource(Dio dio, {@Named('summaryUrl') String baseUrl}) =
+      _SummaryRemoteDataSource;
 
   /// Retrieves a summary report.
   @GET('/')

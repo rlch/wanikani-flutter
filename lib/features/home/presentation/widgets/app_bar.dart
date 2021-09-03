@@ -1,7 +1,8 @@
 import 'dart:ui';
 
 import 'package:flutter/material.dart';
-import 'package:wanikani_flutter/features/home/domain/usecases/get_gravatar.dart';
+import 'package:wanikani_flutter/core/domain/usecases/summary.dart';
+import 'package:wanikani_flutter/features/home/domain/usecases/gravatar.dart';
 import 'package:wanikani_flutter/gen/assets.gen.dart';
 import 'package:wanikani_flutter/injection.dart';
 import 'package:shimmer_animation/shimmer_animation.dart';
@@ -40,20 +41,76 @@ class HomeAppBar extends StatelessWidget implements PreferredSizeWidget {
         children: [
           Image.asset(Assets.images.logos.appbarLogo.path, width: 125),
           const Spacer(),
+          FutureBuilder<int>(
+              future: gi<SummaryUseCases>().getCurrentReviewsNumber(),
+              builder: (context, snap) {
+                return _NumberedChip(
+                  number: snap.data,
+                  color: Theme.of(context).primaryColor,
+                  label: 'Reviews',
+                  onPressed: () {},
+                );
+              }),
+          const SizedBox(width: 10),
+          FutureBuilder<int>(
+              future: gi<SummaryUseCases>().getCurrentLessonsNumber(),
+              builder: (context, snap) {
+                return _NumberedChip(
+                  number: snap.data,
+                  color: Theme.of(context).accentColor,
+                  label: 'Lessons',
+                  onPressed: () {},
+                );
+              }),
+          const SizedBox(width: 10),
           FutureBuilder<ImageProvider>(
-            future: gi<GetGravatar>()('rjmbowie@gmail.com'),
-            builder: (context, data) {
+            future: gi<GravatarUseCases>().getImage('rjmbowie@gmail.com'),
+            builder: (context, snap) {
               return Shimmer(
-                enabled: !data.hasData,
+                enabled: !snap.hasData,
                 child: CircleAvatar(
                   backgroundColor: Colors.grey,
-                  backgroundImage: data.data,
+                  backgroundImage: snap.data,
                 ),
               );
             },
           ),
         ],
       ),
+    );
+  }
+}
+
+class _NumberedChip extends StatelessWidget {
+  const _NumberedChip({
+    required this.label,
+    required this.number,
+    required this.color,
+    required this.onPressed,
+    Key? key,
+  }) : super(key: key);
+
+  final String label;
+
+  /// If null, then the chip is in a loading state.
+  final int? number;
+  final Color color;
+  final VoidCallback onPressed;
+
+  @override
+  Widget build(BuildContext context) {
+    return ActionChip(
+      label: Text(label),
+      avatar: CircleAvatar(
+        backgroundColor: color,
+        child: FittedBox(
+          child: Text(
+            number.toString(),
+            style: TextStyle(color: Colors.white),
+          ),
+        ),
+      ),
+      onPressed: onPressed,
     );
   }
 }

@@ -7,9 +7,7 @@ part of 'assignments.dart';
 // **************************************************************************
 
 class _AssignmentsRemoteDataSource implements AssignmentsRemoteDataSource {
-  _AssignmentsRemoteDataSource(this._dio, {this.baseUrl}) {
-    baseUrl ??= 'https://api.wanikani.com/v2/assignments';
-  }
+  _AssignmentsRemoteDataSource(this._dio, {this.baseUrl});
 
   final Dio _dio;
 

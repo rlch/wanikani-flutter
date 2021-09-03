@@ -1,15 +1,16 @@
+import 'package:injectable/injectable.dart';
 import 'package:wanikani_flutter/core/data/datasources/resources/summary.dart';
 import 'package:wanikani_flutter/core/data/models/resource.dart';
 import 'package:wanikani_flutter/core/data/models/resources/summary.dart';
 
-
-abstract class ISummaryDataSource {
+abstract class ISummaryRepository {
   /// Retrieves a summary report.
   Future<ResourceModel<SummaryModel>> getReport();
 }
 
-class SummaryDataSource implements ISummaryDataSource {
-  const SummaryDataSource({required this.remote});
+@Injectable(as: ISummaryRepository)
+class SummaryRepository implements ISummaryRepository {
+  const SummaryRepository({required this.remote});
   final SummaryRemoteDataSource remote;
 
   @override
