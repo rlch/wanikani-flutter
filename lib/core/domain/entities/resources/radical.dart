@@ -1,4 +1,3 @@
-
 import 'subject.dart';
 
 class Radical extends Subject {
@@ -18,6 +17,7 @@ class Radical extends Subject {
     required int spacedRepetitionSystemId,
   }) : super(
           auxiliaryMeanings: auxiliaryMeanings,
+          characters: characters,
           createdAt: createdAt,
           documentUrl: documentUrl,
           hiddenAt: hiddenAt,

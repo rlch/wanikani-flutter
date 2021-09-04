@@ -12,6 +12,7 @@ abstract class SubjectModel extends Subject with IModel {
   SubjectModel({
     required this.auxiliaryMeanings,
     required this.meanings,
+    required String characters,
     required DateTime createdAt,
     required String documentUrl,
     required int lessonPosition,
@@ -22,6 +23,7 @@ abstract class SubjectModel extends Subject with IModel {
     DateTime? hiddenAt,
   }) : super(
           auxiliaryMeanings: auxiliaryMeanings,
+          characters: characters,
           createdAt: createdAt,
           documentUrl: documentUrl,
           lessonPosition: lessonPosition,
@@ -42,8 +44,7 @@ abstract class SubjectModel extends Subject with IModel {
       case 'vocabulary':
         return VocabularyModel.fromJson(json);
       default:
-        throw Exception(
-            'Attempted to parse invalid subject ${json['object']}.');
+        throw Exception('Attempted to parse invalid subject ${json['object']}.');
     }
   }
 
@@ -67,8 +68,7 @@ class MeaningModel extends Meaning {
           acceptedAnswer: acceptedAnswer,
         );
 
-  factory MeaningModel.fromJson(Map<String, dynamic> json) =>
-      _$MeaningModelFromJson(json);
+  factory MeaningModel.fromJson(Map<String, dynamic> json) => _$MeaningModelFromJson(json);
   Map<String, dynamic> toJson() => _$MeaningModelToJson(this);
 }
 

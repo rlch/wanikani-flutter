@@ -18,6 +18,7 @@ class HomeAppBar extends StatelessWidget implements PreferredSizeWidget {
 
   @override
   Widget build(BuildContext context) {
+    final summaryUC = gi<SummaryUseCases>();
     return Container(
       padding: appbarPadding,
       decoration: BoxDecoration(
@@ -42,7 +43,7 @@ class HomeAppBar extends StatelessWidget implements PreferredSizeWidget {
           Image.asset(Assets.images.logos.appbarLogo.path, width: 125),
           const Spacer(),
           FutureBuilder<int>(
-              future: gi<SummaryUseCases>().getCurrentReviewsNumber(),
+              future: summaryUC.getCurrentReviewsNumber(),
               builder: (context, snap) {
                 return _NumberedChip(
                   number: snap.data,
@@ -53,7 +54,7 @@ class HomeAppBar extends StatelessWidget implements PreferredSizeWidget {
               }),
           const SizedBox(width: 10),
           FutureBuilder<int>(
-              future: gi<SummaryUseCases>().getCurrentLessonsNumber(),
+              future: summaryUC.getCurrentLessonsNumber(),
               builder: (context, snap) {
                 return _NumberedChip(
                   number: snap.data,

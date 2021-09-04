@@ -10,6 +10,7 @@ class Kanji extends Subject {
     required this.readingMnemonic,
     required this.readings,
     required this.visuallySimilarSubjectIds,
+    required String characters,
     required List<AuxiliaryMeaning> auxiliaryMeanings,
     required DateTime createdAt,
     required String documentUrl,
@@ -22,6 +23,7 @@ class Kanji extends Subject {
     required int spacedRepetitionSystemId,
   }) : super(
           auxiliaryMeanings: auxiliaryMeanings,
+          characters: characters,
           createdAt: createdAt,
           documentUrl: documentUrl,
           hiddenAt: hiddenAt,

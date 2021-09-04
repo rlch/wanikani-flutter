@@ -4,6 +4,7 @@
 abstract class Subject {
   const Subject({
     required this.auxiliaryMeanings,
+    required this.characters,
     required this.createdAt,
     required this.documentUrl,
     required this.hiddenAt,
@@ -17,6 +18,9 @@ abstract class Subject {
 
   /// Collection of auxiliary meanings. See table below for the object structure.
   final List<AuxiliaryMeaning> auxiliaryMeanings;
+
+  /// The UTF-8 characters for the subject, including kanji and hiragana.
+  final String? characters;
 
   /// Timestamp when the subject was created.
   final DateTime createdAt;

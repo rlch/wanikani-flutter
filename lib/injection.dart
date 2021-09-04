@@ -5,7 +5,7 @@ import 'injection.config.dart';
 final gi = GetIt.instance;
 
 @InjectableInit(preferRelativeImports: true)
-void configureInjection({
+Future<void> configureInjection({
   String environment = Env.dev,
 }) =>
     $initGetIt(gi, environment: environment);

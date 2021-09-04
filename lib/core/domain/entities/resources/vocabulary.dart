@@ -8,6 +8,7 @@ class Vocabulary extends Subject {
     required this.pronunciationAudios,
     required this.readings,
     required this.readingMnemonic,
+    required String characters,
     required List<AuxiliaryMeaning> auxiliaryMeanings,
     required DateTime createdAt,
     required String documentUrl,
@@ -20,6 +21,7 @@ class Vocabulary extends Subject {
     required int spacedRepetitionSystemId,
   }) : super(
           auxiliaryMeanings: auxiliaryMeanings,
+          characters: characters,
           createdAt: createdAt,
           documentUrl: documentUrl,
           hiddenAt: hiddenAt,

@@ -13,6 +13,7 @@ class KanjiModel extends Kanji with IModel implements SubjectModel {
     required this.readings,
     required this.auxiliaryMeanings,
     required this.meanings,
+    required String characters,
     required List<int> amalgamationSubjectIds,
     required List<int> componentSubjectIds,
     required String readingMnemonic,
@@ -29,6 +30,7 @@ class KanjiModel extends Kanji with IModel implements SubjectModel {
     String? readingHint,
   }) : super(
           readingMnemonic: readingMnemonic,
+          characters: characters,
           readings: readings,
           amalgamationSubjectIds: amalgamationSubjectIds,
           componentSubjectIds: componentSubjectIds,
@@ -51,7 +53,6 @@ class KanjiModel extends Kanji with IModel implements SubjectModel {
   final List<AuxiliaryMeaningModel> auxiliaryMeanings;
   final List<MeaningModel> meanings;
 
-  factory KanjiModel.fromJson(Map<String, dynamic> json) =>
-      _$KanjiModelFromJson(json);
+  factory KanjiModel.fromJson(Map<String, dynamic> json) => _$KanjiModelFromJson(json);
   Map<String, dynamic> toJson() => _$KanjiModelToJson(this);
 }

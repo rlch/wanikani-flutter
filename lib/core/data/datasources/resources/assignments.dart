@@ -1,7 +1,6 @@
 import 'package:dio/dio.dart';
 import 'package:injectable/injectable.dart';
 import 'package:retrofit/retrofit.dart';
-import 'package:wanikani_flutter/core/data/datasources/constants.dart';
 import 'package:wanikani_flutter/core/utils/extensions/date_time_x.dart';
 import 'package:wanikani_flutter/core/data/models/collection.dart';
 import 'package:wanikani_flutter/core/data/models/resource.dart';

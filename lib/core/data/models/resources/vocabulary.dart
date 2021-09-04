@@ -14,6 +14,7 @@ class VocabularyModel extends Vocabulary with IModel implements SubjectModel {
     required this.readings,
     required this.auxiliaryMeanings,
     required this.meanings,
+    required String characters,
     required List<int> componentSubjectIds,
     required List<String> partsOfSpeech,
     required String readingMnemonic,
@@ -28,6 +29,7 @@ class VocabularyModel extends Vocabulary with IModel implements SubjectModel {
   }) : super(
           auxiliaryMeanings: auxiliaryMeanings,
           createdAt: createdAt,
+          characters: characters,
           documentUrl: documentUrl,
           hiddenAt: hiddenAt,
           lessonPosition: lessonPosition,
@@ -44,8 +46,7 @@ class VocabularyModel extends Vocabulary with IModel implements SubjectModel {
           readingMnemonic: readingMnemonic,
         );
 
-  factory VocabularyModel.fromJson(Map<String, dynamic> json) =>
-      _$VocabularyModelFromJson(json);
+  factory VocabularyModel.fromJson(Map<String, dynamic> json) => _$VocabularyModelFromJson(json);
   Map<String, dynamic> toJson() => _$VocabularyModelToJson(this);
 
   @override
@@ -112,6 +113,5 @@ class PronunciationAudioMetadataModel extends PronunciationAudioMetadata {
 
   factory PronunciationAudioMetadataModel.fromJson(Map<String, dynamic> json) =>
       _$PronunciationAudioMetadataModelFromJson(json);
-  Map<String, dynamic> toJson() =>
-      _$PronunciationAudioMetadataModelToJson(this);
+  Map<String, dynamic> toJson() => _$PronunciationAudioMetadataModelToJson(this);
 }

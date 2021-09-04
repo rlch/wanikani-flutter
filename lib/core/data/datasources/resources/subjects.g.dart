@@ -7,9 +7,7 @@ part of 'subjects.dart';
 // **************************************************************************
 
 class _SubjectsRemoteDataSource implements SubjectsRemoteDataSource {
-  _SubjectsRemoteDataSource(this._dio, {this.baseUrl}) {
-    baseUrl ??= 'https://api.wanikani.com/v2/subjects/';
-  }
+  _SubjectsRemoteDataSource(this._dio, {this.baseUrl});
 
   final Dio _dio;
 

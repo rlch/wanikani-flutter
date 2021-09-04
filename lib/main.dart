@@ -4,9 +4,9 @@ import 'package:wanikani_flutter/injection.dart';
 
 import 'core/presentation/app.dart';
 
-void main() {
+void main() async {
   WidgetsFlutterBinding.ensureInitialized();
-  configureInjection();
+  await configureInjection();
 
   runApp(App());
 }

@@ -1,10 +1,11 @@
+import 'package:injectable/injectable.dart';
 import 'package:wanikani_flutter/core/data/datasources/resources/subjects.dart';
 import 'package:wanikani_flutter/core/data/models/collection.dart';
 import 'package:wanikani_flutter/core/data/models/resource.dart';
 import 'package:wanikani_flutter/core/data/models/resources/subject.dart';
 import 'package:wanikani_flutter/core/domain/entities/enums/subject_type.dart';
 
-abstract class ISubjectsDataSource {
+abstract class ISubjectsRepository {
   /// Returns a collection of all subjects, ordered by ascending id, 1000 at a time.
   Future<CollectionModel<SubjectModel>> getAll({
     List<int>? ids,
@@ -19,8 +20,9 @@ abstract class ISubjectsDataSource {
   Future<ResourceModel<SubjectModel>> getById(String id);
 }
 
-class SubjectsDataSource implements ISubjectsDataSource {
-  const SubjectsDataSource({required this.remote});
+@Injectable(as: ISubjectsRepository)
+class SubjectsRepository implements ISubjectsRepository {
+  const SubjectsRepository({required this.remote});
 
   final SubjectsRemoteDataSource remote;
 
@@ -35,7 +37,7 @@ class SubjectsDataSource implements ISubjectsDataSource {
   }) {
     return remote.getAll(
       ids: ids,
-      types: types,
+      types: [...?types?.map((e) => e.toJson())],
       slugs: slugs,
       levels: levels,
       hidden: hidden,

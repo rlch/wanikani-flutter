@@ -17,6 +17,7 @@ KanjiModel _$KanjiModelFromJson(Map<String, dynamic> json) {
     meanings: (json['meanings'] as List<dynamic>)
         .map((e) => MeaningModel.fromJson(e as Map<String, dynamic>))
         .toList(),
+    characters: json['characters'] as String,
     amalgamationSubjectIds: (json['amalgamation_subject_ids'] as List<dynamic>)
         .map((e) => e as int)
         .toList(),
@@ -48,6 +49,7 @@ KanjiModel _$KanjiModelFromJson(Map<String, dynamic> json) {
 Map<String, dynamic> _$KanjiModelToJson(KanjiModel instance) =>
     <String, dynamic>{
       'last_checked_cache_at': instance.lastCheckedCacheAt?.toIso8601String(),
+      'characters': instance.characters,
       'created_at': instance.createdAt.toIso8601String(),
       'document_url': instance.documentUrl,
       'hidden_at': instance.hiddenAt?.toIso8601String(),
