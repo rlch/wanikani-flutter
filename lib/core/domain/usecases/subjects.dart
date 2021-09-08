@@ -17,8 +17,9 @@ class SubjectsUseCases {
     List<int>? levels,
     bool? hidden,
     DateTime? updatedAfter,
-  }) {
-    return repository.getAll(
+  }) async {
+    print('getting');
+    final x = await repository.getAll(
       ids: ids,
       types: types,
       slugs: slugs,
@@ -26,5 +27,9 @@ class SubjectsUseCases {
       hidden: hidden,
       updatedAfter: updatedAfter,
     );
+
+    print(x);
+
+    return x;
   }
 }

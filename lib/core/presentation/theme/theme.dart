@@ -5,17 +5,13 @@ import 'package:flutter/material.dart';
 /// This class is abstract so it cannot be instantiated.
 /// In reality, this class is an equivalent to [ThemeData], not [Theme].
 abstract class WanikaniTheme {
-  static final _lightRoles = WanikaniLightThemeRoles(),
-      _darkRoles = WanikaniDarkThemeRoles();
-
+  static final _lightRoles = WanikaniLightThemeRoles(), _darkRoles = WanikaniDarkThemeRoles();
   static final _lightTheme = ThemeData.light(), _darkTheme = ThemeData.dark();
 
   static ThemeData light() => _merge(_lightTheme, _lightRoles);
-
   static ThemeData dark() => _merge(_darkTheme, _darkRoles);
 
-  static ThemeData _merge(ThemeData original, WanikaniThemeRoles roles) =>
-      original.copyWith(
+  static ThemeData _merge(ThemeData original, WanikaniThemeRoles roles) => original.copyWith(
         colorScheme: roles.colorScheme,
         brightness: roles.brightness,
         primaryColor: roles.primary,
@@ -51,6 +47,27 @@ abstract class WanikaniTheme {
         /// navigationRailTheme: roles.navigationRail,
         /// floatingActionButtonTheme: roles.floatingActionButton,
       );
+
+  static LinearGradient appBarGradient(BuildContext context, {bool flipped = false}) {
+    return LinearGradient(
+      begin: flipped ? Alignment.bottomCenter : Alignment.topCenter,
+      end: flipped ? Alignment.topCenter : Alignment.bottomCenter,
+      colors: [
+        Color(0xffffffff).withOpacity(0.9),
+        Color(0xfff2f2f2).withOpacity(0.9),
+      ],
+    );
+  }
+
+  static List<BoxShadow> appBarBoxShadow(BuildContext context) {
+    return [
+      BoxShadow(
+        color: Colors.black.withOpacity(0.05),
+        blurRadius: 3,
+        spreadRadius: 3,
+      )
+    ];
+  }
 }
 
 abstract class WanikaniThemeRoles {

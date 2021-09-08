@@ -530,6 +530,12 @@
       "languageVersion": "2.12"
     },
     {
+      "name": "simple_animations",
+      "rootUri": "file:///Users/rjm/flutter/.pub-cache/hosted/pub.dartlang.org/simple_animations-3.1.1",
+      "packageUri": "lib/",
+      "languageVersion": "2.12"
+    },
+    {
       "name": "sky_engine",
       "rootUri": "file:///Users/rjm/flutter/bin/cache/pkg/sky_engine",
       "packageUri": "lib/",
@@ -622,6 +628,18 @@
     {
       "name": "string_scanner",
       "rootUri": "file:///Users/rjm/flutter/.pub-cache/hosted/pub.dartlang.org/string_scanner-1.1.0",
+      "packageUri": "lib/",
+      "languageVersion": "2.12"
+    },
+    {
+      "name": "supercharged",
+      "rootUri": "file:///Users/rjm/flutter/.pub-cache/hosted/pub.dartlang.org/supercharged-2.0.0",
+      "packageUri": "lib/",
+      "languageVersion": "2.12"
+    },
+    {
+      "name": "supercharged_dart",
+      "rootUri": "file:///Users/rjm/flutter/.pub-cache/hosted/pub.dartlang.org/supercharged_dart-2.0.0",
       "packageUri": "lib/",
       "languageVersion": "2.12"
     },
@@ -734,7 +752,7 @@
       "languageVersion": "2.13"
     }
   ],
-  "generated": "2021-09-05T04:27:20.394326Z",
+  "generated": "2021-09-08T12:53:09.052578Z",
   "generator": "pub",
   "generatorVersion": "2.13.4"
 }

@@ -46,7 +46,7 @@ class CacheInterceptorBuilder {
         return entry.value;
       }
     }
-    print('Didnt find cache');
+    /// print('Didnt find cache');
 
     return null;
   }
@@ -121,14 +121,14 @@ class CacheInterceptorBuilder {
   /// Returns the response after a HTTP request or the cached response if
   /// available on cache
   void _onRequest(RequestOptions options, RequestInterceptorHandler handler) async {
-    print('Getting cache');
+    /// print('Getting cache');
     var cache = _getCache(options.uri);
     if (cache != null) {
-      print('Getting key ${_getKey(options)}');
+      /// print('Getting key ${_getKey(options)}');
       var value = await cache.get(_getKey(options));
-      print('Cache has keys ${await cache.keys}');
+      /// print('Cache has keys ${await cache.keys}');
       if (value != null) {
-        print('Found value $value!');
+        /// print('Found value $value!');
         handler.resolve(
             _responseFromCacheValue(
                 value is CacheValue ? value : CacheValue.fromJson(value), options),
@@ -195,7 +195,7 @@ class CacheInterceptorBuilder {
   /// Returns [Response] after the interception
   void _onResponse(Response<dynamic> response, ResponseInterceptorHandler handler) async {
     if (response.statusCode! >= 200 && response.statusCode! < 300) {
-      print('Parsing response');
+      /// print('Parsing response');
       var cache = _getCache(response.requestOptions.uri);
       if (cache != null) {
         var options = response.requestOptions;

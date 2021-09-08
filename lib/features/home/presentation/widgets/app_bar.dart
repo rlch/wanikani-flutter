@@ -2,6 +2,7 @@ import 'dart:ui';
 
 import 'package:flutter/material.dart';
 import 'package:wanikani_flutter/core/domain/usecases/summary.dart';
+import 'package:wanikani_flutter/core/presentation/theme/theme.dart';
 import 'package:wanikani_flutter/features/home/domain/usecases/gravatar.dart';
 import 'package:wanikani_flutter/gen/assets.gen.dart';
 import 'package:wanikani_flutter/injection.dart';
@@ -22,21 +23,8 @@ class HomeAppBar extends StatelessWidget implements PreferredSizeWidget {
     return Container(
       padding: appbarPadding,
       decoration: BoxDecoration(
-        gradient: LinearGradient(
-          begin: Alignment.topCenter,
-          end: Alignment.bottomCenter,
-          colors: [
-            Color(0xffffffff).withOpacity(0.9),
-            Color(0xfff2f2f2).withOpacity(0.9),
-          ],
-        ),
-        boxShadow: [
-          BoxShadow(
-            color: Colors.black.withOpacity(0.05),
-            blurRadius: 3,
-            spreadRadius: 3,
-          )
-        ],
+        gradient: WanikaniTheme.appBarGradient(context),
+        boxShadow: WanikaniTheme.appBarBoxShadow(context),
       ),
       child: Row(
         children: [

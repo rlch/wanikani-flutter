@@ -38,6 +38,7 @@ abstract class DioModule {
 
     final dio = Dio()
       ..interceptors.addAll([
+        PrettyDioLogger(),
         newCacheInterceptor(
           '${RegExp.escape('api.wanikani.com/v2')}.*',
           newSembastFileCache(

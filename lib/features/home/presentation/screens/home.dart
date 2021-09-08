@@ -1,11 +1,11 @@
 import 'package:flutter/material.dart';
-import 'package:wanikani_flutter/core/data/models/collection.dart';
-import 'package:wanikani_flutter/core/data/models/resources/subject.dart';
-import 'package:wanikani_flutter/core/domain/entities/enums/subject_type.dart';
-import 'package:wanikani_flutter/core/domain/usecases/subjects.dart';
+import 'package:supercharged/supercharged.dart';
+import 'package:wanikani_flutter/features/home/presentation/pages/home_page.dart';
+import 'package:wanikani_flutter/features/home/presentation/pages/knowledge_page.dart';
 import 'package:wanikani_flutter/features/home/presentation/widgets/app_bar.dart';
+import 'package:wanikani_flutter/features/home/presentation/widgets/custom_nav_bar/custom_nav_bar.dart';
+import 'package:wanikani_flutter/features/home/presentation/widgets/custom_nav_bar/custom_nav_bar_item.dart';
 import 'package:wanikani_flutter/gen/assets.gen.dart';
-import 'package:wanikani_flutter/injection.dart';
 
 class HomeScreen extends StatefulWidget {
   const HomeScreen({Key? key}) : super(key: key);
@@ -15,10 +15,51 @@ class HomeScreen extends StatefulWidget {
 }
 
 class _HomeScreenState extends State<HomeScreen> {
+  late final PageController pageController;
+
+  int _currentIndex = 1;
+  int get currentIndex => _currentIndex;
+  set currentIndex(int currentIndex) {
+    if (currentIndex == _currentIndex) return;
+    pageController.animateToPage(
+      _currentIndex = currentIndex,
+      duration: 300.milliseconds,
+      curve: Curves.easeInOutCubic,
+    );
+  }
+
+  @override
+  void initState() {
+    pageController = PageController(initialPage: currentIndex);
+    super.initState();
+  }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: HomeAppBar(),
+      bottomNavigationBar: CustomNavBar(
+        height: 90,
+        currentIndex: currentIndex,
+        onTap: (i) => setState(() => currentIndex = i),
+        items: [
+          CustomNavBarItem(
+            label: 'Analytics',
+            icon: Icon(Icons.equalizer),
+            backgroundColor: Colors.blue,
+          ),
+          CustomNavBarItem(
+            label: 'Home',
+            icon: Icon(Icons.home),
+            backgroundColor: Colors.red,
+          ),
+          CustomNavBarItem(
+            label: 'Knowledge',
+            icon: Icon(Icons.auto_stories),
+            backgroundColor: Colors.green,
+          ),
+        ],
+      ),
       body: Container(
         decoration: BoxDecoration(
           image: DecorationImage(
@@ -26,34 +67,13 @@ class _HomeScreenState extends State<HomeScreen> {
             repeat: ImageRepeat.repeat,
           ),
         ),
-        child: FutureBuilder<CollectionModel<SubjectModel>>(
-          future: gi<SubjectsUseCases>().getAll(
-            types: [SubjectType.kanji],
-            levels: [1],
-          ),
-          builder: (context, snap) {
-            final Widget loading = Center(child: CircularProgressIndicator());
-            return snap.data?.when(
-                  (data, pages, object, url, dataUpdatedAt, totalCount) {
-                    return GridView.builder(
-                      gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(crossAxisCount: 4),
-                      itemCount: data.length,
-                      itemBuilder: (context, i) {
-                        final subject = data[i];
-                        final title = subject.maybeMap(
-                          (value) => value.data.characters ?? '',
-                          orElse: () => '',
-                        );
-
-                        return Text(title);
-                      },
-                    );
-                  },
-                  loading: () => loading,
-                  error: (e) => Center(child: Text(e.toString())),
-                ) ??
-                loading;
-          },
+        child: PageView(
+          controller: pageController,
+          children: [
+            HomePage(),
+            HomePage(),
+            KnowledgePage(),
+          ],
         ),
       ),
     );
