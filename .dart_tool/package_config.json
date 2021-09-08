@@ -483,7 +483,7 @@
     },
     {
       "name": "rxdart",
-      "rootUri": "file:///Users/rjm/flutter/.pub-cache/hosted/pub.dartlang.org/rxdart-0.27.1",
+      "rootUri": "file:///Users/rjm/flutter/.pub-cache/hosted/pub.dartlang.org/rxdart-0.27.2",
       "packageUri": "lib/",
       "languageVersion": "2.12"
     },
@@ -579,25 +579,25 @@
     },
     {
       "name": "stash",
-      "rootUri": "file:///Users/rjm/flutter/.pub-cache/hosted/pub.dartlang.org/stash-3.2.0",
+      "rootUri": "../../stash/packages/stash",
       "packageUri": "lib/",
       "languageVersion": "2.13"
     },
     {
       "name": "stash_dio",
-      "rootUri": "file:///Users/rjm/flutter/.pub-cache/hosted/pub.dartlang.org/stash_dio-3.2.1",
+      "rootUri": "../packages/stash_dio",
       "packageUri": "lib/",
       "languageVersion": "2.13"
     },
     {
       "name": "stash_memory",
-      "rootUri": "file:///Users/rjm/flutter/.pub-cache/hosted/pub.dartlang.org/stash_memory-3.2.0",
+      "rootUri": "../../stash/packages/stash_memory",
       "packageUri": "lib/",
       "languageVersion": "2.13"
     },
     {
       "name": "stash_sembast",
-      "rootUri": "file:///Users/rjm/flutter/.pub-cache/hosted/pub.dartlang.org/stash_sembast-3.2.0",
+      "rootUri": "../../stash/packages/stash_sembast",
       "packageUri": "lib/",
       "languageVersion": "2.13"
     },
@@ -734,7 +734,7 @@
       "languageVersion": "2.13"
     }
   ],
-  "generated": "2021-09-04T11:39:40.583552Z",
+  "generated": "2021-09-05T04:27:20.394326Z",
   "generator": "pub",
   "generatorVersion": "2.13.4"
 }

@@ -15,6 +15,8 @@ import 'package:stash_dio/stash_dio.dart';
 abstract class DioModule {
   const DioModule();
 
+  static const bool shouldLog = false;
+
   @Named('baseUrl')
   String get baseUrl => 'https://api.wanikani.com/v2';
 
@@ -29,44 +31,43 @@ abstract class DioModule {
   Future<Dio> dio(@Named('baseUrl') String url) async {
     final dir = await getApplicationDocumentsDirectory();
     final cacheFile = File('${dir.path}/cache.db');
-    print(cacheFile.lengthSync());
+
+    /// final store = newSembastFileStore(file: cacheFile);
 
     final log = Logger();
 
-    log.d('Instantiating Dio');
-
-    log.i('${RegExp.escape(baseUrl).replaceAll('\/', '\\/')}/.*');
-
     final dio = Dio()
       ..interceptors.addAll([
-        /// newCacheInterceptor(
-        ///   '.*',
-        ///   newMemoryCache(
-        ///     cacheName: 'memory',
-        ///     eventListenerMode: EventListenerMode.asynchronous,
-        ///   )
-        ///     ..on<CreatedEntryEvent>().listen((e) => log.d('Created ${e.entry.key} in file'))
-        ///     ..on<RemovedEntryEvent>().listen((e) => log.d('Removed ${e.entry.key} in file'))
-        ///     ..on<EvictedEntryEvent>().listen((e) => log.d('Evicted ${e.entry.key} in file'))
-        ///     ..on<UpdatedEntryEvent>().listen((e) => log.d('Updated ${e.newEntry.key} in file')),
-        /// ),
-
-        newTieredCacheInterceptor(
-          '.*wanikani.*',
-          newMemoryCache(
-            cacheName: 'memory',
-            maxEntries: 100,
-          )..on<CreatedEntryEvent>().listen((e) => log.d('Created ${e.entry.key} in memory')),
-          newSembastFileStore(
+        newCacheInterceptor(
+          '${RegExp.escape('api.wanikani.com/v2')}.*',
+          newSembastFileCache(
             file: cacheFile,
-          ).cache(
-            cacheName: 'cache3',
+            cacheName: 'cache',
             maxEntries: 100,
             evictionPolicy: LruEvictionPolicy(),
-            eventListenerMode: EventListenerMode.asynchronous,
-          )..on<CreatedEntryEvent>().listen((e) => log.d('Created ${e.entry.key} in file')),
+            eventListenerMode: EventListenerMode.synchronous,
+          )..on<CreatedEntryEvent>().listen((e) {
+              true ? log.d('Created ${e.entry.key} in file') : null;
+            }),
         ),
-        PrettyDioLogger(responseHeader: true, responseBody: false),
+
+        /// newTieredCacheInterceptor(
+        ///   '${RegExp.escape('api.wanikani.com/v2')}.*',
+        ///   newMemoryCache(
+        ///     cacheName: 'memory',
+        ///     maxEntries: 100,
+        ///   )..on<CreatedEntryEvent>()
+        ///       .listen((e) => shouldLog ? log.d('Created ${e.entry.key} in memory') : null),
+        ///   newSembastFileCache(
+        ///     file: cacheFile,
+        ///     cacheName: 'cache',
+        ///     maxEntries: 100,
+        ///     evictionPolicy: LruEvictionPolicy(),
+        ///     eventListenerMode: EventListenerMode.asynchronous,
+        ///   )..on<CreatedEntryEvent>()
+        ///       .listen((e) => true ? log.d('Created ${e.entry.key} in file') : null),
+        /// ),
+        if (shouldLog) PrettyDioLogger(responseHeader: true, responseBody: false),
       ]);
     dio.options.headers
       ..['Wanikani-Revision'] = '20170710'

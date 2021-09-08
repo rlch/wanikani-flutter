@@ -38,10 +38,14 @@ dependencies:
   retrofit: ^2.0.1
 
   # Caching
-  stash: ^3.2.0
-  stash_sembast: ^3.2.0
-  stash_dio: ^3.2.1
-  stash_memory: ^3.2.0
+  stash: 
+    path: ../stash/packages/stash
+  stash_sembast: 
+    path: ../stash/packages/stash_sembast
+  stash_dio: 
+    path: ./packages/stash_dio
+  stash_memory:
+    path: ../stash/packages/stash_memory
   flutter_cache_manager: ^3.1.2
 
 dev_dependencies:

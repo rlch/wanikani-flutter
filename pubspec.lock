@@ -563,7 +563,7 @@ packages:
       name: rxdart
       url: "https://pub.dartlang.org"
     source: hosted
-    version: "0.27.1"
+    version: "0.27.2"
   sembast:
     dependency: "direct main"
     description:
@@ -670,30 +670,30 @@ packages:
   stash:
     dependency: "direct main"
     description:
-      name: stash
-      url: "https://pub.dartlang.org"
-    source: hosted
+      path: "../stash/packages/stash"
+      relative: true
+    source: path
     version: "3.2.0"
   stash_dio:
     dependency: "direct main"
     description:
-      name: stash_dio
-      url: "https://pub.dartlang.org"
-    source: hosted
+      path: "packages/stash_dio"
+      relative: true
+    source: path
     version: "3.2.1"
   stash_memory:
     dependency: "direct main"
     description:
-      name: stash_memory
-      url: "https://pub.dartlang.org"
-    source: hosted
+      path: "../stash/packages/stash_memory"
+      relative: true
+    source: path
     version: "3.2.0"
   stash_sembast:
     dependency: "direct main"
     description:
-      name: stash_sembast
-      url: "https://pub.dartlang.org"
-    source: hosted
+      path: "../stash/packages/stash_sembast"
+      relative: true
+    source: path
     version: "3.2.0"
   state_notifier:
     dependency: transitive
