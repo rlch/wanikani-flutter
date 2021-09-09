@@ -1,3 +1,5 @@
+import 'package:wanikani_flutter/core/domain/entities/enums/subject_type.dart';
+
 import 'reading.dart';
 import 'subject.dart';
 
@@ -22,6 +24,7 @@ class Kanji extends Subject {
     required String slug,
     required int spacedRepetitionSystemId,
   }) : super(
+          type: SubjectType.kanji,
           auxiliaryMeanings: auxiliaryMeanings,
           characters: characters,
           createdAt: createdAt,

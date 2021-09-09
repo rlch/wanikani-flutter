@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:wanikani_flutter/core/domain/entities/enums/subject_type.dart';
 
 /// Provides a [light] and a [dark] theme ([ThemeData]).
 ///
@@ -68,6 +69,19 @@ abstract class WanikaniTheme {
       )
     ];
   }
+
+  static Color subjectColor(SubjectType type) {
+    switch (type) {
+      case SubjectType.radical:
+        return WanikaniThemeRoles.radical;
+      case SubjectType.kanji:
+        return WanikaniThemeRoles.kanji;
+      case SubjectType.vocabulary:
+        return WanikaniThemeRoles.vocabulary;
+      default:
+        throw Exception('Invalid subject type');
+    }
+  }
 }
 
 abstract class WanikaniThemeRoles {
@@ -94,17 +108,21 @@ abstract class WanikaniThemeRoles {
   final Color secondary = const Color(0xff00aaff);
   final Color background = const Color(0xffeee);
 
-  final Color apprentice = const Color(0xffdd0093);
-  final Color guru = const Color(0xff882d9e);
-  final Color master = const Color(0xff294ddb);
-  final Color enlightened = const Color(0xff0093dd);
-  final Color burned = const Color(0xff434343);
-
   final Color success = const Color(0xff88cc00);
   final Color error = const Color(0xfff03);
 
   final Color lightText = Colors.white;
   final Color darkText = Colors.black;
+
+  static final Color apprentice = const Color(0xffdd0093);
+  static final Color guru = const Color(0xff882d9e);
+  static final Color master = const Color(0xff294ddb);
+  static final Color enlightened = const Color(0xff0093dd);
+  static final Color burned = const Color(0xff434343);
+
+  static final Color radical = const Color(0xff00a1f1);
+  static final Color kanji = const Color(0xfff100a1);
+  static final Color vocabulary = const Color(0xffaa00ff);
 }
 
 class WanikaniLightThemeRoles extends WanikaniThemeRoles {

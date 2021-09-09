@@ -1,3 +1,5 @@
+import 'package:wanikani_flutter/core/domain/entities/enums/subject_type.dart';
+
 import 'subject.dart';
 
 class Vocabulary extends Subject {
@@ -20,6 +22,7 @@ class Vocabulary extends Subject {
     required String slug,
     required int spacedRepetitionSystemId,
   }) : super(
+          type: SubjectType.vocabulary,
           auxiliaryMeanings: auxiliaryMeanings,
           characters: characters,
           createdAt: createdAt,
@@ -59,10 +62,10 @@ class ContextSentence {
   });
 
   /// English translation of the sentence
-  final String en;
+  final String? en;
 
   /// Japanese context sentence
-  final String ja;
+  final String? ja;
 }
 
 class PronunciationAudio {

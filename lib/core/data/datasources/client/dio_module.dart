@@ -6,16 +6,15 @@ import 'package:logger/logger.dart';
 import 'package:path_provider/path_provider.dart';
 import 'package:pretty_dio_logger/pretty_dio_logger.dart';
 import 'package:stash/stash_api.dart';
-import 'package:stash_memory/stash_memory.dart';
 import 'package:stash_sembast/stash_sembast.dart';
 import 'package:wanikani_flutter/config.dart';
 import 'package:stash_dio/stash_dio.dart';
 
+const bool _shouldLog = false;
+
 @module
 abstract class DioModule {
   const DioModule();
-
-  static const bool shouldLog = false;
 
   @Named('baseUrl')
   String get baseUrl => 'https://api.wanikani.com/v2';
@@ -33,8 +32,7 @@ abstract class DioModule {
     final cacheFile = File('${dir.path}/cache.db');
 
     /// final store = newSembastFileStore(file: cacheFile);
-
-    final log = Logger();
+    /// final log = Logger();
 
     final dio = Dio()
       ..interceptors.addAll([
@@ -47,9 +45,7 @@ abstract class DioModule {
             maxEntries: 100,
             evictionPolicy: LruEvictionPolicy(),
             eventListenerMode: EventListenerMode.synchronous,
-          )..on<CreatedEntryEvent>().listen((e) {
-              true ? log.d('Created ${e.entry.key} in file') : null;
-            }),
+          )..on<CreatedEntryEvent>().listen((e) {}),
         ),
 
         /// newTieredCacheInterceptor(
@@ -68,7 +64,7 @@ abstract class DioModule {
         ///   )..on<CreatedEntryEvent>()
         ///       .listen((e) => true ? log.d('Created ${e.entry.key} in file') : null),
         /// ),
-        if (shouldLog) PrettyDioLogger(responseHeader: true, responseBody: false),
+        if (_shouldLog) PrettyDioLogger(responseHeader: true, responseBody: false),
       ]);
     dio.options.headers
       ..['Wanikani-Revision'] = '20170710'

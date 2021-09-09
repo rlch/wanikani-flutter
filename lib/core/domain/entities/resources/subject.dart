@@ -1,8 +1,11 @@
+import 'package:wanikani_flutter/core/domain/entities/enums/subject_type.dart';
+
 /// The exact structure of a subject depends on the subject type. The available subject types are radical,
 /// kanji, and vocabulary. Note that any attributes called out for the specific subject type behaves
 /// differently than the common attribute of the same name.
 abstract class Subject {
   const Subject({
+    required this.type,
     required this.auxiliaryMeanings,
     required this.characters,
     required this.createdAt,
@@ -15,6 +18,8 @@ abstract class Subject {
     required this.slug,
     required this.spacedRepetitionSystemId,
   });
+
+  final SubjectType type;
 
   /// Collection of auxiliary meanings. See table below for the object structure.
   final List<AuxiliaryMeaning> auxiliaryMeanings;

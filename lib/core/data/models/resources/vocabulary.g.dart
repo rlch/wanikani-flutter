@@ -73,8 +73,8 @@ Map<String, dynamic> _$VocabularyModelToJson(VocabularyModel instance) =>
 
 ContextSentenceModel _$ContextSentenceModelFromJson(Map<String, dynamic> json) {
   return ContextSentenceModel(
-    en: json['en'] as String,
-    ja: json['ja'] as String,
+    en: json['en'] as String?,
+    ja: json['ja'] as String?,
   );
 }
 

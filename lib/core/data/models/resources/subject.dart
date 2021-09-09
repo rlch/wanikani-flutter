@@ -1,4 +1,5 @@
 import 'package:json_annotation/json_annotation.dart';
+import 'package:wanikani_flutter/core/domain/entities/enums/subject_type.dart';
 import 'package:wanikani_flutter/core/domain/entities/resources/subject.dart';
 
 import '../model.dart';
@@ -20,6 +21,7 @@ abstract class SubjectModel extends Subject with IModel {
     required String meaningMnemonic,
     required String slug,
     required int spacedRepetitionSystemId,
+    required SubjectType type,
     DateTime? hiddenAt,
   }) : super(
           auxiliaryMeanings: auxiliaryMeanings,
@@ -33,6 +35,7 @@ abstract class SubjectModel extends Subject with IModel {
           slug: slug,
           hiddenAt: hiddenAt,
           spacedRepetitionSystemId: spacedRepetitionSystemId,
+          type: type,
         );
 
   factory SubjectModel.fromJson(Map<String, dynamic> json) {
@@ -42,6 +45,7 @@ abstract class SubjectModel extends Subject with IModel {
       case 'radical':
         return RadicalModel.fromJson(json);
       case 'vocabulary':
+        print('Serializing vocabulary');
         return VocabularyModel.fromJson(json);
       default:
         throw Exception('Attempted to parse invalid subject ${json['object']}.');

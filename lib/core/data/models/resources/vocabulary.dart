@@ -1,3 +1,5 @@
+import 'dart:convert';
+
 import 'package:json_annotation/json_annotation.dart';
 import 'package:wanikani_flutter/core/data/models/model.dart';
 import 'package:wanikani_flutter/core/domain/entities/resources/vocabulary.dart';
@@ -64,8 +66,8 @@ class VocabularyModel extends Vocabulary with IModel implements SubjectModel {
 @JsonSerializable()
 class ContextSentenceModel extends ContextSentence {
   const ContextSentenceModel({
-    required String en,
-    required String ja,
+    required String? en,
+    required String? ja,
   }) : super(en: en, ja: ja);
 
   factory ContextSentenceModel.fromJson(Map<String, dynamic> json) =>

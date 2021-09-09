@@ -3,6 +3,7 @@ import 'dart:ui';
 import 'package:flutter/material.dart';
 import 'package:wanikani_flutter/core/domain/usecases/summary.dart';
 import 'package:wanikani_flutter/core/presentation/theme/theme.dart';
+import 'package:wanikani_flutter/core/utils/extensions/color_x.dart';
 import 'package:wanikani_flutter/features/home/domain/usecases/gravatar.dart';
 import 'package:wanikani_flutter/gen/assets.gen.dart';
 import 'package:wanikani_flutter/injection.dart';
@@ -88,18 +89,33 @@ class _NumberedChip extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return ActionChip(
-      label: Text(label),
-      avatar: CircleAvatar(
-        backgroundColor: color,
-        child: FittedBox(
-          child: Text(
-            number.toString(),
-            style: TextStyle(color: Colors.white),
-          ),
-        ),
+    return Container(
+      decoration: ShapeDecoration(
+        shape: StadiumBorder(),
+        shadows: [
+          BoxShadow(
+            color: color.darken(15),
+            offset: Offset(0, 3),
+          )
+        ],
       ),
-      onPressed: onPressed,
+      child: ActionChip(
+        pressElevation: 0,
+        backgroundColor: color,
+        labelStyle: TextStyle(color: Colors.white, fontWeight: FontWeight.bold),
+        label: Text(number.toString()),
+
+        /// avatar: CircleAvatar(
+        ///   backgroundColor: color,
+        ///   child: FittedBox(
+        ///     child: Text(
+        ///       number.toString(),
+        ///       style: TextStyle(color: Colors.white),
+        ///     ),
+        ///   ),
+        /// ),
+        onPressed: onPressed,
+      ),
     );
   }
 }

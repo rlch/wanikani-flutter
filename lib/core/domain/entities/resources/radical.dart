@@ -1,3 +1,5 @@
+import 'package:wanikani_flutter/core/domain/entities/enums/subject_type.dart';
+
 import 'subject.dart';
 
 class Radical extends Subject {
@@ -16,6 +18,7 @@ class Radical extends Subject {
     required String slug,
     required int spacedRepetitionSystemId,
   }) : super(
+          type: SubjectType.radical,
           auxiliaryMeanings: auxiliaryMeanings,
           characters: characters,
           createdAt: createdAt,
