@@ -8,6 +8,6 @@ class CustomNavBarItem {
   });
 
   final String label;
-  final Widget icon;
+  final IconData icon;
   final Color backgroundColor;
 }

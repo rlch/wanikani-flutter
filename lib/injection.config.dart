@@ -8,14 +8,16 @@ import 'package:dio/dio.dart' as _i4;
 import 'package:get_it/get_it.dart' as _i1;
 import 'package:injectable/injectable.dart' as _i2;
 
-import 'core/data/datasources/client/dio_module.dart' as _i14;
+import 'core/data/datasources/client/dio_module.dart' as _i16;
 import 'core/data/datasources/resources/assignments.dart' as _i9;
 import 'core/data/datasources/resources/subjects.dart' as _i7;
 import 'core/data/datasources/resources/summary.dart' as _i8;
-import 'core/data/repositories/resources/subjects.dart' as _i10;
-import 'core/data/repositories/resources/summary.dart' as _i11;
-import 'core/domain/usecases/subjects.dart' as _i12;
-import 'core/domain/usecases/summary.dart' as _i13;
+import 'core/data/repositories/resources/assignments.dart' as _i10;
+import 'core/data/repositories/resources/subjects.dart' as _i11;
+import 'core/data/repositories/resources/summary.dart' as _i12;
+import 'core/domain/usecases/assignments.dart' as _i15;
+import 'core/domain/usecases/subjects.dart' as _i13;
+import 'core/domain/usecases/summary.dart' as _i14;
 import 'features/home/data/datasources/gravatar.dart' as _i3;
 import 'features/home/data/repositories/gravatar.dart' as _i5;
 import 'features/home/domain/usecases/gravatar.dart'
@@ -52,15 +54,19 @@ Future<_i1.GetIt> $initGetIt(_i1.GetIt get,
   gh.lazySingleton<_i9.AssignmentsRemoteDataSource>(() =>
       _i9.AssignmentsRemoteDataSource(get<_i4.Dio>(),
           baseUrl: get<String>(instanceName: 'assignmentsUrl')));
-  gh.factory<_i10.ISubjectsRepository>(() =>
-      _i10.SubjectsRepository(remote: get<_i7.SubjectsRemoteDataSource>()));
-  gh.factory<_i11.ISummaryRepository>(
-      () => _i11.SummaryRepository(remote: get<_i8.SummaryRemoteDataSource>()));
-  gh.factory<_i12.SubjectsUseCases>(
-      () => _i12.SubjectsUseCases(get<_i10.ISubjectsRepository>()));
-  gh.factory<_i13.SummaryUseCases>(
-      () => _i13.SummaryUseCases(get<_i11.ISummaryRepository>()));
+  gh.factory<_i10.IAssignmentsRepository>(() => _i10.AssignmentsRepository(
+      remote: get<_i9.AssignmentsRemoteDataSource>()));
+  gh.factory<_i11.ISubjectsRepository>(() =>
+      _i11.SubjectsRepository(remote: get<_i7.SubjectsRemoteDataSource>()));
+  gh.factory<_i12.ISummaryRepository>(
+      () => _i12.SummaryRepository(remote: get<_i8.SummaryRemoteDataSource>()));
+  gh.factory<_i13.SubjectsUseCases>(
+      () => _i13.SubjectsUseCases(get<_i11.ISubjectsRepository>()));
+  gh.factory<_i14.SummaryUseCases>(
+      () => _i14.SummaryUseCases(get<_i12.ISummaryRepository>()));
+  gh.factory<_i15.AssignmentsUseCases>(
+      () => _i15.AssignmentsUseCases(get<_i10.IAssignmentsRepository>()));
   return get;
 }
 
-class _$DioModule extends _i14.DioModule {}
+class _$DioModule extends _i16.DioModule {}

@@ -12,42 +12,44 @@ abstract class WanikaniTheme {
   static ThemeData light() => _merge(_lightTheme, _lightRoles);
   static ThemeData dark() => _merge(_darkTheme, _darkRoles);
 
-  static ThemeData _merge(ThemeData original, WanikaniThemeRoles roles) => original.copyWith(
-        colorScheme: roles.colorScheme,
-        brightness: roles.brightness,
-        primaryColor: roles.primary,
-        accentColor: roles.secondary,
-        appBarTheme: AppBarTheme(
-          color: Colors.white,
-          elevation: 1,
-        ),
+  static ThemeData _merge(ThemeData original, WanikaniThemeRoles roles) {
+    return original.copyWith(
+      colorScheme: roles.colorScheme,
+      brightness: roles.brightness,
+      primaryColor: roles.primary,
+      accentColor: roles.secondary,
+      appBarTheme: AppBarTheme(
+        color: Colors.white,
+        elevation: 1,
+      ),
 
-        /// canvasColor: roles.canvas,
-        /// shadowColor: roles.shadow,
-        /// scaffoldBackgroundColor: roles.scaffoldBackground,
-        /// bottomAppBarColor: roles.bottomAppBar,
-        /// cardColor: roles.card,
-        /// dividerColor: roles.divider,
-        /// toggleableActiveColor: roles.toggleableActive,
-        /// focusColor: roles.focus,
-        /// hoverColor: roles.hover,
-        /// highlightColor: roles.highlight,
-        /// splashColor: roles.splash,
-        /// errorColor: roles.error,
-        /// selectedRowColor: roles.selectedRow,
-        /// unselectedWidgetColor: roles.unselectedWidget,
-        /// disabledColor: roles.disabled,
-        /// buttonColor: roles.button,
-        /// textSelectionTheme: roles.textSelection,
-        /// textButtonTheme: TextButtonThemeData(style: roles.textButton),
-        /// elevatedButtonTheme:
-        ///     ElevatedButtonThemeData(style: roles.elevatedButton),
-        /// outlinedButtonTheme:
-        ///     OutlinedButtonThemeData(style: roles.outlinedButton),
-        /// switchTheme: roles.switchTheme,
-        /// navigationRailTheme: roles.navigationRail,
-        /// floatingActionButtonTheme: roles.floatingActionButton,
-      );
+      /// canvasColor: roles.canvas,
+      /// shadowColor: roles.shadow,
+      /// scaffoldBackgroundColor: roles.scaffoldBackground,
+      /// bottomAppBarColor: roles.bottomAppBar,
+      /// cardColor: roles.card,
+      /// dividerColor: roles.divider,
+      /// toggleableActiveColor: roles.toggleableActive,
+      /// focusColor: roles.focus,
+      /// hoverColor: roles.hover,
+      /// highlightColor: roles.highlight,
+      /// splashColor: roles.splash,
+      /// errorColor: roles.error,
+      /// selectedRowColor: roles.selectedRow,
+      /// unselectedWidgetColor: roles.unselectedWidget,
+      /// disabledColor: roles.disabled,
+      /// buttonColor: roles.button,
+      /// textSelectionTheme: roles.textSelection,
+      /// textButtonTheme: TextButtonThemeData(style: roles.textButton),
+      /// elevatedButtonTheme:
+      ///     ElevatedButtonThemeData(style: roles.elevatedButton),
+      /// outlinedButtonTheme:
+      ///     OutlinedButtonThemeData(style: roles.outlinedButton),
+      /// switchTheme: roles.switchTheme,
+      /// navigationRailTheme: roles.navigationRail,
+      /// floatingActionButtonTheme: roles.floatingActionButton,
+    );
+  }
 
   static LinearGradient appBarGradient(BuildContext context, {bool flipped = false}) {
     return LinearGradient(

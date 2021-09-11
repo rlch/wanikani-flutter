@@ -1,6 +1,7 @@
 import 'dart:ui';
 
 import 'package:flutter/material.dart';
+import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:wanikani_flutter/core/domain/usecases/summary.dart';
 import 'package:wanikani_flutter/core/presentation/theme/theme.dart';
 import 'package:wanikani_flutter/core/utils/extensions/color_x.dart';
@@ -9,7 +10,7 @@ import 'package:wanikani_flutter/gen/assets.gen.dart';
 import 'package:wanikani_flutter/injection.dart';
 import 'package:shimmer_animation/shimmer_animation.dart';
 
-class HomeAppBar extends StatelessWidget implements PreferredSizeWidget {
+class HomeAppBar extends ConsumerWidget implements PreferredSizeWidget {
   const HomeAppBar({Key? key}) : super(key: key);
 
   static const appbarPadding = EdgeInsets.symmetric(vertical: 20, horizontal: 10);
@@ -19,8 +20,9 @@ class HomeAppBar extends StatelessWidget implements PreferredSizeWidget {
   Size get preferredSize => Size.fromHeight(appbarPadding.vertical + appbarInternalHeight);
 
   @override
-  Widget build(BuildContext context) {
+  Widget build(BuildContext context, watch) {
     final summaryUC = gi<SummaryUseCases>();
+
     return Container(
       padding: appbarPadding,
       decoration: BoxDecoration(
@@ -32,23 +34,23 @@ class HomeAppBar extends StatelessWidget implements PreferredSizeWidget {
           Image.asset(Assets.images.logos.appbarLogo.path, width: 125),
           const Spacer(),
           FutureBuilder<int>(
-              future: summaryUC.getCurrentReviewsNumber(),
-              builder: (context, snap) {
+              future: summaryUC.getCurrentLessonsNumber(),
+              builder: (context, snapshot) {
                 return _NumberedChip(
-                  number: snap.data,
+                  number: snapshot.data,
                   color: Theme.of(context).primaryColor,
-                  label: 'Reviews',
+                  label: 'Lessons',
                   onPressed: () {},
                 );
               }),
           const SizedBox(width: 10),
           FutureBuilder<int>(
-              future: summaryUC.getCurrentLessonsNumber(),
-              builder: (context, snap) {
+              future: summaryUC.getCurrentReviewsNumber(),
+              builder: (context, snapshot) {
                 return _NumberedChip(
-                  number: snap.data,
+                  number: snapshot.data,
                   color: Theme.of(context).accentColor,
-                  label: 'Lessons',
+                  label: 'Reviews',
                   onPressed: () {},
                 );
               }),

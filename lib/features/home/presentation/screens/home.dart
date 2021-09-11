@@ -45,17 +45,17 @@ class _HomeScreenState extends State<HomeScreen> {
         items: [
           CustomNavBarItem(
             label: 'Analytics',
-            icon: Icon(Icons.equalizer),
+            icon: Icons.equalizer,
             backgroundColor: Colors.blue,
           ),
           CustomNavBarItem(
             label: 'Home',
-            icon: Icon(Icons.home),
+            icon: Icons.home,
             backgroundColor: Colors.red,
           ),
           CustomNavBarItem(
             label: 'Knowledge',
-            icon: Icon(Icons.auto_stories),
+            icon: Icons.auto_stories,
             backgroundColor: Colors.green,
           ),
         ],

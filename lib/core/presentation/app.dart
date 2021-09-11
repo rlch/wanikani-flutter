@@ -1,6 +1,7 @@
 import 'package:auto_route/annotations.dart';
 import 'package:auto_route/auto_route.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:wanikani_flutter/core/presentation/theme/theme.dart';
 import 'package:wanikani_flutter/features/home/presentation/screens/home.dart';
 
@@ -26,11 +27,13 @@ class _AppState extends State<App> {
 
   @override
   Widget build(BuildContext context) {
-    return MaterialApp.router(
-      debugShowCheckedModeBanner: false,
-      theme: WanikaniTheme.light(),
-      routeInformationParser: _appRouter.defaultRouteParser(),
-      routerDelegate: _appRouter.delegate(),
+    return ProviderScope(
+      child: MaterialApp.router(
+        debugShowCheckedModeBanner: false,
+        theme: WanikaniTheme.light(),
+        routeInformationParser: _appRouter.defaultRouteParser(),
+        routerDelegate: _appRouter.delegate(),
+      ),
     );
   }
 }

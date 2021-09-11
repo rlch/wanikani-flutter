@@ -99,6 +99,7 @@ class _CustomNavBarState extends State<CustomNavBar> with AnimationMixin {
                   child: Center(
                     child: _CustomNavBarTile(
                       widget.items[i],
+                      selectedIconSize: widget.iconSize + 3,
                       iconSize: widget.iconSize,
                       selected: widget.currentIndex == i,
                       onTap: widget.onTap == null ? null : () => widget.onTap!(i),

@@ -1,11 +1,15 @@
 import 'package:flutter/material.dart';
 import 'package:wanikani_flutter/core/data/models/collection.dart';
+import 'package:wanikani_flutter/core/data/models/resources/assignment.dart';
 import 'package:wanikani_flutter/core/data/models/resources/subject.dart';
 import 'package:wanikani_flutter/core/domain/entities/enums/subject_type.dart';
+import 'package:wanikani_flutter/core/domain/entities/resources/radical.dart';
+import 'package:wanikani_flutter/core/domain/usecases/assignments.dart';
 import 'package:wanikani_flutter/core/domain/usecases/subjects.dart';
 import 'package:wanikani_flutter/core/presentation/theme/theme.dart';
 import 'package:wanikani_flutter/core/utils/extensions/color_x.dart';
 import 'package:wanikani_flutter/injection.dart';
+import 'package:flutter_svg/flutter_svg.dart';
 
 class _KnowledgeTab {
   _KnowledgeTab({
@@ -101,37 +105,45 @@ class __KnowledgeTabViewState extends State<_KnowledgeTabView> with AutomaticKee
   @override
   Widget build(BuildContext context) {
     super.build(context);
-    return FutureBuilder<CollectionModel<SubjectModel>>(
-      future: gi<SubjectsUseCases>().getAll(
-        types: [widget.subjectType],
-        levels: [1],
-      ),
-      builder: (context, snap) {
-        final Widget loading = Center(child: CircularProgressIndicator());
-        return snap.data?.maybeWhen(
-              (data, pages, object, url, dataUpdatedAt, totalCount) {
-                return GridView.builder(
-                  padding: EdgeInsets.symmetric(horizontal: 20),
-                  gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(crossAxisCount: 4),
-                  itemCount: data.length,
-                  itemBuilder: (context, i) {
-                    final resource = data[i];
+    final types = [widget.subjectType];
+    return FutureBuilder<CollectionModel<AssignmentModel>>(
+        future: gi<AssignmentsUseCases>().getAll(
+          subjectTypes: types,
+          levels: [1],
+        ),
+        builder: (context, snapshot) {
+          return FutureBuilder<CollectionModel<SubjectModel>>(
+            future: gi<SubjectsUseCases>().getAll(
+              types: types,
+              levels: [1],
+            ),
+            builder: (context, snap) {
+              final Widget loading = Center(child: CircularProgressIndicator());
+              return snap.data?.maybeWhen(
+                    (data, pages, object, url, dataUpdatedAt, totalCount) {
+                      return GridView.builder(
+                        padding: EdgeInsets.symmetric(horizontal: 20),
+                        gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(crossAxisCount: 4),
+                        itemCount: data.length,
+                        itemBuilder: (context, i) {
+                          final resource = data[i];
 
-                    return Padding(
-                      padding: const EdgeInsets.all(12.0),
-                      child: resource.maybeMap(
-                        (model) => _KnowledgeTile(model.data),
-                        orElse: () => Text('error'),
-                      ),
-                    );
-                  },
-                );
-              },
-              orElse: () => loading,
-            ) ??
-            loading;
-      },
-    );
+                          return Padding(
+                            padding: const EdgeInsets.all(12.0),
+                            child: resource.maybeMap(
+                              (model) => _KnowledgeTile(model.data),
+                              orElse: () => Text('error'),
+                            ),
+                          );
+                        },
+                      );
+                    },
+                    orElse: () => loading,
+                  ) ??
+                  loading;
+            },
+          );
+        });
   }
 }
 
@@ -150,6 +162,34 @@ class _KnowledgeTile extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final subjectColor = WanikaniTheme.subjectColor(subject.type);
+
+    Widget? characters;
+    if (subject.characters?.isEmpty ?? true && subject.type == SubjectType.radical) {
+      final radical = subject as Radical;
+      for (final src in radical.characterImages) {
+        if (src.contentType == 'image/svg+xml') {
+          characters ??= SvgPicture.network(src.url);
+        } else if (src.contentType == 'image/png') {
+          characters = Image.network(src.url, color: Colors.white);
+        }
+      }
+    } else {
+      characters = Text(
+        subject.characters!,
+        style: TextStyle(
+          color: Colors.white,
+          fontWeight: FontWeight.bold,
+          fontSize: 26,
+          shadows: [
+            BoxShadow(
+              color: Colors.black12,
+              offset: Offset(-1, 3),
+            )
+          ],
+        ),
+      );
+    }
+
     return Container(
       padding: EdgeInsets.only(bottom: 5),
       decoration: BoxDecoration(
@@ -166,19 +206,12 @@ class _KnowledgeTile extends StatelessWidget {
           fit: BoxFit.scaleDown,
           child: Padding(
             padding: const EdgeInsets.all(10),
-            child: Text(
-              subject.characters ?? '',
-              style: TextStyle(
-                color: Colors.white,
-                fontWeight: FontWeight.bold,
-                fontSize: 26,
-                shadows: [
-                  BoxShadow(
-                    color: Colors.black12,
-                    offset: Offset(-1, 3),
-                  )
-                ],
-              ),
+            child: Column(
+              mainAxisSize: MainAxisSize.min,
+              children: [
+                if (characters != null) characters,
+
+              ],
             ),
           ),
         ),

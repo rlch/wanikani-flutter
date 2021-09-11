@@ -4,6 +4,7 @@ class _CustomNavBarTile extends StatefulWidget {
   const _CustomNavBarTile(
     this.item, {
     required this.onTap,
+    required this.selectedIconSize,
     required this.iconSize,
     required this.selected,
     Key? key,
@@ -11,6 +12,7 @@ class _CustomNavBarTile extends StatefulWidget {
 
   final VoidCallback? onTap;
   final CustomNavBarItem item;
+  final double selectedIconSize;
   final double iconSize;
   final bool selected;
 
@@ -50,26 +52,27 @@ class __CustomNavBarTileState extends State<_CustomNavBarTile> with AnimationMix
 
   @override
   Widget build(BuildContext context) {
+    final effectiveIconSize = widget.selected ? widget.selectedIconSize : widget.iconSize;
     final effectiveColor =
         color.value ?? (widget.selected ? widget.item.backgroundColor : Colors.black);
-    final icon = ConstrainedBox(
-      constraints: BoxConstraints.tightFor(
-        width: widget.iconSize,
-        height: widget.iconSize,
-      ),
-      child: FittedBox(
-        fit: BoxFit.scaleDown,
-        child: widget.item.icon,
+    final icon = IconTheme(
+      data: IconThemeData(color: effectiveColor),
+      child: ConstrainedBox(
+        constraints: BoxConstraints.tightFor(
+          width: effectiveIconSize,
+          height: effectiveIconSize,
+        ),
+        child: FittedBox(child: Icon(widget.item.icon)),
       ),
     );
     return Column(
       mainAxisAlignment: MainAxisAlignment.center,
       children: [
         widget.onTap != null
-            ? IconButton(
-                onPressed: widget.onTap,
-                icon: icon,
-                color: effectiveColor,
+            ? InkWell(
+                splashColor: Colors.grey,
+                onTap: widget.onTap,
+                child: icon,
               )
             : icon,
         FadeTransition(

@@ -1,3 +1,4 @@
+import 'package:injectable/injectable.dart';
 import 'package:wanikani_flutter/core/data/datasources/resources/assignments.dart';
 import 'package:wanikani_flutter/core/data/models/collection.dart';
 import 'package:wanikani_flutter/core/data/models/resource.dart';
@@ -35,6 +36,7 @@ abstract class IAssignmentsRepository {
   });
 }
 
+@Injectable(as: IAssignmentsRepository)
 class AssignmentsRepository implements IAssignmentsRepository {
   const AssignmentsRepository({required this.remote});
 
@@ -71,7 +73,7 @@ class AssignmentsRepository implements IAssignmentsRepository {
       srsStages: srsStages,
       started: started,
       subjectIds: subjectIds,
-      subjectTypes: subjectTypes,
+      subjectTypes: [...?subjectTypes?.map((s) => s.toJson())],
       unlocked: unlocked,
       updatedAfter: updatedAfter,
     );

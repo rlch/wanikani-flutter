@@ -24,7 +24,7 @@ abstract class IAssignmentsDataSource {
     List<int>? srsStages,
     bool? started,
     List<int>? subjectIds,
-    List<SubjectType>? subjectTypes,
+    List<String>? subjectTypes,
     bool? unlocked,
     DateTime? updatedAfter,
   });
@@ -62,7 +62,7 @@ abstract class AssignmentsRemoteDataSource implements IAssignmentsDataSource {
     @Query('srs_stages') List<int>? srsStages,
     @Query('started') bool? started,
     @Query('subject_ids') List<int>? subjectIds,
-    @Query('subject_types') List<SubjectType>? subjectTypes,
+    @Query('subject_types') List<String>? subjectTypes,
     @Query('unlocked') bool? unlocked,
     @Query('updated_after') DateTime? updatedAfter,
   });
