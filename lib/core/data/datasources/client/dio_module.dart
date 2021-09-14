@@ -33,7 +33,7 @@ abstract class DioModule {
     final cacheFile = File('${dir.path}/cache.db');
 
     /// final store = newSembastFileStore(file: cacheFile);
-    /// final log = Logger();
+    final log = Logger();
 
     final dio = Dio()
       ..interceptors.addAll([
@@ -42,8 +42,10 @@ abstract class DioModule {
           '${RegExp.escape('api.wanikani.com/v2')}.*',
           newMemoryCache(
             cacheName: 'memory',
-            maxEntries: 100,
-          )..on<CreatedEntryEvent>().listen((e) {}),
+            maxEntries: 1000,
+          )..on<CreatedEntryEvent>().listen((e) {
+            log.i('Created memory event');
+          }),
           newSembastFileCache(
             file: cacheFile,
             cacheName: 'cache',
